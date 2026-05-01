@@ -30,716 +30,236 @@
     --sans: 'DM Sans', sans-serif;
     --display: 'Syne', sans-serif;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 15px;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* Scanline overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
-    pointer-events: none;
-    z-index: 999;
-  }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.6; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px); pointer-events: none; z-index: 999; }
 
   /* ─── NAV ─── */
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(10,12,15,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2rem;
-    height: 52px;
-  }
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--mono);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--green);
-    text-decoration: none;
-  }
-  .nav-logo .logo-icon {
-    width: 28px; height: 28px;
-    background: var(--green-dim2);
-    border: 1px solid var(--green);
-    border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px;
-    font-weight: 700;
-  }
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    list-style: none;
-  }
-  .nav-links a {
-    display: block;
-    padding: 0 14px;
-    height: 52px;
-    line-height: 52px;
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text2);
-    text-decoration: none;
-    border-bottom: 2px solid transparent;
-    transition: color .2s, border-color .2s;
-    white-space: nowrap;
-  }
-  .nav-links a:hover { color: var(--green); border-bottom-color: var(--green); }
-  .nav-badge {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text3);
-    margin-left: auto;
-    padding-left: 2rem;
-  }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(10,12,15,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 52px; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--green); text-decoration: none; }
+  .nav-logo .logo-icon { width: 28px; height: 28px; background: var(--green-dim2); border: 1px solid var(--green); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+  .nav-links { display: flex; align-items: center; gap: 0; list-style: none; }
+  .nav-links a { display: block; padding: 0 14px; height: 52px; line-height: 52px; font-family: var(--mono); font-size: 12px; color: var(--text2); text-decoration: none; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; white-space: nowrap; }
+  .nav-links a:hover, .nav-links a.active { color: var(--green); border-bottom-color: var(--green); }
+  .nav-badge { font-family: var(--mono); font-size: 10px; color: var(--text3); margin-left: auto; padding-left: 2rem; }
 
   /* ─── HERO ─── */
-  .hero {
-    padding: 80px 2rem 60px;
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-  }
-  .hero-eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--green);
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-  .hero h1 {
-    font-family: var(--display);
-    font-size: clamp(2.4rem, 4vw, 3.4rem);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -.01em;
-    color: var(--text);
-    margin-bottom: 20px;
-  }
+  .hero { padding: 80px 2rem 60px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .hero-eyebrow { font-family: var(--mono); font-size: 11px; color: var(--green); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 16px; }
+  .hero h1 { font-family: var(--display); font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 800; line-height: 1.1; letter-spacing: -.01em; color: var(--text); margin-bottom: 20px; }
   .hero h1 span { color: var(--green); }
-  .hero-desc {
-    font-size: 15px;
-    color: var(--text2);
-    line-height: 1.7;
-    margin-bottom: 32px;
-    max-width: 440px;
-  }
-  .hero-ctas {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .btn-primary {
-    background: var(--green);
-    color: #060a06;
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 700;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: opacity .15s, transform .1s;
-    display: inline-block;
-    letter-spacing: .05em;
-  }
+  .hero-desc { font-size: 15px; color: var(--text2); line-height: 1.7; margin-bottom: 32px; max-width: 440px; }
+  .hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn-primary { background: var(--green); color: #060a06; font-family: var(--mono); font-size: 12px; font-weight: 700; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; text-decoration: none; transition: opacity .15s, transform .1s; display: inline-block; letter-spacing: .05em; }
   .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
-  .btn-ghost {
-    background: transparent;
-    color: var(--text2);
-    font-family: var(--mono);
-    font-size: 12px;
-    padding: 10px 20px;
-    border: 1px solid var(--border2);
-    border-radius: 6px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: border-color .2s, color .2s;
-    display: inline-block;
-    letter-spacing: .03em;
-  }
+  .btn-ghost { background: transparent; color: var(--text2); font-family: var(--mono); font-size: 12px; padding: 10px 20px; border: 1px solid var(--border2); border-radius: 6px; cursor: pointer; text-decoration: none; transition: border-color .2s, color .2s; display: inline-block; letter-spacing: .03em; }
   .btn-ghost:hover { border-color: var(--green); color: var(--green); }
 
   /* ─── TERMINAL ─── */
-  .terminal {
-    background: var(--bg2);
-    border: 1px solid var(--border2);
-    border-radius: 10px;
-    overflow: hidden;
-    font-family: var(--mono);
-    font-size: 12.5px;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.5);
-  }
-  .term-header {
-    background: var(--bg3);
-    padding: 10px 14px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    border-bottom: 1px solid var(--border);
-  }
+  .terminal { background: var(--bg2); border: 1px solid var(--border2); border-radius: 10px; overflow: hidden; font-family: var(--mono); font-size: 12.5px; box-shadow: 0 24px 64px rgba(0,0,0,0.5); }
+  .term-header { background: var(--bg3); padding: 10px 14px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--border); }
   .dot { width: 11px; height: 11px; border-radius: 50%; }
-  .dot-r { background: #ff5f57; }
-  .dot-y { background: #febc2e; }
-  .dot-g { background: #28c840; }
+  .dot-r { background: #ff5f57; } .dot-y { background: #febc2e; } .dot-g { background: #28c840; }
   .term-title { font-size: 11px; color: var(--text3); margin-left: 6px; }
   .term-body { padding: 16px 18px; line-height: 1.8; }
-  .t-prompt { color: var(--green); }
-  .t-cmd { color: var(--text); }
-  .t-output { color: var(--text2); display: block; padding-left: 2px; }
-  .t-ok { color: var(--green2); }
-  .t-warn { color: var(--amber); }
-  .t-err { color: var(--red); }
-  .t-comment { color: var(--text3); }
+  .t-prompt { color: var(--green); } .t-cmd { color: var(--text); } .t-output { color: var(--text2); display: block; padding-left: 2px; }
+  .t-ok { color: var(--green2); } .t-warn { color: var(--amber); } .t-err { color: var(--red); } .t-comment { color: var(--text3); }
   .t-blank { display: block; height: 8px; }
-  .cursor {
-    display: inline-block;
-    width: 7px; height: 14px;
-    background: var(--green);
-    vertical-align: middle;
-    animation: blink 1.1s step-end infinite;
-  }
+  .cursor { display: inline-block; width: 7px; height: 14px; background: var(--green); vertical-align: middle; animation: blink 1.1s step-end infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
   /* ─── STAT BAR ─── */
-  .stat-bar {
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    background: var(--bg2);
-    padding: 18px 2rem;
-  }
-  .stat-bar-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  .stat-item {
-    text-align: center;
-    flex: 1;
-  }
-  .stat-num {
-    font-family: var(--display);
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--green);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .stat-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: .08em;
-  }
-  .stat-div {
-    width: 1px;
-    height: 32px;
-    background: var(--border2);
-  }
+  .stat-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg2); padding: 18px 2rem; }
+  .stat-bar-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .stat-item { text-align: center; flex: 1; }
+  .stat-num { font-family: var(--display); font-size: 1.8rem; font-weight: 800; color: var(--green); line-height: 1; margin-bottom: 4px; }
+  .stat-label { font-family: var(--mono); font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .08em; }
+  .stat-div { width: 1px; height: 32px; background: var(--border2); }
 
   /* ─── SECTIONS ─── */
-  .section {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 64px 2rem;
-  }
-  .section-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--green);
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-  .section-title {
-    font-family: var(--display);
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: var(--text);
-    margin-bottom: 6px;
-  }
-  .section-sub {
-    font-size: 14px;
-    color: var(--text2);
-    margin-bottom: 32px;
-    max-width: 560px;
-  }
-  hr.section-divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 0;
-  }
+  .section { max-width: 1100px; margin: 0 auto; padding: 64px 2rem; }
+  .section-label { font-family: var(--mono); font-size: 10px; color: var(--green); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 10px; }
+  .section-title { font-family: var(--display); font-size: 1.6rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+  .section-sub { font-size: 14px; color: var(--text2); margin-bottom: 32px; max-width: 560px; }
+  hr.section-divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
-  /* ─── MODULES GRID ─── */
-  .filter-bar {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-bottom: 24px;
-  }
-  .filter-btn {
-    font-family: var(--mono);
-    font-size: 11px;
-    padding: 5px 12px;
-    border-radius: 4px;
-    border: 1px solid var(--border2);
-    background: transparent;
-    color: var(--text2);
-    cursor: pointer;
-    transition: all .15s;
-  }
+  /* ─── FILTER BAR ─── */
+  .filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 24px; }
+  .filter-btn { font-family: var(--mono); font-size: 11px; padding: 5px 12px; border-radius: 4px; border: 1px solid var(--border2); background: transparent; color: var(--text2); cursor: pointer; transition: all .15s; }
   .filter-btn.active { background: var(--green-dim2); border-color: var(--green); color: var(--green); }
   .filter-btn:hover:not(.active) { border-color: var(--border2); color: var(--text); }
 
-  .modules-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 12px;
-  }
-  .module-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 18px 20px;
-    cursor: pointer;
-    transition: border-color .2s, background .2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .module-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--green);
-    opacity: 0;
-    transition: opacity .2s;
-  }
+  /* ─── MODULES GRID ─── */
+  .modules-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+  .module-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; cursor: pointer; transition: border-color .2s, background .2s; position: relative; overflow: hidden; }
+  .module-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--green); opacity: 0; transition: opacity .2s; }
   .module-card:hover { border-color: var(--border2); background: var(--bg3); }
   .module-card:hover::before { opacity: 1; }
-
-  .module-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 8px;
-  }
-  .module-icon {
-    font-size: 20px;
-    margin-bottom: 2px;
-  }
-  .module-level {
-    font-family: var(--mono);
-    font-size: 10px;
-    padding: 3px 8px;
-    border-radius: 3px;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-  }
+  .module-card[data-hidden="true"] { display: none; }
+  .module-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; }
+  .module-icon { font-size: 20px; margin-bottom: 2px; }
+  .module-level { font-family: var(--mono); font-size: 10px; padding: 3px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: .06em; }
   .level-beginner { background: rgba(57,255,110,0.1); color: var(--green); border: 1px solid rgba(57,255,110,0.25); }
   .level-intermediate { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(245,166,35,0.25); }
   .level-advanced { background: rgba(255,71,87,0.1); color: var(--red); border: 1px solid rgba(255,71,87,0.25); }
   .level-lfcs { background: rgba(61,158,255,0.1); color: var(--blue); border: 1px solid rgba(61,158,255,0.25); }
-
-  .module-name {
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 5px;
-  }
-  .module-desc {
-    font-size: 12px;
-    color: var(--text2);
-    line-height: 1.5;
-  }
-  .module-tags {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-    margin-top: 12px;
-  }
-  .tag {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text3);
-    background: var(--bg4);
-    padding: 2px 7px;
-    border-radius: 3px;
-  }
+  .module-name { font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+  .module-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
+  .module-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 12px; }
+  .tag { font-family: var(--mono); font-size: 10px; color: var(--text3); background: var(--bg4); padding: 2px 7px; border-radius: 3px; }
 
   /* ─── AI TOOLS ─── */
-  .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 12px;
-  }
-  .tool-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px;
-    transition: border-color .2s;
-    cursor: pointer;
-  }
-  .tool-card:hover { border-color: var(--border2); }
-  .tool-icon-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
-  }
-  .tool-icon {
-    width: 36px; height: 36px;
-    background: var(--green-dim);
-    border: 1px solid rgba(57,255,110,0.2);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 17px;
-  }
-  .tool-ai-badge {
-    font-family: var(--mono);
-    font-size: 9px;
-    color: var(--green);
-    border: 1px solid rgba(57,255,110,0.3);
-    padding: 2px 7px;
-    border-radius: 3px;
-    letter-spacing: .06em;
-  }
-  .tool-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 5px;
-  }
-  .tool-desc {
-    font-size: 12px;
-    color: var(--text2);
-    line-height: 1.5;
-  }
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+  .tool-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; transition: border-color .2s, background .2s; cursor: pointer; }
+  .tool-card:hover { border-color: var(--green); background: var(--bg3); }
+  .tool-icon-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .tool-icon { width: 36px; height: 36px; background: var(--green-dim); border: 1px solid rgba(57,255,110,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 17px; }
+  .tool-ai-badge { font-family: var(--mono); font-size: 9px; color: var(--green); border: 1px solid rgba(57,255,110,0.3); padding: 2px 7px; border-radius: 3px; letter-spacing: .06em; }
+  .tool-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+  .tool-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
 
-  /* ─── CHEATSHEET PREVIEW ─── */
-  .cheat-preview {
-    background: var(--bg2);
-    border: 1px solid var(--border2);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .cheat-header {
-    background: var(--bg3);
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 1px solid var(--border);
-  }
-  .cheat-search {
-    flex: 1;
-    background: var(--bg4);
-    border: 1px solid var(--border2);
-    border-radius: 5px;
-    padding: 6px 12px;
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text2);
-  }
-  .cheat-count {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text3);
-    white-space: nowrap;
-  }
-  .cheat-body {
-    padding: 4px 0;
-    max-height: 320px;
-    overflow-y: auto;
-  }
-  .cheat-row {
-    display: grid;
-    grid-template-columns: 2fr 3fr 80px;
-    gap: 0;
-    padding: 9px 16px;
-    border-bottom: 1px solid var(--border);
-    align-items: center;
-    transition: background .15s;
-    cursor: pointer;
-  }
+  /* ─── CHEATSHEET ─── */
+  .cheat-preview { background: var(--bg2); border: 1px solid var(--border2); border-radius: 10px; overflow: hidden; }
+  .cheat-header { background: var(--bg3); padding: 12px 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); }
+  .cheat-search { flex: 1; background: var(--bg4); border: 1px solid var(--border2); border-radius: 5px; padding: 6px 12px; font-family: var(--mono); font-size: 12px; color: var(--text2); outline: none; transition: border-color .2s; }
+  .cheat-search:focus { border-color: var(--green); color: var(--text); }
+  .cheat-search::placeholder { color: var(--text3); }
+  .cheat-count { font-family: var(--mono); font-size: 11px; color: var(--text3); white-space: nowrap; }
+  .cheat-body { padding: 4px 0; max-height: 320px; overflow-y: auto; }
+  .cheat-row { display: grid; grid-template-columns: 2fr 3fr 80px; gap: 0; padding: 9px 16px; border-bottom: 1px solid var(--border); align-items: center; transition: background .15s; cursor: pointer; }
   .cheat-row:hover { background: var(--bg3); }
   .cheat-row:last-child { border-bottom: none; }
+  .cheat-row[data-hidden="true"] { display: none; }
   .cheat-cmd { font-family: var(--mono); font-size: 12px; color: var(--green); }
   .cheat-exp { font-size: 12px; color: var(--text2); }
-  .cheat-copy {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text3);
-    text-align: right;
-    opacity: 0;
-    transition: opacity .15s;
-  }
+  .cheat-copy { font-family: var(--mono); font-size: 10px; color: var(--text3); text-align: right; opacity: 0; transition: opacity .15s; }
   .cheat-row:hover .cheat-copy { opacity: 1; }
+  .cheat-no-results { padding: 24px 16px; text-align: center; font-family: var(--mono); font-size: 12px; color: var(--text3); display: none; }
 
-  /* ─── QUIZ PREVIEW ─── */
-  .quiz-preview {
-    background: var(--bg2);
-    border: 1px solid var(--border2);
-    border-radius: 10px;
-    padding: 24px;
-  }
-  .quiz-meta {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
-    align-items: center;
-  }
-  .quiz-domain {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--blue);
-    background: rgba(61,158,255,0.1);
-    border: 1px solid rgba(61,158,255,0.2);
-    padding: 3px 9px;
-    border-radius: 3px;
-    text-transform: uppercase;
-    letter-spacing: .07em;
-  }
-  .quiz-diff {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--amber);
-    background: var(--amber-dim);
-    border: 1px solid rgba(245,166,35,0.2);
-    padding: 3px 9px;
-    border-radius: 3px;
-    text-transform: uppercase;
-    letter-spacing: .07em;
-  }
-  .quiz-q {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 16px;
-    line-height: 1.55;
-  }
-  .quiz-options {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .quiz-opt {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 10px 14px;
-    border: 1px solid var(--border2);
-    border-radius: 7px;
-    cursor: pointer;
-    transition: border-color .15s, background .15s;
-    font-size: 12.5px;
-    color: var(--text2);
-    font-family: var(--mono);
-  }
-  .quiz-opt:hover { border-color: var(--green); color: var(--text); background: var(--green-dim); }
+  /* ─── QUIZ ─── */
+  .quiz-preview { background: var(--bg2); border: 1px solid var(--border2); border-radius: 10px; padding: 24px; }
+  .quiz-progress-bar { height: 3px; background: var(--bg4); border-radius: 2px; margin-bottom: 20px; overflow: hidden; }
+  .quiz-progress-fill { height: 100%; background: var(--green); border-radius: 2px; transition: width .4s ease; }
+  .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .quiz-meta { display: flex; gap: 8px; align-items: center; }
+  .quiz-score-display { font-family: var(--mono); font-size: 11px; color: var(--text3); }
+  .quiz-domain { font-family: var(--mono); font-size: 10px; color: var(--blue); background: rgba(61,158,255,0.1); border: 1px solid rgba(61,158,255,0.2); padding: 3px 9px; border-radius: 3px; text-transform: uppercase; letter-spacing: .07em; }
+  .quiz-diff { font-family: var(--mono); font-size: 10px; color: var(--amber); background: var(--amber-dim); border: 1px solid rgba(245,166,35,0.2); padding: 3px 9px; border-radius: 3px; text-transform: uppercase; letter-spacing: .07em; }
+  .quiz-q { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 16px; line-height: 1.55; }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-opt { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border: 1px solid var(--border2); border-radius: 7px; cursor: pointer; transition: border-color .15s, background .15s; font-size: 12.5px; color: var(--text2); font-family: var(--mono); }
+  .quiz-opt:hover:not(.locked) { border-color: var(--green); color: var(--text); background: var(--green-dim); }
   .quiz-opt.correct { border-color: var(--green); background: var(--green-dim); color: var(--green); }
   .quiz-opt.wrong { border-color: var(--red); background: rgba(255,71,87,0.07); color: var(--red); }
-  .opt-letter {
-    font-weight: 700;
-    font-size: 11px;
-    min-width: 14px;
-    margin-top: 1px;
-  }
+  .quiz-opt.locked { cursor: default; }
+  .opt-letter { font-weight: 700; font-size: 11px; min-width: 14px; margin-top: 1px; }
+  .quiz-feedback { display: none; margin-top: 14px; padding: 12px 14px; border-radius: 7px; background: var(--green-dim); border: 1px solid rgba(57,255,110,0.2); font-size: 12px; color: var(--green2); line-height: 1.5; }
+  .quiz-feedback.wrong-fb { background: rgba(255,71,87,0.07); border-color: rgba(255,71,87,0.2); color: #ff8a94; }
+  .quiz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; }
+  .quiz-btn { font-family: var(--mono); font-size: 11px; padding: 7px 16px; border-radius: 5px; border: 1px solid var(--border2); background: transparent; color: var(--text2); cursor: pointer; transition: all .15s; letter-spacing: .04em; }
+  .quiz-btn:hover { border-color: var(--green); color: var(--green); }
+  .quiz-btn:disabled { opacity: .3; cursor: default; }
+  .quiz-btn.primary { background: var(--green); color: #060a06; border-color: var(--green); font-weight: 700; }
+  .quiz-btn.primary:hover { opacity: .85; }
+  .quiz-result { display: none; text-align: center; padding: 32px 0; }
+  .quiz-result-score { font-family: var(--display); font-size: 3.5rem; font-weight: 800; color: var(--green); line-height: 1; }
+  .quiz-result-label { font-family: var(--mono); font-size: 12px; color: var(--text3); margin-top: 8px; margin-bottom: 24px; }
+  .quiz-result-grade { font-size: 14px; color: var(--text2); margin-bottom: 20px; }
+  .quiz-q-num { font-family: var(--mono); font-size: 10px; color: var(--text3); }
 
   /* ─── LABS ─── */
-  .labs-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .lab-item {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    cursor: pointer;
-    transition: border-color .2s, background .2s;
-  }
+  .labs-list { display: flex; flex-direction: column; gap: 10px; }
+  .lab-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; cursor: pointer; transition: border-color .2s, background .2s; }
+  .lab-item-header { padding: 16px 20px; display: flex; align-items: center; gap: 16px; }
   .lab-item:hover { border-color: var(--border2); background: var(--bg3); }
-  .lab-num {
-    font-family: var(--mono);
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text3);
-    min-width: 36px;
-    line-height: 1;
-  }
+  .lab-item[data-hidden="true"] { display: none; }
+  .lab-num { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--text3); min-width: 36px; line-height: 1; }
   .lab-info { flex: 1; }
-  .lab-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 3px;
-  }
+  .lab-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
   .lab-desc { font-size: 12px; color: var(--text2); }
-  .lab-meta {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .lab-time {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text3);
-  }
+  .lab-meta { display: flex; align-items: center; gap: 8px; }
+  .lab-time { font-family: var(--mono); font-size: 10px; color: var(--text3); }
+  .lab-expand-icon { font-size: 12px; color: var(--text3); transition: transform .2s; margin-left: 8px; }
+  .lab-item.open .lab-expand-icon { transform: rotate(180deg); }
+  .lab-detail { display: none; padding: 0 20px 18px; border-top: 1px solid var(--border); }
+  .lab-item.open .lab-detail { display: block; }
+  .lab-steps { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; counter-reset: step; }
+  .lab-step { font-family: var(--mono); font-size: 12px; color: var(--text2); padding: 8px 12px; background: var(--bg4); border-radius: 5px; line-height: 1.6; counter-increment: step; position: relative; padding-left: 36px; }
+  .lab-step::before { content: counter(step); position: absolute; left: 10px; top: 8px; font-size: 10px; color: var(--text3); font-weight: 700; }
+  .lab-step code { color: var(--green); background: rgba(57,255,110,0.08); padding: 1px 5px; border-radius: 3px; }
 
   /* ─── ERROR ENCYCLOPEDIA ─── */
-  .error-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .error-item {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: border-color .2s;
-  }
+  .error-grid { display: flex; flex-direction: column; gap: 8px; }
+  .error-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; cursor: pointer; transition: border-color .2s; }
   .error-item:hover { border-color: var(--border2); }
-  .error-header {
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .error-sev {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
+  .error-item[data-hidden="true"] { display: none; }
+  .error-header { padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
+  .error-sev { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
   .sev-high { background: var(--red); box-shadow: 0 0 6px var(--red); }
   .sev-med { background: var(--amber); }
   .sev-low { background: var(--green); }
-  .error-name {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--red);
-    flex: 1;
-  }
+  .error-name { font-family: var(--mono); font-size: 12px; color: var(--red); flex: 1; }
   .error-name.med { color: var(--amber); }
   .error-name.low { color: var(--green2); }
-  .error-summary { font-size: 12px; color: var(--text2); }
-  .error-cat {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text3);
-    background: var(--bg4);
-    padding: 2px 8px;
-    border-radius: 3px;
-  }
+  .error-cat { font-family: var(--mono); font-size: 10px; color: var(--text3); background: var(--bg4); padding: 2px 8px; border-radius: 3px; white-space: nowrap; }
+  .error-chevron { font-size: 12px; color: var(--text3); transition: transform .2s; }
+  .error-item.open .error-chevron { transform: rotate(180deg); }
+  .error-detail { display: none; padding: 0 16px 14px; border-top: 1px solid var(--border); }
+  .error-item.open .error-detail { display: block; }
+  .error-section { margin-top: 12px; }
+  .error-section-label { font-family: var(--mono); font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 5px; }
+  .error-section p { font-size: 12px; color: var(--text2); line-height: 1.6; }
+  .error-cmd-block { background: var(--bg4); border-radius: 5px; padding: 10px 12px; margin-top: 6px; font-family: var(--mono); font-size: 12px; color: var(--green); line-height: 1.8; }
 
   /* ─── DOMAIN COVERAGE ─── */
-  .domain-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
-  }
-  .domain-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-  }
-  .domain-pct {
-    font-family: var(--display);
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--green);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .domain-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
+  .domain-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+  .domain-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .domain-pct { font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--green); line-height: 1; margin-bottom: 6px; }
+  .domain-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
   .domain-topics { font-size: 11.5px; color: var(--text2); line-height: 1.5; }
-  .domain-bar {
-    height: 3px;
-    background: var(--bg4);
-    border-radius: 2px;
-    margin-top: 12px;
-    overflow: hidden;
-  }
-  .domain-bar-fill {
-    height: 100%;
-    background: var(--green);
-    border-radius: 2px;
-    transition: width .6s ease;
-  }
+  .domain-bar { height: 3px; background: var(--bg4); border-radius: 2px; margin-top: 12px; overflow: hidden; }
+  .domain-bar-fill { height: 100%; background: var(--green); border-radius: 2px; width: 0; transition: width .8s ease; }
+
+  /* ─── MODAL ─── */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 500; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--bg2); border: 1px solid var(--border2); border-radius: 12px; width: 100%; max-width: 700px; max-height: 90vh; overflow: hidden; display: flex; flex-direction: column; }
+  .modal-header { background: var(--bg3); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .modal-title { font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 10px; }
+  .modal-close { background: none; border: none; color: var(--text3); font-size: 20px; cursor: pointer; line-height: 1; padding: 0 4px; transition: color .15s; }
+  .modal-close:hover { color: var(--text); }
+  .modal-body { padding: 20px; overflow-y: auto; flex: 1; }
+  .modal-input-wrap { margin-bottom: 14px; }
+  .modal-label { font-family: var(--mono); font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; display: block; }
+  .modal-textarea { width: 100%; background: var(--bg4); border: 1px solid var(--border2); border-radius: 6px; padding: 10px 12px; font-family: var(--mono); font-size: 12px; color: var(--text2); resize: vertical; min-height: 90px; outline: none; transition: border-color .2s; }
+  .modal-textarea:focus { border-color: var(--green); color: var(--text); }
+  .modal-textarea::placeholder { color: var(--text3); }
+  .modal-run-btn { font-family: var(--mono); font-size: 12px; font-weight: 700; padding: 9px 20px; background: var(--green); color: #060a06; border: none; border-radius: 6px; cursor: pointer; letter-spacing: .04em; transition: opacity .15s; display: flex; align-items: center; gap: 8px; }
+  .modal-run-btn:hover { opacity: .85; }
+  .modal-run-btn:disabled { opacity: .5; cursor: default; }
+  .modal-output { background: var(--bg4); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-top: 16px; font-family: var(--mono); font-size: 12.5px; color: var(--text2); line-height: 1.8; white-space: pre-wrap; display: none; max-height: 360px; overflow-y: auto; }
+  .modal-output.visible { display: block; }
+  .modal-output .out-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px; display: block; }
+  .modal-output .out-green { color: var(--green); }
+  .modal-output .out-amber { color: var(--amber); }
+  .modal-output .out-red { color: var(--red); }
+  .modal-output .out-blue { color: var(--blue); }
+  .modal-spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid #060a06; border-top-color: transparent; border-radius: 50%; animation: spin .6s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ─── MODULE MODAL CONTENT ─── */
+  .mod-content h3 { font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--green); margin: 18px 0 8px; }
+  .mod-content p { font-size: 13px; color: var(--text2); line-height: 1.65; margin-bottom: 8px; }
+  .mod-content code { font-family: var(--mono); font-size: 11.5px; color: var(--green); background: rgba(57,255,110,0.08); padding: 1px 5px; border-radius: 3px; }
+  .mod-cmd-list { background: var(--bg4); border-radius: 7px; padding: 10px 14px; font-family: var(--mono); font-size: 12px; line-height: 2; margin-bottom: 10px; }
+  .mod-cmd-list span { color: var(--green); }
+  .mod-cmd-list .mc { color: var(--text3); }
 
   /* ─── FOOTER ─── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 28px 2rem;
-    text-align: center;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text3);
-  }
+  footer { border-top: 1px solid var(--border); padding: 28px 2rem; text-align: center; font-family: var(--mono); font-size: 11px; color: var(--text3); }
   footer a { color: var(--green); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
   .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
-
-  /* ─── QUIZ INTERACTIONS ─── */
-  .quiz-feedback {
-    display: none;
-    margin-top: 14px;
-    padding: 12px 14px;
-    border-radius: 7px;
-    background: var(--green-dim);
-    border: 1px solid rgba(57,255,110,0.2);
-    font-size: 12px;
-    color: var(--green2);
-    line-height: 1.5;
-  }
-  .quiz-feedback.wrong-fb {
-    background: rgba(255,71,87,0.07);
-    border-color: rgba(255,71,87,0.2);
-    color: #ff8a94;
-  }
 
   /* scrollbar */
   ::-webkit-scrollbar { width: 5px; height: 5px; }
@@ -771,7 +291,7 @@
   <div>
     <p class="hero-eyebrow">// eknathalabs.com · linux lab</p>
     <h1>Master Linux.<br><span>Admin with Confidence.</span></h1>
-    <p class="hero-desc">A structured, hands-on Linux learning lab — LFCS exam domains, AI-powered tools, 250+ commands, 100-question quiz, and full lab walkthroughs. Built by a Platform Engineer, for Platform Engineers.</p>
+    <p class="hero-desc">A structured, hands-on Linux learning lab — LFCS exam domains, AI-powered tools, 250+ commands, 100-question quiz, and full lab walkthroughs. Built by a Engineer, for Everyone.</p>
     <div class="hero-ctas">
       <a class="btn-primary" href="#modules">▶ Start Learning</a>
       <a class="btn-ghost" href="#cheatsheet">⌨ Cheatsheet</a>
@@ -781,9 +301,7 @@
   </div>
   <div class="terminal">
     <div class="term-header">
-      <span class="dot dot-r"></span>
-      <span class="dot dot-y"></span>
-      <span class="dot dot-g"></span>
+      <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
       <span class="term-title">eknatha@linuxlab ~ bash</span>
     </div>
     <div class="term-body">
@@ -827,7 +345,6 @@
     <div class="stat-item"><div class="stat-num">70+</div><div class="stat-label">Error Codes</div></div>
   </div>
 </div>
-
 <hr class="section-divider">
 
 <!-- LFCS DOMAIN COVERAGE -->
@@ -835,36 +352,36 @@
   <p class="section-label">// LFCS Exam Blueprint</p>
   <h2 class="section-title">Official Domain Coverage</h2>
   <p class="section-sub">Every module, quiz question, and lab maps to an official LFCS domain. 2-hour performance-based exam · 17–20 tasks · 67% passing score.</p>
-  <div class="domain-grid">
+  <div class="domain-grid" id="domain-grid">
     <div class="domain-card">
       <div class="domain-pct">25%</div>
       <div class="domain-name">Operations &amp; Deployment</div>
       <div class="domain-topics">systemd, boot process, cron, package management, containers</div>
-      <div class="domain-bar"><div class="domain-bar-fill" style="width:25%"></div></div>
+      <div class="domain-bar"><div class="domain-bar-fill" data-width="25"></div></div>
     </div>
     <div class="domain-card">
       <div class="domain-pct">25%</div>
       <div class="domain-name">Networking</div>
       <div class="domain-topics">interfaces, routing, iptables, firewalld, SSH, DNS, NFS</div>
-      <div class="domain-bar"><div class="domain-bar-fill" style="width:25%"></div></div>
+      <div class="domain-bar"><div class="domain-bar-fill" data-width="25"></div></div>
     </div>
     <div class="domain-card">
       <div class="domain-pct">20%</div>
       <div class="domain-name">Storage</div>
       <div class="domain-topics">LVM, partitioning, filesystems, RAID, mounting, swap</div>
-      <div class="domain-bar"><div class="domain-bar-fill" style="width:20%"></div></div>
+      <div class="domain-bar"><div class="domain-bar-fill" data-width="20"></div></div>
     </div>
     <div class="domain-card">
       <div class="domain-pct">20%</div>
       <div class="domain-name">Essential Commands</div>
       <div class="domain-topics">find, grep, sed, awk, pipes, redirects, permissions, archives</div>
-      <div class="domain-bar"><div class="domain-bar-fill" style="width:20%"></div></div>
+      <div class="domain-bar"><div class="domain-bar-fill" data-width="20"></div></div>
     </div>
     <div class="domain-card">
       <div class="domain-pct">10%</div>
       <div class="domain-name">Users &amp; Groups</div>
       <div class="domain-topics">useradd, sudo, PAM, passwd, groups, LDAP basics</div>
-      <div class="domain-bar"><div class="domain-bar-fill" style="width:10%"></div></div>
+      <div class="domain-bar"><div class="domain-bar-fill" data-width="10"></div></div>
     </div>
   </div>
 </div>
@@ -875,155 +392,98 @@
   <p class="section-label">// Learning Path</p>
   <h2 class="section-title">Structured Modules</h2>
   <p class="section-sub">14 modules from essential commands to advanced security. Click any module to deep dive.</p>
-  <div class="filter-bar">
-    <button class="filter-btn active">All</button>
-    <button class="filter-btn">Beginner</button>
-    <button class="filter-btn">Intermediate</button>
-    <button class="filter-btn">Advanced</button>
-    <button class="filter-btn">LFCS</button>
+  <div class="filter-bar" id="modules-filter">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="beginner">Beginner</button>
+    <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+    <button class="filter-btn" data-filter="advanced">Advanced</button>
+    <button class="filter-btn" data-filter="lfcs">LFCS</button>
   </div>
-  <div class="modules-grid">
-
-    <div class="module-card">
-      <div class="module-top">
-        <div class="module-icon">⌨️</div>
-        <span class="module-level level-beginner">Beginner</span>
-      </div>
+  <div class="modules-grid" id="modules-grid">
+    <div class="module-card" data-level="beginner" data-lfcs="true" data-module="essential">
+      <div class="module-top"><div class="module-icon">⌨️</div><span class="module-level level-beginner">Beginner</span></div>
       <div class="module-name">Essential Commands</div>
       <div class="module-desc">Navigation, file ops, find, grep, text manipulation, pipes, redirects, stdin/stdout/stderr.</div>
       <div class="module-tags"><span class="tag">find</span><span class="tag">grep</span><span class="tag">sed/awk</span><span class="tag">LFCS 20%</span></div>
     </div>
-
-    <div class="module-card">
-      <div class="module-top">
-        <div class="module-icon">🔐</div>
-        <span class="module-level level-beginner">Beginner</span>
-      </div>
+    <div class="module-card" data-level="beginner" data-lfcs="true" data-module="users">
+      <div class="module-top"><div class="module-icon">🔐</div><span class="module-level level-beginner">Beginner</span></div>
       <div class="module-name">Users, Groups &amp; Permissions</div>
       <div class="module-desc">useradd, passwd, sudo, ACLs, chmod, chown, sticky bit, SUID/SGID, umask.</div>
       <div class="module-tags"><span class="tag">useradd</span><span class="tag">sudo</span><span class="tag">ACL</span><span class="tag">LFCS 10%</span></div>
     </div>
-
-    <div class="module-card">
-      <div class="module-top">
-        <div class="module-icon">⚙️</div>
-        <span class="module-level level-beginner">Beginner</span>
-      </div>
+    <div class="module-card" data-level="beginner" data-lfcs="true" data-module="systemd">
+      <div class="module-top"><div class="module-icon">⚙️</div><span class="module-level level-beginner">Beginner</span></div>
       <div class="module-name">systemd &amp; Service Management</div>
       <div class="module-desc">systemctl, journalctl, unit files, targets, boot sequence, service dependencies.</div>
       <div class="module-tags"><span class="tag">systemctl</span><span class="tag">journalctl</span><span class="tag">LFCS 25%</span></div>
     </div>
-
-    <div class="module-card">
-      <div class="module-top">
-        <div class="module-icon">💾</div>
-        <span class="module-level level-intermediate">Intermediate</span>
-      </div>
+    <div class="module-card" data-level="intermediate" data-lfcs="true" data-module="storage">
+      <div class="module-top"><div class="module-icon">💾</div><span class="module-level level-intermediate">Intermediate</span></div>
       <div class="module-name">Storage &amp; Filesystems</div>
       <div class="module-desc">Partitioning (fdisk/gdisk), mkfs, mount, fstab, swap, ext4/xfs/btrfs.</div>
       <div class="module-tags"><span class="tag">fdisk</span><span class="tag">lvm</span><span class="tag">mount</span><span class="tag">LFCS 20%</span></div>
     </div>
-
-    <div class="module-card">
-      <div class="module-top">
-        <div class="module-icon">🗄️</div>
-        <span class="module-level level-intermediate">Intermediate</span>
-      </div>
+    <div class="module-card" data-level="intermediate" data-module="lvm">
+      <div class="module-top"><div class="module-icon">🗄️</div><span class="module-level level-intermediate">Intermediate</span></div>
       <div class="module-name">LVM — Logical Volume Manager</div>
       <div class="module-desc">pvcreate, vgcreate, lvcreate, resize, snapshots, thin provisioning.</div>
       <div class="module-tags"><span class="tag">pvcreate</span><span class="tag">lvcreate</span><span class="tag">lvextend</span></div>
     </div>
-
-    <div class="module-card">
-      <div class="module-top">
-        <div class="module-icon">🌐</div>
-        <span class="module-level level-intermediate">Intermediate</span>
-      </div>
+    <div class="module-card" data-level="intermediate" data-lfcs="true" data-module="networking">
+      <div class="module-top"><div class="module-icon">🌐</div><span class="module-level level-intermediate">Intermediate</span></div>
       <div class="module-name">Networking Fundamentals</div>
       <div class="module-desc">ip, nmcli, netplan, static IPs, routes, DNS resolution, ss, netstat, troubleshooting.</div>
       <div class="module-tags"><span class="tag">ip addr</span><span class="tag">nmcli</span><span class="tag">ss</span><span class="tag">LFCS 25%</span></div>
     </div>
-
-    <div class="module-card">
-      <div class="module-top">
-        <div class="module-icon">🛡️</div>
-        <span class="module-level level-intermediate">Intermediate</span>
-      </div>
+    <div class="module-card" data-level="intermediate" data-module="firewall">
+      <div class="module-top"><div class="module-icon">🛡️</div><span class="module-level level-intermediate">Intermediate</span></div>
       <div class="module-name">Firewall — iptables &amp; firewalld</div>
       <div class="module-desc">iptables chains, rules, NAT, PREROUTING, firewalld zones, rich rules, persistence.</div>
       <div class="module-tags"><span class="tag">iptables</span><span class="tag">firewalld</span><span class="tag">nft</span></div>
     </div>
-
-    <div class="module-card">
-      <div class="module-top">
-        <div class="module-icon">🔑</div>
-        <span class="module-level level-intermediate">Intermediate</span>
-      </div>
+    <div class="module-card" data-level="intermediate" data-module="ssh">
+      <div class="module-top"><div class="module-icon">🔑</div><span class="module-level level-intermediate">Intermediate</span></div>
       <div class="module-name">SSH &amp; Remote Access</div>
       <div class="module-desc">Key-based auth, sshd_config hardening, port forwarding, jump hosts, scp/rsync.</div>
       <div class="module-tags"><span class="tag">ssh-keygen</span><span class="tag">sshd</span><span class="tag">rsync</span></div>
     </div>
-
-    <div class="module-card">
-      <div class="module-top">
-        <div class="module-icon">📦</div>
-        <span class="module-level level-intermediate">Intermediate</span>
-      </div>
+    <div class="module-card" data-level="intermediate" data-module="packages">
+      <div class="module-top"><div class="module-icon">📦</div><span class="module-level level-intermediate">Intermediate</span></div>
       <div class="module-name">Package Management</div>
       <div class="module-desc">apt/dpkg (Debian), dnf/rpm (RHEL), snap, flatpak, compiling from source.</div>
       <div class="module-tags"><span class="tag">apt</span><span class="tag">dnf</span><span class="tag">rpm</span></div>
     </div>
-
-    <div class="module-card">
-      <div class="module-top">
-        <div class="module-icon">📊</div>
-        <span class="module-level level-intermediate">Intermediate</span>
-      </div>
+    <div class="module-card" data-level="intermediate" data-module="processes">
+      <div class="module-top"><div class="module-icon">📊</div><span class="module-level level-intermediate">Intermediate</span></div>
       <div class="module-name">Process &amp; Resource Management</div>
       <div class="module-desc">ps, top, htop, kill, nice/renice, ulimit, cgroups, load average, memory analysis.</div>
       <div class="module-tags"><span class="tag">ps</span><span class="tag">top</span><span class="tag">cgroups</span></div>
     </div>
-
-    <div class="module-card">
-      <div class="module-top">
-        <div class="module-icon">🕐</div>
-        <span class="module-level level-intermediate">Intermediate</span>
-      </div>
+    <div class="module-card" data-level="intermediate" data-module="cron">
+      <div class="module-top"><div class="module-icon">🕐</div><span class="module-level level-intermediate">Intermediate</span></div>
       <div class="module-name">Cron &amp; Task Scheduling</div>
       <div class="module-desc">crontab syntax, system cron, at, anacron, systemd timers — all approaches covered.</div>
       <div class="module-tags"><span class="tag">crontab</span><span class="tag">at</span><span class="tag">systemd timer</span></div>
     </div>
-
-    <div class="module-card">
-      <div class="module-top">
-        <div class="module-icon">📋</div>
-        <span class="module-level level-advanced">Advanced</span>
-      </div>
+    <div class="module-card" data-level="advanced" data-module="scripting">
+      <div class="module-top"><div class="module-icon">📋</div><span class="module-level level-advanced">Advanced</span></div>
       <div class="module-name">Shell Scripting for Sysadmins</div>
       <div class="module-desc">Bash scripting patterns, error handling, loops, functions, heredocs, real automation scripts.</div>
       <div class="module-tags"><span class="tag">bash</span><span class="tag">scripting</span><span class="tag">automation</span></div>
     </div>
-
-    <div class="module-card">
-      <div class="module-top">
-        <div class="module-icon">🐳</div>
-        <span class="module-level level-advanced">Advanced</span>
-      </div>
+    <div class="module-card" data-level="advanced" data-lfcs="true" data-module="containers">
+      <div class="module-top"><div class="module-icon">🐳</div><span class="module-level level-advanced">Advanced</span></div>
       <div class="module-name">Containers &amp; Docker Basics</div>
       <div class="module-desc">docker run/build/compose, image management, networking, volumes — the LFCS container domain.</div>
       <div class="module-tags"><span class="tag">docker</span><span class="tag">containers</span><span class="tag">LFCS</span></div>
     </div>
-
-    <div class="module-card">
-      <div class="module-top">
-        <div class="module-icon">🔒</div>
-        <span class="module-level level-advanced">Advanced</span>
-      </div>
+    <div class="module-card" data-level="advanced" data-module="selinux">
+      <div class="module-top"><div class="module-icon">🔒</div><span class="module-level level-advanced">Advanced</span></div>
       <div class="module-name">SELinux &amp; AppArmor</div>
       <div class="module-desc">Mandatory access control, contexts, booleans, audit logs, troubleshooting denials.</div>
       <div class="module-tags"><span class="tag">SELinux</span><span class="tag">AppArmor</span><span class="tag">MAC</span></div>
     </div>
-
   </div>
 </div>
 <hr class="section-divider">
@@ -1034,67 +494,43 @@
   <h2 class="section-title">Built-in Linux Tools ✦ AI Powered</h2>
   <p class="section-sub">Paste errors, describe tasks, generate configs — without leaving the page.</p>
   <div class="tools-grid">
-    <div class="tool-card">
-      <div class="tool-icon-row">
-        <div class="tool-icon">🔴</div>
-        <span class="tool-ai-badge">✦ AI</span>
-      </div>
+    <div class="tool-card" data-tool="error-explainer" onclick="openTool(this)">
+      <div class="tool-icon-row"><div class="tool-icon">🔴</div><span class="tool-ai-badge">✦ AI</span></div>
       <div class="tool-name">Error Explainer</div>
       <div class="tool-desc">Paste any Linux error or kernel panic. Get root cause, fix commands, and how to prevent it.</div>
     </div>
-    <div class="tool-card">
-      <div class="tool-icon-row">
-        <div class="tool-icon">⚙️</div>
-        <span class="tool-ai-badge">✦ AI</span>
-      </div>
+    <div class="tool-card" data-tool="systemd-gen" onclick="openTool(this)">
+      <div class="tool-icon-row"><div class="tool-icon">⚙️</div><span class="tool-ai-badge">✦ AI</span></div>
       <div class="tool-name">systemd Unit Generator</div>
       <div class="tool-desc">Describe a service in plain English → get a production-ready .service unit file with explanations.</div>
     </div>
-    <div class="tool-card">
-      <div class="tool-icon-row">
-        <div class="tool-icon">📋</div>
-        <span class="tool-ai-badge">✦ AI</span>
-      </div>
+    <div class="tool-card" data-tool="bash-explainer" onclick="openTool(this)">
+      <div class="tool-icon-row"><div class="tool-icon">📋</div><span class="tool-ai-badge">✦ AI</span></div>
       <div class="tool-name">Bash Script Explainer</div>
       <div class="tool-desc">Paste any shell script. Get a line-by-line breakdown, potential bugs, and safer alternatives.</div>
     </div>
-    <div class="tool-card">
-      <div class="tool-icon-row">
-        <div class="tool-icon">🌐</div>
-        <span class="tool-ai-badge">✦ AI</span>
-      </div>
+    <div class="tool-card" data-tool="net-troubleshoot" onclick="openTool(this)">
+      <div class="tool-icon-row"><div class="tool-icon">🌐</div><span class="tool-ai-badge">✦ AI</span></div>
       <div class="tool-name">Network Troubleshooter</div>
       <div class="tool-desc">Describe your networking issue. Get a step-by-step debug checklist with exact commands to run.</div>
     </div>
-    <div class="tool-card">
-      <div class="tool-icon-row">
-        <div class="tool-icon">🛡️</div>
-        <span class="tool-ai-badge">✦ AI</span>
-      </div>
+    <div class="tool-card" data-tool="iptables-builder" onclick="openTool(this)">
+      <div class="tool-icon-row"><div class="tool-icon">🛡️</div><span class="tool-ai-badge">✦ AI</span></div>
       <div class="tool-name">iptables Rule Builder</div>
       <div class="tool-desc">Describe your firewall requirements → get working iptables/nftables rules with explanations.</div>
     </div>
-    <div class="tool-card">
-      <div class="tool-icon-row">
-        <div class="tool-icon">💾</div>
-        <span class="tool-ai-badge">✦ AI</span>
-      </div>
+    <div class="tool-card" data-tool="lvm-planner" onclick="openTool(this)">
+      <div class="tool-icon-row"><div class="tool-icon">💾</div><span class="tool-ai-badge">✦ AI</span></div>
       <div class="tool-name">LVM Planner</div>
       <div class="tool-desc">Describe your storage layout → get full LVM commands: pvcreate, vgcreate, lvcreate, resize.</div>
     </div>
-    <div class="tool-card">
-      <div class="tool-icon-row">
-        <div class="tool-icon">🔐</div>
-        <span class="tool-ai-badge">✦ AI</span>
-      </div>
+    <div class="tool-card" data-tool="perm-debugger" onclick="openTool(this)">
+      <div class="tool-icon-row"><div class="tool-icon">🔐</div><span class="tool-ai-badge">✦ AI</span></div>
       <div class="tool-name">Permission Debugger</div>
       <div class="tool-desc">Paste a "Permission denied" error + context. Get the exact chmod/chown/ACL fix needed.</div>
     </div>
-    <div class="tool-card">
-      <div class="tool-icon-row">
-        <div class="tool-icon">🕐</div>
-        <span class="tool-ai-badge">✦ AI</span>
-      </div>
+    <div class="tool-card" data-tool="cron-builder" onclick="openTool(this)">
+      <div class="tool-icon-row"><div class="tool-icon">🕐</div><span class="tool-ai-badge">✦ AI</span></div>
       <div class="tool-name">Cron Expression Builder</div>
       <div class="tool-desc">Describe your schedule in English → crontab expression. Paste expressions to get explanations.</div>
     </div>
@@ -1102,50 +538,72 @@
 </div>
 <hr class="section-divider">
 
-<!-- CHEATSHEET PREVIEW -->
+<!-- CHEATSHEET -->
 <div class="section" id="cheatsheet">
   <p class="section-label">// Quick Reference</p>
   <h2 class="section-title">Linux Cheatsheet</h2>
   <p class="section-sub">250+ commands — searchable, click any command to copy. LFCS exam shortcuts included.</p>
   <div class="cheat-preview">
     <div class="cheat-header">
-      <input class="cheat-search" type="text" placeholder="Search commands... (e.g. find, systemctl, lvm)">
-      <span class="cheat-count">250+ commands</span>
+      <input class="cheat-search" type="text" id="cheat-search-input" placeholder="Search commands... (e.g. find, systemctl, lvm)" autocomplete="off">
+      <span class="cheat-count" id="cheat-count-label">250+ commands</span>
     </div>
-    <div class="cheat-body">
-      <div class="cheat-row"><span class="cheat-cmd">find / -perm /4000</span><span class="cheat-exp">Find all SUID files on system</span><span class="cheat-copy">⎘ copy</span></div>
-      <div class="cheat-row"><span class="cheat-cmd">journalctl -u nginx --since "1 hour ago"</span><span class="cheat-exp">View nginx logs from last hour</span><span class="cheat-copy">⎘ copy</span></div>
-      <div class="cheat-row"><span class="cheat-cmd">ss -tlnp</span><span class="cheat-exp">List all TCP listening ports with process</span><span class="cheat-copy">⎘ copy</span></div>
-      <div class="cheat-row"><span class="cheat-cmd">lvcreate -L 10G -n data vg0</span><span class="cheat-exp">Create 10G LVM logical volume</span><span class="cheat-copy">⎘ copy</span></div>
-      <div class="cheat-row"><span class="cheat-cmd">iptables -L -n -v --line-numbers</span><span class="cheat-exp">List all iptables rules with line numbers</span><span class="cheat-copy">⎘ copy</span></div>
-      <div class="cheat-row"><span class="cheat-cmd">grep -r "pattern" /etc/ --include="*.conf"</span><span class="cheat-exp">Recursive grep in .conf files only</span><span class="cheat-copy">⎘ copy</span></div>
-      <div class="cheat-row"><span class="cheat-cmd">tar -czf backup.tar.gz /var/data</span><span class="cheat-exp">Create compressed tar archive</span><span class="cheat-copy">⎘ copy</span></div>
-      <div class="cheat-row"><span class="cheat-cmd">rsync -avz --delete src/ user@host:/dst/</span><span class="cheat-exp">Sync with delete of removed files</span><span class="cheat-copy">⎘ copy</span></div>
-      <div class="cheat-row"><span class="cheat-cmd">nmcli con mod eth0 ipv4.method manual ipv4.addresses 192.168.1.10/24</span><span class="cheat-exp">Set static IP via NetworkManager</span><span class="cheat-copy">⎘ copy</span></div>
-      <div class="cheat-row"><span class="cheat-cmd">ausearch -m avc -ts recent</span><span class="cheat-exp">Find recent SELinux denials</span><span class="cheat-copy">⎘ copy</span></div>
+    <div class="cheat-body" id="cheat-body">
+      <div class="cheat-row" data-cmd="find / -perm /4000"><span class="cheat-cmd">find / -perm /4000</span><span class="cheat-exp">Find all SUID files on system</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="journalctl -u nginx --since &quot;1 hour ago&quot;"><span class="cheat-cmd">journalctl -u nginx --since "1 hour ago"</span><span class="cheat-exp">View nginx logs from last hour</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="ss -tlnp"><span class="cheat-cmd">ss -tlnp</span><span class="cheat-exp">List all TCP listening ports with process</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="lvcreate -L 10G -n data vg0"><span class="cheat-cmd">lvcreate -L 10G -n data vg0</span><span class="cheat-exp">Create 10G LVM logical volume</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="iptables -L -n -v --line-numbers"><span class="cheat-cmd">iptables -L -n -v --line-numbers</span><span class="cheat-exp">List all iptables rules with line numbers</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="grep -r &quot;pattern&quot; /etc/ --include=&quot;*.conf&quot;"><span class="cheat-cmd">grep -r "pattern" /etc/ --include="*.conf"</span><span class="cheat-exp">Recursive grep in .conf files only</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="tar -czf backup.tar.gz /var/data"><span class="cheat-cmd">tar -czf backup.tar.gz /var/data</span><span class="cheat-exp">Create compressed tar archive</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="rsync -avz --delete src/ user@host:/dst/"><span class="cheat-cmd">rsync -avz --delete src/ user@host:/dst/</span><span class="cheat-exp">Sync with delete of removed files</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="nmcli con mod eth0 ipv4.method manual ipv4.addresses 192.168.1.10/24"><span class="cheat-cmd">nmcli con mod eth0 ipv4.method manual ipv4.addresses 192.168.1.10/24</span><span class="cheat-exp">Set static IP via NetworkManager</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="ausearch -m avc -ts recent"><span class="cheat-cmd">ausearch -m avc -ts recent</span><span class="cheat-exp">Find recent SELinux denials</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="systemctl list-units --failed"><span class="cheat-cmd">systemctl list-units --failed</span><span class="cheat-exp">List all failed systemd units</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="df -hT"><span class="cheat-cmd">df -hT</span><span class="cheat-exp">Show disk usage with filesystem type</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="lsblk -f"><span class="cheat-cmd">lsblk -f</span><span class="cheat-exp">List block devices with filesystem info</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="ps aux --sort=-%mem | head -10"><span class="cheat-cmd">ps aux --sort=-%mem | head -10</span><span class="cheat-exp">Top 10 processes by memory usage</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="netstat -rn"><span class="cheat-cmd">netstat -rn</span><span class="cheat-exp">Show kernel routing table</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="useradd -m -s /bin/bash -G sudo username"><span class="cheat-cmd">useradd -m -s /bin/bash -G sudo username</span><span class="cheat-exp">Create user with home dir and sudo</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="chmod 2775 /shared/dir"><span class="cheat-cmd">chmod 2775 /shared/dir</span><span class="cheat-exp">Set SGID on shared directory</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="getfacl /path/to/file"><span class="cheat-cmd">getfacl /path/to/file</span><span class="cheat-exp">View ACL entries for a file</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="pvdisplay && vgdisplay && lvdisplay"><span class="cheat-cmd">pvdisplay && vgdisplay && lvdisplay</span><span class="cheat-exp">Full LVM stack summary</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row" data-cmd="strace -p PID"><span class="cheat-cmd">strace -p PID</span><span class="cheat-exp">Trace system calls of running process</span><span class="cheat-copy">⎘ copy</span></div>
     </div>
+    <div class="cheat-no-results" id="cheat-no-results">No commands match your search.</div>
   </div>
 </div>
 <hr class="section-divider">
 
-<!-- QUIZ PREVIEW -->
+<!-- QUIZ -->
 <div class="section" id="quiz">
   <p class="section-label">// Practice Questions</p>
   <h2 class="section-title">LFCS Quiz — 100 Questions</h2>
   <p class="section-sub">Scenario-based questions mapped to official LFCS domains. Filter by domain and difficulty. Track your score.</p>
   <div class="quiz-preview" id="quiz-box">
-    <div class="quiz-meta">
-      <span class="quiz-domain">Networking · 25%</span>
-      <span class="quiz-diff">Medium</span>
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quiz-progress"></div></div>
+    <div class="quiz-header">
+      <div class="quiz-meta" id="quiz-meta-display"></div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <span class="quiz-score-display" id="quiz-score-display">Score: 0/0</span>
+        <span class="quiz-q-num" id="quiz-q-num">Q 1/10</span>
+      </div>
     </div>
-    <div class="quiz-q">You need to configure a persistent static IP of <code style="background:var(--bg4);padding:2px 6px;border-radius:3px;font-family:var(--mono);font-size:12px;color:var(--green)">10.0.0.5/24</code> on interface <code style="background:var(--bg4);padding:2px 6px;border-radius:3px;font-family:var(--mono);font-size:12px;color:var(--green)">eth0</code> on an Ubuntu system using NetworkManager. Which command achieves this AND survives a reboot?</div>
-    <div class="quiz-options" id="quiz-opts">
-      <div class="quiz-opt" onclick="answer(this, false)"><span class="opt-letter">A</span>ip addr add 10.0.0.5/24 dev eth0</div>
-      <div class="quiz-opt" onclick="answer(this, true)"><span class="opt-letter">B</span>nmcli con mod eth0 ipv4.method manual ipv4.addresses 10.0.0.5/24 && nmcli con up eth0</div>
-      <div class="quiz-opt" onclick="answer(this, false)"><span class="opt-letter">C</span>ifconfig eth0 10.0.0.5 netmask 255.255.255.0</div>
-      <div class="quiz-opt" onclick="answer(this, false)"><span class="opt-letter">D</span>echo "10.0.0.5/24" > /etc/network/eth0.conf && systemctl restart networking</div>
+    <div id="quiz-question-area">
+      <div class="quiz-q" id="quiz-q-text"></div>
+      <div class="quiz-options" id="quiz-opts"></div>
+      <div class="quiz-feedback" id="quiz-fb"></div>
+      <div class="quiz-nav">
+        <button class="quiz-btn" id="quiz-skip-btn" onclick="skipQuestion()">Skip →</button>
+        <button class="quiz-btn primary" id="quiz-next-btn" onclick="nextQuestion()" disabled>Next Question →</button>
+      </div>
     </div>
-    <div class="quiz-feedback" id="quiz-fb"></div>
+    <div class="quiz-result" id="quiz-result">
+      <div class="quiz-result-score" id="quiz-final-score">0/10</div>
+      <div class="quiz-result-label">Quiz Complete</div>
+      <div class="quiz-result-grade" id="quiz-grade-text"></div>
+      <button class="quiz-btn primary" onclick="restartQuiz()">↺ Restart Quiz</button>
+    </div>
   </div>
 </div>
 <hr class="section-divider">
@@ -1155,60 +613,132 @@
   <p class="section-label">// Hands-on Scenarios</p>
   <h2 class="section-title">Practice Labs</h2>
   <p class="section-sub">14 full step-by-step labs modelled on production incidents and LFCS exam tasks.</p>
-  <div class="filter-bar">
-    <button class="filter-btn active">All</button>
-    <button class="filter-btn">Beginner</button>
-    <button class="filter-btn">Intermediate</button>
-    <button class="filter-btn">Advanced</button>
+  <div class="filter-bar" id="labs-filter">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="beginner">Beginner</button>
+    <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+    <button class="filter-btn" data-filter="advanced">Advanced</button>
   </div>
-  <div class="labs-list">
-    <div class="lab-item">
-      <div class="lab-num">01</div>
-      <div class="lab-info">
-        <div class="lab-name">Recover a Broken Boot — GRUB Rescue</div>
-        <div class="lab-desc">Simulate and recover from a corrupted GRUB config. Single-user mode, chroot, reinstall bootloader.</div>
+  <div class="labs-list" id="labs-list">
+    <div class="lab-item" data-level="intermediate">
+      <div class="lab-item-header" onclick="toggleLab(this.parentElement)">
+        <div class="lab-num">01</div>
+        <div class="lab-info">
+          <div class="lab-name">Recover a Broken Boot — GRUB Rescue</div>
+          <div class="lab-desc">Simulate and recover from a corrupted GRUB config. Single-user mode, chroot, reinstall bootloader.</div>
+        </div>
+        <div class="lab-meta"><span class="lab-time">~45 min</span><span class="module-level level-intermediate" style="font-size:10px">Intermediate</span><span class="lab-expand-icon">▼</span></div>
       </div>
-      <div class="lab-meta"><span class="lab-time">~45 min</span><span class="module-level level-intermediate" style="font-size:10px">Intermediate</span></div>
+      <div class="lab-detail">
+        <div class="lab-steps">
+          <div class="lab-step">Boot into GRUB rescue mode by holding Shift during boot to access GRUB menu.</div>
+          <div class="lab-step">At rescue prompt, find your root partition: <code>ls (hd0,1)/</code> until you see <code>etc/</code>.</div>
+          <div class="lab-step">Set root and prefix: <code>set root=(hd0,1)</code> then <code>set prefix=(hd0,1)/boot/grub</code></div>
+          <div class="lab-step">Load normal module and boot: <code>insmod normal</code> then <code>normal</code></div>
+          <div class="lab-step">Once booted, reinstall GRUB: <code>sudo grub-install /dev/sda && sudo update-grub</code></div>
+          <div class="lab-step">Verify boot entries: <code>cat /boot/grub/grub.cfg | grep menuentry</code></div>
+        </div>
+      </div>
     </div>
-    <div class="lab-item">
-      <div class="lab-num">02</div>
-      <div class="lab-info">
-        <div class="lab-name">LVM Full Disk — Expand Without Downtime</div>
-        <div class="lab-desc">Simulate a 100% disk usage alert. Add a PV, extend VG, resize LV, grow filesystem live.</div>
+    <div class="lab-item" data-level="intermediate">
+      <div class="lab-item-header" onclick="toggleLab(this.parentElement)">
+        <div class="lab-num">02</div>
+        <div class="lab-info">
+          <div class="lab-name">LVM Full Disk — Expand Without Downtime</div>
+          <div class="lab-desc">Simulate a 100% disk usage alert. Add a PV, extend VG, resize LV, grow filesystem live.</div>
+        </div>
+        <div class="lab-meta"><span class="lab-time">~30 min</span><span class="module-level level-intermediate" style="font-size:10px">Intermediate</span><span class="lab-expand-icon">▼</span></div>
       </div>
-      <div class="lab-meta"><span class="lab-time">~30 min</span><span class="module-level level-intermediate" style="font-size:10px">Intermediate</span></div>
+      <div class="lab-detail">
+        <div class="lab-steps">
+          <div class="lab-step">Simulate full disk: <code>df -h /dev/mapper/vg0-data</code> — confirm 100% usage.</div>
+          <div class="lab-step">Initialize new disk as PV: <code>sudo pvcreate /dev/sdb</code></div>
+          <div class="lab-step">Extend the volume group: <code>sudo vgextend vg0 /dev/sdb</code></div>
+          <div class="lab-step">Extend the logical volume: <code>sudo lvextend -L +20G /dev/vg0/data</code></div>
+          <div class="lab-step">Grow ext4 filesystem online: <code>sudo resize2fs /dev/vg0/data</code></div>
+          <div class="lab-step">Verify: <code>df -h /dev/mapper/vg0-data</code> — confirm new size.</div>
+        </div>
+      </div>
     </div>
-    <div class="lab-item">
-      <div class="lab-num">03</div>
-      <div class="lab-info">
-        <div class="lab-name">Nginx Fails to Start — Port Conflict Debug</div>
-        <div class="lab-desc">Diagnose port conflict with ss/fuser, stop conflicting service, configure nginx, persist with systemd.</div>
+    <div class="lab-item" data-level="beginner">
+      <div class="lab-item-header" onclick="toggleLab(this.parentElement)">
+        <div class="lab-num">03</div>
+        <div class="lab-info">
+          <div class="lab-name">Nginx Fails to Start — Port Conflict Debug</div>
+          <div class="lab-desc">Diagnose port conflict with ss/fuser, stop conflicting service, configure nginx, persist with systemd.</div>
+        </div>
+        <div class="lab-meta"><span class="lab-time">~20 min</span><span class="module-level level-beginner" style="font-size:10px">Beginner</span><span class="lab-expand-icon">▼</span></div>
       </div>
-      <div class="lab-meta"><span class="lab-time">~20 min</span><span class="module-level level-beginner" style="font-size:10px">Beginner</span></div>
+      <div class="lab-detail">
+        <div class="lab-steps">
+          <div class="lab-step">Check nginx status: <code>sudo systemctl status nginx</code> — note "Address already in use".</div>
+          <div class="lab-step">Find who owns port 80: <code>ss -tlnp | grep :80</code> or <code>sudo fuser 80/tcp</code></div>
+          <div class="lab-step">Identify the conflicting service by its PID: <code>ps aux | grep &lt;PID&gt;</code></div>
+          <div class="lab-step">Stop the conflicting service: <code>sudo systemctl stop apache2</code></div>
+          <div class="lab-step">Start nginx: <code>sudo systemctl start nginx && sudo systemctl enable nginx</code></div>
+          <div class="lab-step">Verify: <code>curl -I http://localhost</code> — should return HTTP/1.1 200 OK.</div>
+        </div>
+      </div>
     </div>
-    <div class="lab-item">
-      <div class="lab-num">04</div>
-      <div class="lab-info">
-        <div class="lab-name">Set Up SSH Hardening — No-Password Auth</div>
-        <div class="lab-desc">Key-based auth only, disable root login, change default port, configure fail2ban, test lockout.</div>
+    <div class="lab-item" data-level="intermediate">
+      <div class="lab-item-header" onclick="toggleLab(this.parentElement)">
+        <div class="lab-num">04</div>
+        <div class="lab-info">
+          <div class="lab-name">Set Up SSH Hardening — No-Password Auth</div>
+          <div class="lab-desc">Key-based auth only, disable root login, change default port, configure fail2ban, test lockout.</div>
+        </div>
+        <div class="lab-meta"><span class="lab-time">~35 min</span><span class="module-level level-intermediate" style="font-size:10px">Intermediate</span><span class="lab-expand-icon">▼</span></div>
       </div>
-      <div class="lab-meta"><span class="lab-time">~35 min</span><span class="module-level level-intermediate" style="font-size:10px">Intermediate</span></div>
+      <div class="lab-detail">
+        <div class="lab-steps">
+          <div class="lab-step">Generate SSH key pair: <code>ssh-keygen -t ed25519 -C "admin@server"</code></div>
+          <div class="lab-step">Copy public key to server: <code>ssh-copy-id -i ~/.ssh/id_ed25519.pub user@host</code></div>
+          <div class="lab-step">Edit sshd config: Set <code>PasswordAuthentication no</code>, <code>PermitRootLogin no</code>, <code>Port 2222</code></div>
+          <div class="lab-step">Reload sshd: <code>sudo systemctl reload sshd</code> — test new key login first!</div>
+          <div class="lab-step">Install fail2ban: <code>sudo apt install fail2ban</code> and configure <code>/etc/fail2ban/jail.local</code></div>
+          <div class="lab-step">Test lockout: attempt 5 wrong logins — <code>sudo fail2ban-client status sshd</code></div>
+        </div>
+      </div>
     </div>
-    <div class="lab-item">
-      <div class="lab-num">05</div>
-      <div class="lab-info">
-        <div class="lab-name">Firewall: Isolate a Compromised Web Server</div>
-        <div class="lab-desc">Use iptables to allow only port 443 inbound, block all outbound except DNS, persist rules.</div>
+    <div class="lab-item" data-level="advanced">
+      <div class="lab-item-header" onclick="toggleLab(this.parentElement)">
+        <div class="lab-num">05</div>
+        <div class="lab-info">
+          <div class="lab-name">Firewall: Isolate a Compromised Web Server</div>
+          <div class="lab-desc">Use iptables to allow only port 443 inbound, block all outbound except DNS, persist rules.</div>
+        </div>
+        <div class="lab-meta"><span class="lab-time">~40 min</span><span class="module-level level-advanced" style="font-size:10px">Advanced</span><span class="lab-expand-icon">▼</span></div>
       </div>
-      <div class="lab-meta"><span class="lab-time">~40 min</span><span class="module-level level-advanced" style="font-size:10px">Advanced</span></div>
+      <div class="lab-detail">
+        <div class="lab-steps">
+          <div class="lab-step">Flush existing rules: <code>sudo iptables -F && sudo iptables -X</code></div>
+          <div class="lab-step">Set default DROP policy: <code>sudo iptables -P INPUT DROP && sudo iptables -P OUTPUT DROP && sudo iptables -P FORWARD DROP</code></div>
+          <div class="lab-step">Allow established connections: <code>sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</code></div>
+          <div class="lab-step">Allow HTTPS inbound: <code>sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT</code></div>
+          <div class="lab-step">Allow DNS outbound only: <code>sudo iptables -A OUTPUT -p udp --dport 53 -j ACCEPT</code></div>
+          <div class="lab-step">Persist rules: <code>sudo iptables-save > /etc/iptables/rules.v4</code> and install <code>iptables-persistent</code></div>
+        </div>
+      </div>
     </div>
-    <div class="lab-item">
-      <div class="lab-num">06</div>
-      <div class="lab-info">
-        <div class="lab-name">SELinux Denial — Fix Without Disabling</div>
-        <div class="lab-desc">App fails due to SELinux AVC denial. Use audit2allow, setsebool, restorecon — never setenforce 0.</div>
+    <div class="lab-item" data-level="advanced">
+      <div class="lab-item-header" onclick="toggleLab(this.parentElement)">
+        <div class="lab-num">06</div>
+        <div class="lab-info">
+          <div class="lab-name">SELinux Denial — Fix Without Disabling</div>
+          <div class="lab-desc">App fails due to SELinux AVC denial. Use audit2allow, setsebool, restorecon — never setenforce 0.</div>
+        </div>
+        <div class="lab-meta"><span class="lab-time">~45 min</span><span class="module-level level-advanced" style="font-size:10px">Advanced</span><span class="lab-expand-icon">▼</span></div>
       </div>
-      <div class="lab-meta"><span class="lab-time">~45 min</span><span class="module-level level-advanced" style="font-size:10px">Advanced</span></div>
+      <div class="lab-detail">
+        <div class="lab-steps">
+          <div class="lab-step">Check SELinux status: <code>sestatus</code> — ensure Enforcing mode.</div>
+          <div class="lab-step">Find the denial: <code>ausearch -m avc -ts recent | audit2why</code></div>
+          <div class="lab-step">Check if a boolean fixes it: <code>getsebool -a | grep httpd</code> — enable if applicable: <code>setsebool -P httpd_can_network_connect on</code></div>
+          <div class="lab-step">Fix wrong file context: <code>restorecon -Rv /var/www/html/</code></div>
+          <div class="lab-step">If custom policy needed: <code>ausearch -m avc | audit2allow -M mypolicy && semodule -i mypolicy.pp</code></div>
+          <div class="lab-step">Verify app works and confirm SELinux still enforcing: <code>sestatus | grep mode</code></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1219,71 +749,128 @@
   <p class="section-label">// Error Encyclopedia</p>
   <h2 class="section-title">Linux Error Code Encyclopedia</h2>
   <p class="section-sub">70+ Linux errors — root cause, fix commands, and prevention. Searchable. Click any to expand.</p>
-  <div class="filter-bar">
-    <button class="filter-btn active">All</button>
-    <button class="filter-btn">systemd</button>
-    <button class="filter-btn">Network</button>
-    <button class="filter-btn">Storage</button>
-    <button class="filter-btn">Permissions</button>
-    <button class="filter-btn">Boot</button>
+  <div class="filter-bar" id="errors-filter">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="systemd">systemd</button>
+    <button class="filter-btn" data-filter="network">Network</button>
+    <button class="filter-btn" data-filter="storage">Storage</button>
+    <button class="filter-btn" data-filter="permissions">Permissions</button>
+    <button class="filter-btn" data-filter="boot">Boot</button>
   </div>
-  <div class="error-grid">
-    <div class="error-item">
-      <div class="error-header">
+  <div class="error-grid" id="error-grid">
+
+    <div class="error-item" data-cat="systemd">
+      <div class="error-header" onclick="toggleError(this.parentElement)">
         <span class="error-sev sev-high"></span>
         <span class="error-name">Job for nginx.service failed because the control process exited with error code</span>
         <span class="error-cat">systemd</span>
+        <span class="error-chevron">▼</span>
+      </div>
+      <div class="error-detail">
+        <div class="error-section"><div class="error-section-label">Root Cause</div><p>The nginx process failed to start — usually a config syntax error, port conflict, or missing file. systemd reports the generic failure; the real cause is in the logs.</p></div>
+        <div class="error-section"><div class="error-section-label">Fix Commands</div><div class="error-cmd-block">journalctl -u nginx -n 50 --no-pager<br>nginx -t<br>ss -tlnp | grep :80<br>sudo systemctl start nginx</div></div>
+        <div class="error-section"><div class="error-section-label">Prevention</div><p>Always run <code>nginx -t</code> before reloading. Use <code>systemctl --failed</code> to catch issues early.</p></div>
       </div>
     </div>
-    <div class="error-item">
-      <div class="error-header">
+
+    <div class="error-item" data-cat="network">
+      <div class="error-header" onclick="toggleError(this.parentElement)">
         <span class="error-sev sev-high"></span>
         <span class="error-name">bind() to 0.0.0.0:80 failed (98: Address already in use)</span>
         <span class="error-cat">Network</span>
+        <span class="error-chevron">▼</span>
+      </div>
+      <div class="error-detail">
+        <div class="error-section"><div class="error-section-label">Root Cause</div><p>Another process is bound to port 80. Common culprits: apache2, another nginx instance, or a Node.js app.</p></div>
+        <div class="error-section"><div class="error-section-label">Fix Commands</div><div class="error-cmd-block">ss -tlnp | grep :80<br>sudo fuser -k 80/tcp<br>sudo systemctl stop apache2<br>sudo systemctl start nginx</div></div>
+        <div class="error-section"><div class="error-section-label">Prevention</div><p>Use <code>ss -tlnp</code> before starting services. Only one service should own each port.</p></div>
       </div>
     </div>
-    <div class="error-item">
-      <div class="error-header">
+
+    <div class="error-item" data-cat="boot">
+      <div class="error-header" onclick="toggleError(this.parentElement)">
         <span class="error-sev sev-high"></span>
         <span class="error-name">GRUB error: unknown filesystem. Entering rescue mode...</span>
         <span class="error-cat">Boot</span>
+        <span class="error-chevron">▼</span>
+      </div>
+      <div class="error-detail">
+        <div class="error-section"><div class="error-section-label">Root Cause</div><p>GRUB cannot find or read the boot partition — caused by disk failure, wrong partition table, or GRUB misconfiguration after moving disks.</p></div>
+        <div class="error-section"><div class="error-section-label">Fix Commands</div><div class="error-cmd-block">grub rescue> ls (hd0,1)/<br>grub rescue> set root=(hd0,1)<br>grub rescue> insmod normal<br>grub rescue> normal<br># After boot:<br>sudo grub-install /dev/sda && sudo update-grub</div></div>
+        <div class="error-section"><div class="error-section-label">Prevention</div><p>After changing disk layout, always run <code>update-grub</code>. Keep a live USB available.</p></div>
       </div>
     </div>
-    <div class="error-item">
-      <div class="error-header">
+
+    <div class="error-item" data-cat="storage">
+      <div class="error-header" onclick="toggleError(this.parentElement)">
         <span class="error-sev sev-med"></span>
         <span class="error-name med">No space left on device (ENOSPC)</span>
         <span class="error-cat">Storage</span>
+        <span class="error-chevron">▼</span>
+      </div>
+      <div class="error-detail">
+        <div class="error-section"><div class="error-section-label">Root Cause</div><p>Either disk space is exhausted, or inode count is depleted (you can have free blocks but no free inodes).</p></div>
+        <div class="error-section"><div class="error-section-label">Fix Commands</div><div class="error-cmd-block">df -h           # check disk space<br>df -i           # check inodes<br>du -sh /* 2>/dev/null | sort -rh | head -10<br>find /var/log -name "*.log" -size +100M<br>journalctl --vacuum-size=200M</div></div>
+        <div class="error-section"><div class="error-section-label">Prevention</div><p>Set up disk usage alerts at 80%. Rotate logs with logrotate. Monitor inodes with Prometheus node_exporter.</p></div>
       </div>
     </div>
-    <div class="error-item">
-      <div class="error-header">
+
+    <div class="error-item" data-cat="permissions">
+      <div class="error-header" onclick="toggleError(this.parentElement)">
         <span class="error-sev sev-med"></span>
         <span class="error-name med">type=AVC msg=audit: denied { read } for path=... comm="nginx"</span>
         <span class="error-cat">Permissions</span>
+        <span class="error-chevron">▼</span>
+      </div>
+      <div class="error-detail">
+        <div class="error-section"><div class="error-section-label">Root Cause</div><p>SELinux is blocking nginx from reading a file — the file has an incorrect security context label.</p></div>
+        <div class="error-section"><div class="error-section-label">Fix Commands</div><div class="error-cmd-block">ausearch -m avc -ts recent | audit2why<br>ls -Z /path/to/file<br>restorecon -Rv /path/to/dir/<br>chcon -t httpd_sys_content_t /path/to/file</div></div>
+        <div class="error-section"><div class="error-section-label">Prevention</div><p>Always use <code>restorecon</code> after moving files. Never use <code>setenforce 0</code> as a fix.</p></div>
       </div>
     </div>
-    <div class="error-item">
-      <div class="error-header">
+
+    <div class="error-item" data-cat="network">
+      <div class="error-header" onclick="toggleError(this.parentElement)">
         <span class="error-sev sev-med"></span>
         <span class="error-name med">ssh: connect to host 192.168.1.1 port 22: Connection refused</span>
         <span class="error-cat">Network</span>
+        <span class="error-chevron">▼</span>
+      </div>
+      <div class="error-detail">
+        <div class="error-section"><div class="error-section-label">Root Cause</div><p>SSH daemon is not running, is bound to a different port, or the firewall is blocking port 22.</p></div>
+        <div class="error-section"><div class="error-section-label">Fix Commands</div><div class="error-cmd-block">sudo systemctl status sshd<br>sudo systemctl start sshd<br>sudo ss -tlnp | grep ssh<br>sudo iptables -L | grep 22<br>sudo firewall-cmd --list-ports</div></div>
+        <div class="error-section"><div class="error-section-label">Prevention</div><p>Enable sshd with <code>systemctl enable sshd</code>. Open firewall port before changing SSH port.</p></div>
       </div>
     </div>
-    <div class="error-item">
-      <div class="error-header">
+
+    <div class="error-item" data-cat="permissions">
+      <div class="error-header" onclick="toggleError(this.parentElement)">
         <span class="error-sev sev-low"></span>
         <span class="error-name low">sudo: user not in the sudoers file. This incident will be reported.</span>
         <span class="error-cat">Permissions</span>
+        <span class="error-chevron">▼</span>
+      </div>
+      <div class="error-detail">
+        <div class="error-section"><div class="error-section-label">Root Cause</div><p>The user account is not in the <code>sudo</code> group or lacks a sudoers entry. The incident is logged to syslog.</p></div>
+        <div class="error-section"><div class="error-section-label">Fix Commands</div><div class="error-cmd-block"># As root:<br>usermod -aG sudo username     # Debian/Ubuntu<br>usermod -aG wheel username    # RHEL/CentOS<br>visudo                         # edit sudoers safely</div></div>
+        <div class="error-section"><div class="error-section-label">Prevention</div><p>Add users to the sudo/wheel group during provisioning. Use Ansible or cloud-init to enforce it.</p></div>
       </div>
     </div>
-    <div class="error-item">
-      <div class="error-header">
+
+    <div class="error-item" data-cat="storage">
+      <div class="error-header" onclick="toggleError(this.parentElement)">
         <span class="error-sev sev-low"></span>
         <span class="error-name low">E: Could not get lock /var/lib/dpkg/lock — open (11: Resource temporarily unavailable)</span>
-        <span class="error-cat">Package</span>
+        <span class="error-cat">Storage</span>
+        <span class="error-chevron">▼</span>
+      </div>
+      <div class="error-detail">
+        <div class="error-section"><div class="error-section-label">Root Cause</div><p>Another apt/dpkg process is running (e.g., unattended-upgrades, another terminal). Only one process can hold the dpkg lock.</p></div>
+        <div class="error-section"><div class="error-section-label">Fix Commands</div><div class="error-cmd-block">ps aux | grep -E "apt|dpkg"<br>sudo lsof /var/lib/dpkg/lock<br># Wait for the other process, or:<br>sudo kill -9 &lt;PID&gt;<br>sudo rm /var/lib/dpkg/lock*<br>sudo dpkg --configure -a</div></div>
+        <div class="error-section"><div class="error-section-label">Prevention</div><p>Never force-kill apt without running <code>dpkg --configure -a</code> afterward. Disable unattended-upgrades if it conflicts with your workflow.</p></div>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -1299,62 +886,632 @@
   <div style="margin-top:8px">© 2025 Eknatha Reddy · Free forever · No ads · No signup</div>
 </footer>
 
+<!-- AI TOOL MODAL -->
+<div class="modal-overlay" id="tool-modal" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title-text">Tool</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-input-wrap">
+        <label class="modal-label" id="modal-input-label">Input</label>
+        <textarea class="modal-textarea" id="modal-input" rows="4" placeholder=""></textarea>
+      </div>
+      <button class="modal-run-btn" id="modal-run-btn" onclick="runTool()">
+        <span id="modal-btn-label">▶ Run</span>
+      </button>
+      <div class="modal-output" id="modal-output">
+        <span class="out-label">AI Response</span>
+        <div id="modal-output-text"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE MODAL -->
+<div class="modal-overlay" id="module-modal" onclick="closeModuleModalOutside(event)">
+  <div class="modal" style="max-width:640px">
+    <div class="modal-header">
+      <div class="modal-title" id="module-modal-title">Module</div>
+      <button class="modal-close" onclick="closeModuleModal()">✕</button>
+    </div>
+    <div class="modal-body" id="module-modal-body"></div>
+  </div>
+</div>
+
 <script>
-  // Filter buttons
-  document.querySelectorAll('.filter-bar').forEach(bar => {
-    bar.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+// ──────────────────────────────────────────────
+// NAV ACTIVE LINK on scroll
+// ──────────────────────────────────────────────
+const navLinks = document.querySelectorAll('.nav-links a');
+const sections = ['modules','tools','cheatsheet','quiz','labs','errors'];
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  for (const id of sections) {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= 80) current = id;
+  }
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}, { passive: true });
+
+navLinks.forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ──────────────────────────────────────────────
+// DOMAIN BAR ANIMATION (IntersectionObserver)
+// ──────────────────────────────────────────────
+const domainObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.domain-bar-fill').forEach(bar => {
+        const w = bar.getAttribute('data-width');
+        bar.style.width = w + '%';
       });
+      domainObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+const dg = document.getElementById('domain-grid');
+if (dg) domainObs.observe(dg);
+
+// ──────────────────────────────────────────────
+// MODULES FILTER
+// ──────────────────────────────────────────────
+document.getElementById('modules-filter').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('#modules-filter .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const f = btn.dataset.filter;
+  document.querySelectorAll('#modules-grid .module-card').forEach(card => {
+    if (f === 'all') { card.removeAttribute('data-hidden'); return; }
+    if (f === 'lfcs') { card.dataset.hidden = card.dataset.lfcs !== 'true' ? 'true' : ''; return; }
+    card.dataset.hidden = card.dataset.level !== f ? 'true' : '';
+  });
+});
+
+// ──────────────────────────────────────────────
+// MODULE CARDS → open detail modal
+// ──────────────────────────────────────────────
+const moduleContent = {
+  essential: {
+    title: '⌨️ Essential Commands',
+    body: `<div class="mod-content">
+      <h3>Overview</h3><p>This module covers the core Linux commands used daily in operations and forms 20% of the LFCS exam.</p>
+      <h3>Key Commands</h3>
+      <div class="mod-cmd-list">
+        <span>find /etc -name "*.conf" -mtime -7</span> <span class="mc">  # modified in last 7 days</span><br>
+        <span>grep -rn "pattern" /var/log/</span> <span class="mc">        # recursive search with line nums</span><br>
+        <span>sed -i 's/old/new/g' file.txt</span> <span class="mc">      # in-place replacement</span><br>
+        <span>awk '{print $1,$3}' access.log</span> <span class="mc">     # print columns 1 and 3</span><br>
+        <span>cut -d: -f1 /etc/passwd</span> <span class="mc">            # extract usernames</span><br>
+        <span>sort -k2 -n file.txt | uniq -c</span> <span class="mc">     # sort by col2, count dupes</span>
+      </div>
+      <h3>Pipes &amp; Redirects</h3><p>Combine commands with <code>|</code>, redirect output with <code>></code> (overwrite) or <code>>></code> (append). Use <code>2>&amp;1</code> to merge stderr with stdout. <code>/dev/null</code> discards output.</p>
+      <h3>Archives</h3>
+      <div class="mod-cmd-list">
+        <span>tar -czf archive.tar.gz dir/</span> <span class="mc">    # create gzip archive</span><br>
+        <span>tar -xzf archive.tar.gz -C /opt/</span> <span class="mc"> # extract to /opt</span><br>
+        <span>zip -r archive.zip dir/</span> <span class="mc">           # create zip</span>
+      </div>
+    </div>`
+  },
+  users: {
+    title: '🔐 Users, Groups & Permissions',
+    body: `<div class="mod-content">
+      <h3>User Management</h3>
+      <div class="mod-cmd-list">
+        <span>useradd -m -s /bin/bash -G sudo devuser</span><br>
+        <span>passwd devuser</span> <span class="mc">          # set password</span><br>
+        <span>usermod -aG docker devuser</span> <span class="mc"> # add to group</span><br>
+        <span>userdel -r olduser</span> <span class="mc">       # remove user + home</span>
+      </div>
+      <h3>Permissions</h3><p>chmod uses octal (755, 644) or symbolic (u+x, g-w). <code>chown user:group file</code> changes ownership. <code>umask</code> sets default permissions.</p>
+      <div class="mod-cmd-list">
+        <span>chmod 755 /var/www/html</span><br>
+        <span>chown -R www-data:www-data /var/www</span><br>
+        <span>chmod u+s /usr/bin/passwd</span> <span class="mc"> # SUID bit</span><br>
+        <span>chmod g+s /shared/</span> <span class="mc">       # SGID — inherit group</span>
+      </div>
+      <h3>ACLs (Access Control Lists)</h3>
+      <div class="mod-cmd-list">
+        <span>setfacl -m u:alice:rw file.txt</span><br>
+        <span>getfacl file.txt</span><br>
+        <span>setfacl -b file.txt</span> <span class="mc"> # remove all ACLs</span>
+      </div>
+    </div>`
+  },
+  systemd: {
+    title: '⚙️ systemd & Service Management',
+    body: `<div class="mod-content">
+      <h3>Core Commands</h3>
+      <div class="mod-cmd-list">
+        <span>systemctl start|stop|restart|reload nginx</span><br>
+        <span>systemctl enable|disable nginx</span> <span class="mc"> # boot persistence</span><br>
+        <span>systemctl status nginx</span><br>
+        <span>systemctl list-units --failed</span><br>
+        <span>systemctl daemon-reload</span> <span class="mc">  # after editing unit files</span>
+      </div>
+      <h3>Logs with journalctl</h3>
+      <div class="mod-cmd-list">
+        <span>journalctl -u nginx -f</span> <span class="mc">         # follow logs</span><br>
+        <span>journalctl -u nginx --since "1h ago"</span><br>
+        <span>journalctl -p err -b</span> <span class="mc">           # errors this boot</span><br>
+        <span>journalctl --disk-usage</span>
+      </div>
+      <h3>Writing Unit Files</h3><p>Unit files live in <code>/etc/systemd/system/</code>. Key sections: <code>[Unit]</code> (description, deps), <code>[Service]</code> (ExecStart, Restart, User), <code>[Install]</code> (WantedBy).</p>
+      <div class="mod-cmd-list">
+        <span>[Service]</span><br>
+        <span>ExecStart=/usr/bin/myapp --port 8080</span><br>
+        <span>Restart=on-failure</span><br>
+        <span>RestartSec=5</span><br>
+        <span>User=appuser</span>
+      </div>
+    </div>`
+  },
+  networking: {
+    title: '🌐 Networking Fundamentals',
+    body: `<div class="mod-content">
+      <h3>Interface Management</h3>
+      <div class="mod-cmd-list">
+        <span>ip addr show</span><br>
+        <span>ip addr add 192.168.1.10/24 dev eth0</span><br>
+        <span>ip link set eth0 up</span><br>
+        <span>ip route add default via 192.168.1.1</span>
+      </div>
+      <h3>NetworkManager (nmcli)</h3>
+      <div class="mod-cmd-list">
+        <span>nmcli con show</span><br>
+        <span>nmcli con mod eth0 ipv4.method manual ipv4.addresses 10.0.0.5/24</span><br>
+        <span>nmcli con mod eth0 ipv4.gateway 10.0.0.1</span><br>
+        <span>nmcli con up eth0</span>
+      </div>
+      <h3>Diagnostics</h3>
+      <div class="mod-cmd-list">
+        <span>ss -tlnp</span> <span class="mc">              # TCP listening sockets</span><br>
+        <span>traceroute 8.8.8.8</span><br>
+        <span>dig @8.8.8.8 example.com</span><br>
+        <span>tcpdump -i eth0 port 80 -w cap.pcap</span>
+      </div>
+    </div>`
+  },
+  lvm: {
+    title: '🗄️ LVM — Logical Volume Manager',
+    body: `<div class="mod-content">
+      <h3>LVM Stack</h3><p>Physical Volumes (PV) → Volume Groups (VG) → Logical Volumes (LV). This abstraction layer allows online resizing and snapshots.</p>
+      <h3>Create from Scratch</h3>
+      <div class="mod-cmd-list">
+        <span>pvcreate /dev/sdb /dev/sdc</span><br>
+        <span>vgcreate vg_data /dev/sdb /dev/sdc</span><br>
+        <span>lvcreate -L 50G -n lv_app vg_data</span><br>
+        <span>mkfs.ext4 /dev/vg_data/lv_app</span><br>
+        <span>mount /dev/vg_data/lv_app /opt/app</span>
+      </div>
+      <h3>Extend Online</h3>
+      <div class="mod-cmd-list">
+        <span>vgextend vg_data /dev/sdd</span><br>
+        <span>lvextend -L +20G /dev/vg_data/lv_app</span><br>
+        <span>resize2fs /dev/vg_data/lv_app</span> <span class="mc">  # ext4</span><br>
+        <span>xfs_growfs /opt/app</span> <span class="mc">             # xfs</span>
+      </div>
+    </div>`
+  },
+  storage: {
+    title: '💾 Storage & Filesystems',
+    body: `<div class="mod-content">
+      <h3>Partitioning</h3>
+      <div class="mod-cmd-list">
+        <span>fdisk /dev/sdb</span> <span class="mc">   # MBR partition table</span><br>
+        <span>gdisk /dev/sdb</span> <span class="mc">   # GPT partition table</span><br>
+        <span>parted /dev/sdb print</span>
+      </div>
+      <h3>Filesystems</h3>
+      <div class="mod-cmd-list">
+        <span>mkfs.ext4 /dev/sdb1</span><br>
+        <span>mkfs.xfs /dev/sdb2</span><br>
+        <span>tune2fs -l /dev/sdb1</span> <span class="mc"> # inspect ext4</span><br>
+        <span>fsck -n /dev/sdb1</span> <span class="mc">    # check (no fix)</span>
+      </div>
+      <h3>fstab — Persistent Mounts</h3><p>Use UUID instead of device names in <code>/etc/fstab</code>. Always use <code>mount -a</code> to test before rebooting.</p>
+      <div class="mod-cmd-list">
+        <span>blkid /dev/sdb1</span><br>
+        <span>UUID=abc123 /data ext4 defaults 0 2</span>
+      </div>
+    </div>`
+  },
+  firewall: {
+    title: '🛡️ Firewall — iptables & firewalld',
+    body: `<div class="mod-content">
+      <h3>iptables Basics</h3>
+      <div class="mod-cmd-list">
+        <span>iptables -L -n -v --line-numbers</span><br>
+        <span>iptables -A INPUT -p tcp --dport 443 -j ACCEPT</span><br>
+        <span>iptables -A INPUT -s 10.0.0.0/8 -j ACCEPT</span><br>
+        <span>iptables -P INPUT DROP</span> <span class="mc">  # default deny</span><br>
+        <span>iptables-save > /etc/iptables/rules.v4</span>
+      </div>
+      <h3>firewalld (RHEL/CentOS)</h3>
+      <div class="mod-cmd-list">
+        <span>firewall-cmd --list-all</span><br>
+        <span>firewall-cmd --add-service=https --permanent</span><br>
+        <span>firewall-cmd --add-port=8080/tcp --permanent</span><br>
+        <span>firewall-cmd --reload</span>
+      </div>
+    </div>`
+  },
+  ssh: {
+    title: '🔑 SSH & Remote Access',
+    body: `<div class="mod-content">
+      <h3>Key Setup</h3>
+      <div class="mod-cmd-list">
+        <span>ssh-keygen -t ed25519 -C "admin"</span><br>
+        <span>ssh-copy-id -i ~/.ssh/id_ed25519.pub user@host</span><br>
+        <span>ssh -i ~/.ssh/id_ed25519 user@host</span>
+      </div>
+      <h3>sshd Hardening</h3><p>Edit <code>/etc/ssh/sshd_config</code>:</p>
+      <div class="mod-cmd-list">
+        <span>PasswordAuthentication no</span><br>
+        <span>PermitRootLogin no</span><br>
+        <span>Port 2222</span><br>
+        <span>AllowUsers devuser deploy</span><br>
+        <span>MaxAuthTries 3</span>
+      </div>
+      <h3>Port Forwarding</h3>
+      <div class="mod-cmd-list">
+        <span>ssh -L 8080:localhost:80 user@host</span> <span class="mc">  # local forward</span><br>
+        <span>ssh -R 9090:localhost:3000 user@host</span> <span class="mc"> # remote forward</span>
+      </div>
+    </div>`
+  },
+  packages: { title: '📦 Package Management', body: `<div class="mod-content"><h3>apt (Debian/Ubuntu)</h3><div class="mod-cmd-list"><span>apt update && apt upgrade -y</span><br><span>apt install nginx</span><br><span>apt-cache search keyword</span><br><span>dpkg -l | grep nginx</span><br><span>dpkg -L nginx</span> <span class="mc"> # list installed files</span></div><h3>dnf/rpm (RHEL/CentOS)</h3><div class="mod-cmd-list"><span>dnf install nginx</span><br><span>rpm -qa | grep nginx</span><br><span>rpm -ql nginx</span> <span class="mc"> # list files</span><br><span>dnf history</span></div><h3>Compile from Source</h3><div class="mod-cmd-list"><span>./configure --prefix=/usr/local</span><br><span>make -j$(nproc)</span><br><span>sudo make install</span></div></div>` },
+  processes: { title: '📊 Process & Resource Management', body: `<div class="mod-content"><h3>Process Inspection</h3><div class="mod-cmd-list"><span>ps aux --sort=-%cpu | head -15</span><br><span>top -b -n1 | head -20</span><br><span>pgrep -la nginx</span><br><span>lsof -p PID</span></div><h3>Signals & Killing</h3><div class="mod-cmd-list"><span>kill -15 PID</span> <span class="mc"> # SIGTERM — graceful</span><br><span>kill -9 PID</span> <span class="mc">  # SIGKILL — force</span><br><span>pkill -f "python app.py"</span></div><h3>Priority</h3><div class="mod-cmd-list"><span>nice -n 10 command</span> <span class="mc">      # start with priority</span><br><span>renice -n 5 -p PID</span> <span class="mc">     # change running process</span></div><h3>Memory</h3><div class="mod-cmd-list"><span>free -h</span><br><span>vmstat 1 5</span><br><span>cat /proc/meminfo | grep -i huge</span></div></div>` },
+  cron: { title: '🕐 Cron & Task Scheduling', body: `<div class="mod-content"><h3>crontab Syntax</h3><p>Format: <code>min hour day month weekday command</code></p><div class="mod-cmd-list"><span>0 2 * * * /opt/backup.sh</span> <span class="mc">          # daily at 2am</span><br><span>*/15 * * * * /opt/healthcheck.sh</span> <span class="mc">  # every 15 min</span><br><span>0 9 * * 1-5 /opt/report.py</span> <span class="mc">       # weekdays at 9am</span></div><h3>Commands</h3><div class="mod-cmd-list"><span>crontab -e</span> <span class="mc"> # edit current user cron</span><br><span>crontab -l</span> <span class="mc"> # list cron jobs</span><br><span>crontab -r</span> <span class="mc"> # remove all cron jobs</span></div><h3>systemd Timers</h3><div class="mod-cmd-list"><span>OnCalendar=daily</span><br><span>OnCalendar=*:0/15</span> <span class="mc"> # every 15 min</span><br><span>systemctl list-timers</span></div></div>` },
+  scripting: { title: '📋 Shell Scripting for Sysadmins', body: `<div class="mod-content"><h3>Script Template</h3><div class="mod-cmd-list"><span>#!/bin/bash</span><br><span>set -euo pipefail</span> <span class="mc"> # strict mode</span><br><span>trap 'cleanup' EXIT</span><br><br><span>cleanup() { echo "Cleaning up..."; }</span></div><h3>Error Handling</h3><div class="mod-cmd-list"><span>if ! command -v docker &>/dev/null; then</span><br><span>  echo "docker not found" >&2; exit 1</span><br><span>fi</span></div><h3>Loops</h3><div class="mod-cmd-list"><span>for host in web01 web02 web03; do</span><br><span>  ssh "$host" 'systemctl restart nginx'</span><br><span>done</span></div></div>` },
+  containers: { title: '🐳 Containers & Docker Basics', body: `<div class="mod-content"><h3>Core Commands</h3><div class="mod-cmd-list"><span>docker run -d -p 80:80 --name web nginx</span><br><span>docker ps -a</span><br><span>docker logs -f web</span><br><span>docker exec -it web bash</span><br><span>docker stop web && docker rm web</span></div><h3>Images</h3><div class="mod-cmd-list"><span>docker build -t myapp:1.0 .</span><br><span>docker images</span><br><span>docker rmi myapp:1.0</span><br><span>docker image prune</span></div><h3>Volumes & Networks</h3><div class="mod-cmd-list"><span>docker volume create app_data</span><br><span>docker run -v app_data:/data nginx</span><br><span>docker network create app_net</span><br><span>docker network connect app_net web</span></div></div>` },
+  selinux: { title: '🔒 SELinux & AppArmor', body: `<div class="mod-content"><h3>SELinux Status</h3><div class="mod-cmd-list"><span>sestatus</span><br><span>getenforce</span><br><span>setenforce 1</span> <span class="mc"> # enforcing (never 0 in prod!)</span></div><h3>Diagnose Denials</h3><div class="mod-cmd-list"><span>ausearch -m avc -ts recent</span><br><span>ausearch -m avc | audit2why</span><br><span>ausearch -m avc | audit2allow -M mypol</span><br><span>semodule -i mypol.pp</span></div><h3>Fix Contexts</h3><div class="mod-cmd-list"><span>ls -Z /path/to/file</span><br><span>restorecon -Rv /var/www/</span><br><span>chcon -t httpd_sys_content_t file</span><br><span>setsebool -P httpd_can_network_connect on</span></div></div>` },
+};
+
+document.querySelectorAll('.module-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const key = card.dataset.module;
+    const data = moduleContent[key];
+    if (!data) return;
+    document.getElementById('module-modal-title').innerHTML = data.title;
+    document.getElementById('module-modal-body').innerHTML = data.body;
+    document.getElementById('module-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+function closeModuleModal() {
+  document.getElementById('module-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModuleModalOutside(e) {
+  if (e.target === document.getElementById('module-modal')) closeModuleModal();
+}
+
+// ──────────────────────────────────────────────
+// CHEATSHEET SEARCH
+// ──────────────────────────────────────────────
+const cheatInput = document.getElementById('cheat-search-input');
+const cheatRows = document.querySelectorAll('#cheat-body .cheat-row');
+const cheatCountLabel = document.getElementById('cheat-count-label');
+const cheatNoResults = document.getElementById('cheat-no-results');
+
+cheatInput.addEventListener('input', () => {
+  const q = cheatInput.value.toLowerCase().trim();
+  let visible = 0;
+  cheatRows.forEach(row => {
+    const cmd = row.querySelector('.cheat-cmd').textContent.toLowerCase();
+    const exp = row.querySelector('.cheat-exp').textContent.toLowerCase();
+    const match = !q || cmd.includes(q) || exp.includes(q);
+    row.dataset.hidden = match ? '' : 'true';
+    if (match) visible++;
+  });
+  cheatCountLabel.textContent = q ? `${visible} result${visible !== 1 ? 's' : ''}` : '250+ commands';
+  cheatNoResults.style.display = (q && visible === 0) ? 'block' : 'none';
+});
+
+// CHEATSHEET COPY (real clipboard)
+cheatRows.forEach(row => {
+  row.addEventListener('click', () => {
+    const cmd = row.querySelector('.cheat-cmd').textContent;
+    const copyEl = row.querySelector('.cheat-copy');
+    navigator.clipboard.writeText(cmd).then(() => {
+      copyEl.textContent = '✓ copied';
+      copyEl.style.color = 'var(--green)';
+      copyEl.style.opacity = '1';
+      setTimeout(() => {
+        copyEl.textContent = '⎘ copy';
+        copyEl.style.color = '';
+        copyEl.style.opacity = '';
+      }, 1600);
+    }).catch(() => {
+      // fallback
+      const ta = document.createElement('textarea');
+      ta.value = cmd; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      copyEl.textContent = '✓ copied';
+      copyEl.style.color = 'var(--green)';
+      setTimeout(() => { copyEl.textContent = '⎘ copy'; copyEl.style.color = ''; }, 1600);
     });
   });
+});
 
-  // Domain bar animation
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.querySelectorAll('.domain-bar-fill').forEach(bar => {
-          bar.style.width = bar.style.width;
-        });
-      }
+// ──────────────────────────────────────────────
+// LABS FILTER + ACCORDION
+// ──────────────────────────────────────────────
+document.getElementById('labs-filter').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('#labs-filter .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const f = btn.dataset.filter;
+  document.querySelectorAll('#labs-list .lab-item').forEach(item => {
+    item.dataset.hidden = (f !== 'all' && item.dataset.level !== f) ? 'true' : '';
+  });
+});
+
+function toggleLab(item) {
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.lab-item.open').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ──────────────────────────────────────────────
+// ERRORS FILTER + ACCORDION
+// ──────────────────────────────────────────────
+document.getElementById('errors-filter').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('#errors-filter .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const f = btn.dataset.filter;
+  document.querySelectorAll('#error-grid .error-item').forEach(item => {
+    item.dataset.hidden = (f !== 'all' && item.dataset.cat.toLowerCase() !== f) ? 'true' : '';
+  });
+});
+
+function toggleError(item) {
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.error-item.open').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ──────────────────────────────────────────────
+// QUIZ
+// ──────────────────────────────────────────────
+const QUIZ_QUESTIONS = [
+  { domain: 'Networking · 25%', diff: 'Medium', q: 'You need to configure a persistent static IP of <code style="background:var(--bg4);padding:2px 6px;border-radius:3px;font-family:var(--mono);font-size:12px;color:var(--green)">10.0.0.5/24</code> on interface <code style="background:var(--bg4);padding:2px 6px;border-radius:3px;font-family:var(--mono);font-size:12px;color:var(--green)">eth0</code> on Ubuntu using NetworkManager. Which command achieves this AND survives a reboot?', opts: ['ip addr add 10.0.0.5/24 dev eth0', 'nmcli con mod eth0 ipv4.method manual ipv4.addresses 10.0.0.5/24 && nmcli con up eth0', 'ifconfig eth0 10.0.0.5 netmask 255.255.255.0', 'echo "10.0.0.5/24" > /etc/network/eth0.conf && systemctl restart networking'], correct: 1, explain: '✓ Correct! <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">ip addr add</code> is not persistent. <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">nmcli</code> writes to NetworkManager connection files in <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">/etc/NetworkManager/system-connections/</code> which survive reboots.' },
+  { domain: 'systemd · 25%', diff: 'Easy', q: 'A service unit file is updated in <code style="background:var(--bg4);padding:2px 6px;border-radius:3px;font-family:var(--mono);font-size:12px;color:var(--green)">/etc/systemd/system/</code>. What must be run before restarting the service to apply the changes?', opts: ['systemctl reload myapp', 'systemctl daemon-reload', 'systemctl reset-failed', 'service myapp reload'], correct: 1, explain: '✓ Correct! <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">systemctl daemon-reload</code> reloads the systemd manager configuration after unit file changes.' },
+  { domain: 'Storage · 20%', diff: 'Medium', q: 'You have an ext4 filesystem on an LVM logical volume. You\'ve already extended the LV with <code style="background:var(--bg4);padding:2px 6px;border-radius:3px;font-family:var(--mono);font-size:12px;color:var(--green)">lvextend -L +10G</code>. What command grows the filesystem to use the new space?', opts: ['fsck -f /dev/vg0/data', 'resize2fs /dev/vg0/data', 'xfs_growfs /dev/vg0/data', 'e2fsck -y /dev/vg0/data'], correct: 1, explain: '✓ Correct! <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">resize2fs</code> is for ext4. For XFS you would use <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">xfs_growfs</code>. Both can run online (without unmounting).' },
+  { domain: 'Permissions · 10%', diff: 'Easy', q: 'Which chmod mode sets the SUID bit on a binary so it runs as the file owner regardless of who executes it?', opts: ['chmod 1755 /usr/bin/myapp', 'chmod 2755 /usr/bin/myapp', 'chmod 4755 /usr/bin/myapp', 'chmod 6755 /usr/bin/myapp'], correct: 2, explain: '✓ Correct! SUID = 4. chmod 4755 sets SUID + rwxr-xr-x. SGID = 2, Sticky = 1. chmod 6755 would set both SUID and SGID.' },
+  { domain: 'systemd · 25%', diff: 'Hard', q: 'A systemd service keeps restarting in a loop and hitting its start limit. Which command clears the failure counter so the service can be started again?', opts: ['systemctl restart myapp', 'systemctl reload-or-restart myapp', 'systemctl reset-failed myapp', 'systemctl unmask myapp'], correct: 2, explain: '✓ Correct! <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">systemctl reset-failed</code> clears the failed state and restart counter, allowing the service to be started again.' },
+  { domain: 'Storage · 20%', diff: 'Medium', q: 'You see "No space left on device" but <code style="background:var(--bg4);padding:2px 6px;border-radius:3px;font-family:var(--mono);font-size:12px;color:var(--green)">df -h</code> shows 40% free. What is the most likely cause?', opts: ['The filesystem is fragmented', 'All inodes are exhausted', 'The mount point is read-only', 'The disk has bad sectors'], correct: 1, explain: '✓ Correct! You can have free disk blocks but zero free inodes. Check with <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">df -i</code>. This happens when millions of tiny files consume all inodes.' },
+  { domain: 'Networking · 25%', diff: 'Hard', q: 'Which command reveals which process is listening on TCP port 443 along with its PID?', opts: ['netstat -a | grep 443', 'ss -tlnp | grep :443', 'lsof | grep 443', 'ps aux | grep 443'], correct: 1, explain: '✓ Correct! <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">ss -tlnp</code> shows TCP listening sockets with process names and PIDs. <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">netstat -tlnp</code> also works but is deprecated.' },
+  { domain: 'Permissions · 10%', diff: 'Medium', q: 'You want to grant <code style="background:var(--bg4);padding:2px 6px;border-radius:3px;font-family:var(--mono);font-size:12px;color:var(--green)">alice</code> read/write access to a file without changing its existing owner or group. Which tool is correct?', opts: ['chmod u+rw /data/file.txt', 'chown alice /data/file.txt', 'setfacl -m u:alice:rw /data/file.txt', 'usermod -aG datagroup alice'], correct: 2, explain: '✓ Correct! ACLs (Access Control Lists) allow fine-grained permissions per-user without changing ownership. Use <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">getfacl</code> to verify.' },
+  { domain: 'Essential Commands · 20%', diff: 'Easy', q: 'Which command finds all files modified in the last 24 hours under <code style="background:var(--bg4);padding:2px 6px;border-radius:3px;font-family:var(--mono);font-size:12px;color:var(--green)">/var/log</code>?', opts: ['ls -lt /var/log | head', 'find /var/log -mtime -1', 'find /var/log -newer /var/log', 'stat /var/log/*'], correct: 1, explain: '✓ Correct! <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">find -mtime -1</code> means "modified less than 1 day ago". Use <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">-mmin -60</code> for minutes precision.' },
+  { domain: 'systemd · 25%', diff: 'Medium', q: 'You want to view all systemd log entries with priority "error" or higher from the current boot only. Which journalctl flags achieve this?', opts: ['journalctl -p err -b', 'journalctl --level=error --boot', 'journalctl -u error -b0', 'journalctl -e -p 3'], correct: 0, explain: '✓ Correct! <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">-p err</code> filters by priority (err and above), <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">-b</code> limits to current boot. Priority levels: emerg(0), alert(1), crit(2), err(3), warning(4).' },
+];
+
+let quizIdx = 0, quizScore = 0, quizAnswered = false;
+
+function renderQuestion() {
+  const q = QUIZ_QUESTIONS[quizIdx];
+  document.getElementById('quiz-q-num').textContent = `Q ${quizIdx + 1}/${QUIZ_QUESTIONS.length}`;
+  document.getElementById('quiz-score-display').textContent = `Score: ${quizScore}/${quizIdx}`;
+  document.getElementById('quiz-progress').style.width = ((quizIdx / QUIZ_QUESTIONS.length) * 100) + '%';
+
+  const metaEl = document.getElementById('quiz-meta-display');
+  metaEl.innerHTML = `<span class="quiz-domain">${q.domain}</span><span class="quiz-diff">${q.diff}</span>`;
+
+  document.getElementById('quiz-q-text').innerHTML = q.q;
+
+  const optsEl = document.getElementById('quiz-opts');
+  optsEl.innerHTML = '';
+  const letters = ['A','B','C','D'];
+  q.opts.forEach((opt, i) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-opt';
+    div.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+    div.addEventListener('click', () => answer(div, i === q.correct, i, q));
+    optsEl.appendChild(div);
+  });
+
+  const fb = document.getElementById('quiz-fb');
+  fb.style.display = 'none';
+  fb.className = 'quiz-feedback';
+
+  document.getElementById('quiz-next-btn').disabled = true;
+  document.getElementById('quiz-skip-btn').disabled = false;
+  quizAnswered = false;
+}
+
+function answer(el, correct, idx, q) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+
+  document.querySelectorAll('#quiz-opts .quiz-opt').forEach(o => o.classList.add('locked'));
+  const fb = document.getElementById('quiz-fb');
+
+  if (correct) {
+    el.classList.add('correct');
+    quizScore++;
+    fb.className = 'quiz-feedback';
+    fb.innerHTML = q.explain;
+  } else {
+    el.classList.add('wrong');
+    document.querySelectorAll('#quiz-opts .quiz-opt')[q.correct].classList.add('correct');
+    fb.className = 'quiz-feedback wrong-fb';
+    fb.innerHTML = `✗ Not quite. The correct answer is <strong>${['A','B','C','D'][q.correct]}</strong>. ${q.explain.replace('✓ Correct! ', '')}`;
+  }
+  fb.style.display = 'block';
+  document.getElementById('quiz-score-display').textContent = `Score: ${quizScore}/${quizIdx + 1}`;
+  document.getElementById('quiz-next-btn').disabled = false;
+}
+
+function nextQuestion() {
+  if (!quizAnswered) return;
+  quizIdx++;
+  if (quizIdx >= QUIZ_QUESTIONS.length) {
+    showResult();
+  } else {
+    renderQuestion();
+  }
+}
+
+function skipQuestion() {
+  quizIdx++;
+  if (quizIdx >= QUIZ_QUESTIONS.length) showResult();
+  else renderQuestion();
+}
+
+function showResult() {
+  document.getElementById('quiz-question-area').style.display = 'none';
+  const result = document.getElementById('quiz-result');
+  result.style.display = 'block';
+  document.getElementById('quiz-final-score').textContent = `${quizScore}/${QUIZ_QUESTIONS.length}`;
+  document.getElementById('quiz-progress').style.width = '100%';
+
+  const pct = Math.round((quizScore / QUIZ_QUESTIONS.length) * 100);
+  let grade = '';
+  if (pct >= 90) grade = '🏆 Excellent — LFCS Exam Ready!';
+  else if (pct >= 70) grade = '✓ Good — Almost there. Review weak areas.';
+  else if (pct >= 50) grade = '⚡ Keep going — revisit modules and retry.';
+  else grade = '📚 Keep studying — the modules above will help!';
+  document.getElementById('quiz-grade-text').textContent = grade;
+}
+
+function restartQuiz() {
+  quizIdx = 0; quizScore = 0; quizAnswered = false;
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('quiz-question-area').style.display = 'block';
+  renderQuestion();
+}
+
+renderQuestion();
+
+// ──────────────────────────────────────────────
+// AI TOOL MODAL
+// ──────────────────────────────────────────────
+const TOOL_CONFIG = {
+  'error-explainer': { title: '🔴 Error Explainer', label: 'Paste your Linux error or log output', placeholder: 'e.g. Failed to start nginx.service: Unit not found\nor paste a full journalctl output...' },
+  'systemd-gen': { title: '⚙️ systemd Unit Generator', label: 'Describe the service in plain English', placeholder: 'e.g. A Node.js app at /opt/myapp/index.js running as user "nodeapp" on port 3000, restart on failure...' },
+  'bash-explainer': { title: '📋 Bash Script Explainer', label: 'Paste your shell script', placeholder: '#!/bin/bash\n...' },
+  'net-troubleshoot': { title: '🌐 Network Troubleshooter', label: 'Describe your networking issue', placeholder: 'e.g. I cannot SSH to my server. The server is up. ping works but ssh gives "Connection refused"...' },
+  'iptables-builder': { title: '🛡️ iptables Rule Builder', label: 'Describe your firewall requirements', placeholder: 'e.g. Allow port 80 and 443 from any IP. Block all outbound except port 443 and DNS. Log dropped packets...' },
+  'lvm-planner': { title: '💾 LVM Planner', label: 'Describe your storage layout', placeholder: 'e.g. I have /dev/sdb (500GB) and /dev/sdc (500GB). I need a 200GB volume for databases and 600GB for backups...' },
+  'perm-debugger': { title: '🔐 Permission Debugger', label: 'Paste the "Permission denied" error + context', placeholder: 'e.g. nginx: [warn] could not build optimal types_hash\nopendir() "/var/www/html/app" failed (13: Permission denied)\n\nls -la /var/www/html/app shows drwxr-x--- root www-data ...' },
+  'cron-builder': { title: '🕐 Cron Expression Builder', label: 'Describe your schedule or paste a cron expression', placeholder: 'e.g. "Run every Monday at 3:30am" or paste "0 3 * * 1" to explain it...' },
+};
+
+const TOOL_PROMPTS = {
+  'error-explainer': (input) => `You are a senior Linux sysadmin. Analyze this Linux error and respond in this exact format:\n\n## Root Cause\n[1-2 sentences explaining what caused this error]\n\n## Fix Commands\n\`\`\`bash\n[exact commands to fix the issue]\n\`\`\`\n\n## Prevention\n[1-2 sentences on how to prevent this in future]\n\nError to analyze:\n${input}`,
+  'systemd-gen': (input) => `You are a Linux sysadmin expert. Generate a production-ready systemd .service unit file based on this description. Include inline comments explaining each directive. After the unit file, add a brief "Key Points" section explaining the important choices made.\n\nService description:\n${input}`,
+  'bash-explainer': (input) => `You are a bash scripting expert. Analyze this shell script and provide:\n1. A brief summary of what it does\n2. Line-by-line explanation of key/non-obvious parts\n3. Any potential bugs or improvements\n4. Security concerns if any\n\nScript:\n${input}`,
+  'net-troubleshoot': (input) => `You are a senior Linux network engineer. Given this networking issue, provide a step-by-step debug checklist with exact commands to run at each step. Format as numbered steps with code blocks for commands.\n\nIssue: ${input}`,
+  'iptables-builder': (input) => `You are a Linux firewall expert. Generate working iptables rules for these requirements. Include:\n1. The iptables commands with inline comments\n2. How to persist the rules\n3. A brief explanation of what each rule does\n\nRequirements: ${input}`,
+  'lvm-planner': (input) => `You are an LVM storage expert. Generate the complete LVM commands for this storage layout. Include pvcreate, vgcreate, lvcreate, mkfs, and mount/fstab commands. Add inline comments. At the end, show how to verify the setup.\n\nStorage layout: ${input}`,
+  'perm-debugger': (input) => `You are a Linux permissions expert. Analyze this permission error and provide the exact fix. Include chmod/chown/ACL/SELinux commands as needed. Explain why the error occurred.\n\nError and context: ${input}`,
+  'cron-builder': (input) => `You are a cron scheduling expert. If given a description, provide the cron expression and explain each field. If given a cron expression, explain exactly when it runs with examples. Also provide the equivalent systemd timer OnCalendar syntax.\n\nInput: ${input}`,
+};
+
+let currentTool = null;
+
+function openTool(card) {
+  const toolKey = card.dataset.tool;
+  const config = TOOL_CONFIG[toolKey];
+  if (!config) return;
+  currentTool = toolKey;
+  document.getElementById('modal-title-text').textContent = config.title;
+  document.getElementById('modal-input-label').textContent = config.label;
+  document.getElementById('modal-input').placeholder = config.placeholder;
+  document.getElementById('modal-input').value = '';
+  document.getElementById('modal-output').classList.remove('visible');
+  document.getElementById('modal-output-text').textContent = '';
+  document.getElementById('modal-btn-label').innerHTML = '▶ Run';
+  document.getElementById('modal-run-btn').disabled = false;
+  document.getElementById('tool-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('modal-input').focus(), 100);
+}
+
+async function runTool() {
+  const input = document.getElementById('modal-input').value.trim();
+  if (!input) { document.getElementById('modal-input').focus(); return; }
+
+  const btn = document.getElementById('modal-run-btn');
+  btn.disabled = true;
+  document.getElementById('modal-btn-label').innerHTML = '<span class="modal-spinner"></span> Thinking...';
+
+  const outputEl = document.getElementById('modal-output');
+  const outputText = document.getElementById('modal-output-text');
+  outputEl.classList.add('visible');
+  outputText.innerHTML = '<span style="color:var(--text3)">Analyzing...</span>';
+
+  try {
+    const prompt = TOOL_PROMPTS[currentTool](input);
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
     });
-  }, { threshold: 0.3 });
-  document.querySelector('.domain-grid') && observer.observe(document.querySelector('.domain-grid'));
 
-  // Quiz
-  let answered = false;
-  function answer(el, correct) {
-    if (answered) return;
-    answered = true;
-    const fb = document.getElementById('quiz-fb');
-    if (correct) {
-      el.classList.add('correct');
-      fb.style.display = 'block';
-      fb.className = 'quiz-feedback';
-      fb.innerHTML = '✓ Correct! <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">ip addr add</code> is not persistent (lost on reboot). <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">nmcli</code> writes to NetworkManager connection files in <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">/etc/NetworkManager/system-connections/</code> which survive reboots.';
-    } else {
-      el.classList.add('wrong');
-      document.querySelectorAll('.quiz-opt')[1].classList.add('correct');
-      fb.style.display = 'block';
-      fb.className = 'quiz-feedback wrong-fb';
-      fb.innerHTML = '✗ Not quite. This command is either non-persistent or uses a deprecated tool. The correct answer is <strong>B</strong> — nmcli writes persistent connection files that survive reboots.';
-    }
+    const data = await response.json();
+    const text = data.content?.map(c => c.text || '').join('') || 'No response received.';
+    outputText.innerHTML = formatAIOutput(text);
+  } catch (err) {
+    outputText.innerHTML = `<span class="out-red">Error: ${err.message}</span>`;
   }
 
-  // Cheatsheet copy simulation
-  document.querySelectorAll('.cheat-row').forEach(row => {
-    row.addEventListener('click', () => {
-      const cmd = row.querySelector('.cheat-cmd').textContent;
-      const copy = row.querySelector('.cheat-copy');
-      copy.textContent = '✓ copied';
-      copy.style.color = 'var(--green)';
-      setTimeout(() => {
-        copy.textContent = '⎘ copy';
-        copy.style.color = '';
-      }, 1500);
-    });
-  });
+  btn.disabled = false;
+  document.getElementById('modal-btn-label').innerHTML = '▶ Run Again';
+}
+
+function formatAIOutput(text) {
+  return text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/```(\w*)\n?([\s\S]*?)```/g, (_, lang, code) =>
+      `<div style="background:var(--bg);border:1px solid var(--border2);border-radius:5px;padding:10px 12px;margin:8px 0;font-family:var(--mono);font-size:12px;color:var(--green);white-space:pre;overflow-x:auto">${code.trim()}</div>`)
+    .replace(/`([^`]+)`/g, '<code style="background:rgba(57,255,110,0.1);color:var(--green);padding:1px 5px;border-radius:3px;font-family:var(--mono);font-size:11px">$1</code>')
+    .replace(/^## (.+)$/gm, '<div style="font-family:var(--sans);font-size:13px;font-weight:600;color:var(--text);margin:16px 0 6px">$1</div>')
+    .replace(/^### (.+)$/gm, '<div style="font-family:var(--mono);font-size:11px;color:var(--green);text-transform:uppercase;letter-spacing:.08em;margin:12px 0 4px">$1</div>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong style="color:var(--text)">$1</strong>')
+    .replace(/^(\d+\. .+)$/gm, '<div style="margin:3px 0">$1</div>')
+    .replace(/\n/g, '<br>');
+}
+
+function closeModal() {
+  document.getElementById('tool-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('tool-modal')) closeModal();
+}
+
+// keyboard close
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeModal(); closeModuleModal(); }
+});
 </script>
 </body>
 </html>
