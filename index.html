@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinuxLab — linux.eknathalabs.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c0f;
+    --bg2: #0f1218;
+    --bg3: #161b24;
+    --bg4: #1d2535;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --green: #39ff6e;
+    --green2: #1adb52;
+    --green-dim: rgba(57,255,110,0.08);
+    --green-dim2: rgba(57,255,110,0.15);
+    --amber: #f5a623;
+    --amber-dim: rgba(245,166,35,0.1);
+    --red: #ff4757;
+    --blue: #3d9eff;
+    --text: #e8edf5;
+    --text2: #8b95a8;
+    --text3: #4f5a6a;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --display: 'Syne', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Scanline overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,12,15,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 52px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--green);
+    text-decoration: none;
+  }
+  .nav-logo .logo-icon {
+    width: 28px; height: 28px;
+    background: var(--green-dim2);
+    border: 1px solid var(--green);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+  }
+  .nav-links a {
+    display: block;
+    padding: 0 14px;
+    height: 52px;
+    line-height: 52px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text2);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { color: var(--green); border-bottom-color: var(--green); }
+  .nav-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    margin-left: auto;
+    padding-left: 2rem;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    padding: 80px 2rem 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--green);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -.01em;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .hero h1 span { color: var(--green); }
+  .hero-desc {
+    font-size: 15px;
+    color: var(--text2);
+    line-height: 1.7;
+    margin-bottom: 32px;
+    max-width: 440px;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--green);
+    color: #060a06;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity .15s, transform .1s;
+    display: inline-block;
+    letter-spacing: .05em;
+  }
+  .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text2);
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 10px 20px;
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color .2s, color .2s;
+    display: inline-block;
+    letter-spacing: .03em;
+  }
+  .btn-ghost:hover { border-color: var(--green); color: var(--green); }
+
+  /* ─── TERMINAL ─── */
+  .terminal {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+  }
+  .term-header {
+    background: var(--bg3);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #febc2e; }
+  .dot-g { background: #28c840; }
+  .term-title { font-size: 11px; color: var(--text3); margin-left: 6px; }
+  .term-body { padding: 16px 18px; line-height: 1.8; }
+  .t-prompt { color: var(--green); }
+  .t-cmd { color: var(--text); }
+  .t-output { color: var(--text2); display: block; padding-left: 2px; }
+  .t-ok { color: var(--green2); }
+  .t-warn { color: var(--amber); }
+  .t-err { color: var(--red); }
+  .t-comment { color: var(--text3); }
+  .t-blank { display: block; height: 8px; }
+  .cursor {
+    display: inline-block;
+    width: 7px; height: 14px;
+    background: var(--green);
+    vertical-align: middle;
+    animation: blink 1.1s step-end infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  /* ─── STAT BAR ─── */
+  .stat-bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    padding: 18px 2rem;
+  }
+  .stat-bar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .stat-item {
+    text-align: center;
+    flex: 1;
+  }
+  .stat-num {
+    font-family: var(--display);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+  .stat-div {
+    width: 1px;
+    height: 32px;
+    background: var(--border2);
+  }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 2rem;
+  }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .section-sub {
+    font-size: 14px;
+    color: var(--text2);
+    margin-bottom: 32px;
+    max-width: 560px;
+  }
+  hr.section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* ─── MODULES GRID ─── */
+  .filter-bar {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .filter-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 5px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .filter-btn.active { background: var(--green-dim2); border-color: var(--green); color: var(--green); }
+  .filter-btn:hover:not(.active) { border-color: var(--border2); color: var(--text); }
+
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 12px;
+  }
+  .module-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .module-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--green);
+    opacity: 0;
+    transition: opacity .2s;
+  }
+  .module-card:hover { border-color: var(--border2); background: var(--bg3); }
+  .module-card:hover::before { opacity: 1; }
+
+  .module-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .module-icon {
+    font-size: 20px;
+    margin-bottom: 2px;
+  }
+  .module-level {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .level-beginner { background: rgba(57,255,110,0.1); color: var(--green); border: 1px solid rgba(57,255,110,0.25); }
+  .level-intermediate { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(245,166,35,0.25); }
+  .level-advanced { background: rgba(255,71,87,0.1); color: var(--red); border: 1px solid rgba(255,71,87,0.25); }
+  .level-lfcs { background: rgba(61,158,255,0.1); color: var(--blue); border: 1px solid rgba(61,158,255,0.25); }
+
+  .module-name {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 5px;
+  }
+  .module-desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.5;
+  }
+  .module-tags {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    background: var(--bg4);
+    padding: 2px 7px;
+    border-radius: 3px;
+  }
+
+  /* ─── AI TOOLS ─── */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+  }
+  .tool-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    transition: border-color .2s;
+    cursor: pointer;
+  }
+  .tool-card:hover { border-color: var(--border2); }
+  .tool-icon-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .tool-icon {
+    width: 36px; height: 36px;
+    background: var(--green-dim);
+    border: 1px solid rgba(57,255,110,0.2);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px;
+  }
+  .tool-ai-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--green);
+    border: 1px solid rgba(57,255,110,0.3);
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: .06em;
+  }
+  .tool-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 5px;
+  }
+  .tool-desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.5;
+  }
+
+  /* ─── CHEATSHEET PREVIEW ─── */
+  .cheat-preview {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .cheat-header {
+    background: var(--bg3);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .cheat-search {
+    flex: 1;
+    background: var(--bg4);
+    border: 1px solid var(--border2);
+    border-radius: 5px;
+    padding: 6px 12px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text2);
+  }
+  .cheat-count {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    white-space: nowrap;
+  }
+  .cheat-body {
+    padding: 4px 0;
+    max-height: 320px;
+    overflow-y: auto;
+  }
+  .cheat-row {
+    display: grid;
+    grid-template-columns: 2fr 3fr 80px;
+    gap: 0;
+    padding: 9px 16px;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+    transition: background .15s;
+    cursor: pointer;
+  }
+  .cheat-row:hover { background: var(--bg3); }
+  .cheat-row:last-child { border-bottom: none; }
+  .cheat-cmd { font-family: var(--mono); font-size: 12px; color: var(--green); }
+  .cheat-exp { font-size: 12px; color: var(--text2); }
+  .cheat-copy {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    text-align: right;
+    opacity: 0;
+    transition: opacity .15s;
+  }
+  .cheat-row:hover .cheat-copy { opacity: 1; }
+
+  /* ─── QUIZ PREVIEW ─── */
+  .quiz-preview {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .quiz-meta {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    align-items: center;
+  }
+  .quiz-domain {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--blue);
+    background: rgba(61,158,255,0.1);
+    border: 1px solid rgba(61,158,255,0.2);
+    padding: 3px 9px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+  }
+  .quiz-diff {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--amber);
+    background: var(--amber-dim);
+    border: 1px solid rgba(245,166,35,0.2);
+    padding: 3px 9px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+  }
+  .quiz-q {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.55;
+  }
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .quiz-opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1px solid var(--border2);
+    border-radius: 7px;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+    font-size: 12.5px;
+    color: var(--text2);
+    font-family: var(--mono);
+  }
+  .quiz-opt:hover { border-color: var(--green); color: var(--text); background: var(--green-dim); }
+  .quiz-opt.correct { border-color: var(--green); background: var(--green-dim); color: var(--green); }
+  .quiz-opt.wrong { border-color: var(--red); background: rgba(255,71,87,0.07); color: var(--red); }
+  .opt-letter {
+    font-weight: 700;
+    font-size: 11px;
+    min-width: 14px;
+    margin-top: 1px;
+  }
+
+  /* ─── LABS ─── */
+  .labs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .lab-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .lab-item:hover { border-color: var(--border2); background: var(--bg3); }
+  .lab-num {
+    font-family: var(--mono);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text3);
+    min-width: 36px;
+    line-height: 1;
+  }
+  .lab-info { flex: 1; }
+  .lab-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .lab-desc { font-size: 12px; color: var(--text2); }
+  .lab-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lab-time {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+  }
+
+  /* ─── ERROR ENCYCLOPEDIA ─── */
+  .error-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .error-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color .2s;
+  }
+  .error-item:hover { border-color: var(--border2); }
+  .error-header {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .error-sev {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .sev-high { background: var(--red); box-shadow: 0 0 6px var(--red); }
+  .sev-med { background: var(--amber); }
+  .sev-low { background: var(--green); }
+  .error-name {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--red);
+    flex: 1;
+  }
+  .error-name.med { color: var(--amber); }
+  .error-name.low { color: var(--green2); }
+  .error-summary { font-size: 12px; color: var(--text2); }
+  .error-cat {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    background: var(--bg4);
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  /* ─── DOMAIN COVERAGE ─── */
+  .domain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .domain-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .domain-pct {
+    font-family: var(--display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .domain-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .domain-topics { font-size: 11.5px; color: var(--text2); line-height: 1.5; }
+  .domain-bar {
+    height: 3px;
+    background: var(--bg4);
+    border-radius: 2px;
+    margin-top: 12px;
+    overflow: hidden;
+  }
+  .domain-bar-fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 2px;
+    transition: width .6s ease;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 2rem;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+  }
+  footer a { color: var(--green); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+
+  /* ─── QUIZ INTERACTIONS ─── */
+  .quiz-feedback {
+    display: none;
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: 7px;
+    background: var(--green-dim);
+    border: 1px solid rgba(57,255,110,0.2);
+    font-size: 12px;
+    color: var(--green2);
+    line-height: 1.5;
+  }
+  .quiz-feedback.wrong-fb {
+    background: rgba(255,71,87,0.07);
+    border-color: rgba(255,71,87,0.2);
+    color: #ff8a94;
+  }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <span class="logo-icon">$_</span>
+    LinuxLab
+  </a>
+  <ul class="nav-links">
+    <li><a href="#modules">📚 Modules</a></li>
+    <li><a href="#tools">🤖 AI Tools</a></li>
+    <li><a href="#cheatsheet">⌨ Cheatsheet</a></li>
+    <li><a href="#quiz">✦ Quiz</a></li>
+    <li><a href="#labs">⚗ Labs</a></li>
+    <li><a href="#errors">🔴 Errors</a></li>
+  </ul>
+  <span class="nav-badge">linux.eknathalabs.com · free · no signup</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <p class="hero-eyebrow">// eknathalabs.com · linux lab</p>
+    <h1>Master Linux.<br><span>Admin with Confidence.</span></h1>
+    <p class="hero-desc">A structured, hands-on Linux learning lab — LFCS exam domains, AI-powered tools, 250+ commands, 100-question quiz, and full lab walkthroughs. Built by a Platform Engineer, for Platform Engineers.</p>
+    <div class="hero-ctas">
+      <a class="btn-primary" href="#modules">▶ Start Learning</a>
+      <a class="btn-ghost" href="#cheatsheet">⌨ Cheatsheet</a>
+      <a class="btn-ghost" href="#quiz">✦ Take Quiz</a>
+      <a class="btn-ghost" href="#labs">⚗ Practice Labs</a>
+    </div>
+  </div>
+  <div class="terminal">
+    <div class="term-header">
+      <span class="dot dot-r"></span>
+      <span class="dot dot-y"></span>
+      <span class="dot dot-g"></span>
+      <span class="term-title">eknatha@linuxlab ~ bash</span>
+    </div>
+    <div class="term-body">
+      <span class="t-prompt">eknatha@linuxlab</span><span class="t-cmd"> $ systemctl status nginx</span><br>
+      <span class="t-output">● nginx.service - A high performance web server</span>
+      <span class="t-output">   Loaded: loaded (/lib/systemd/system/nginx.service)</span>
+      <span class="t-err">   Active: failed (Result: exit-code)</span>
+      <span class="t-output">  Process: 1234 ExecStart=/usr/sbin/nginx (code=exited)</span>
+      <span class="t-blank"></span>
+      <span class="t-prompt">eknatha@linuxlab</span><span class="t-cmd"> $ journalctl -u nginx -n 20</span><br>
+      <span class="t-warn">Aug 12 09:42:11 nginx[1234]: bind() to 0.0.0.0:80 failed</span>
+      <span class="t-warn">Aug 12 09:42:11 nginx[1234]: (98: Address already in use)</span>
+      <span class="t-blank"></span>
+      <span class="t-prompt">eknatha@linuxlab</span><span class="t-cmd"> $ ss -tlnp | grep :80</span><br>
+      <span class="t-output">LISTEN 0 128 0.0.0.0:80 users:(("apache2",pid=999))</span>
+      <span class="t-blank"></span>
+      <span class="t-comment"># Port 80 held by apache2 — stop it first</span><br>
+      <span class="t-prompt">eknatha@linuxlab</span><span class="t-cmd"> $ sudo systemctl stop apache2 && sudo systemctl start nginx</span><br>
+      <span class="t-ok">✓ nginx.service started — Active: active (running)</span>
+      <span class="t-blank"></span>
+      <span class="t-prompt">eknatha@linuxlab</span><span class="t-cmd"> $ <span class="cursor"></span></span>
+    </div>
+  </div>
+</div>
+
+<!-- STAT BAR -->
+<div class="stat-bar">
+  <div class="stat-bar-inner">
+    <div class="stat-item"><div class="stat-num">14</div><div class="stat-label">Modules</div></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><div class="stat-num">8</div><div class="stat-label">AI Tools</div></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><div class="stat-num">250+</div><div class="stat-label">Commands</div></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><div class="stat-num">100</div><div class="stat-label">Quiz Q&amp;A</div></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><div class="stat-num">14</div><div class="stat-label">Labs</div></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><div class="stat-num">LFCS</div><div class="stat-label">Exam Ready</div></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><div class="stat-num">70+</div><div class="stat-label">Error Codes</div></div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- LFCS DOMAIN COVERAGE -->
+<div class="section" id="domains">
+  <p class="section-label">// LFCS Exam Blueprint</p>
+  <h2 class="section-title">Official Domain Coverage</h2>
+  <p class="section-sub">Every module, quiz question, and lab maps to an official LFCS domain. 2-hour performance-based exam · 17–20 tasks · 67% passing score.</p>
+  <div class="domain-grid">
+    <div class="domain-card">
+      <div class="domain-pct">25%</div>
+      <div class="domain-name">Operations &amp; Deployment</div>
+      <div class="domain-topics">systemd, boot process, cron, package management, containers</div>
+      <div class="domain-bar"><div class="domain-bar-fill" style="width:25%"></div></div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-pct">25%</div>
+      <div class="domain-name">Networking</div>
+      <div class="domain-topics">interfaces, routing, iptables, firewalld, SSH, DNS, NFS</div>
+      <div class="domain-bar"><div class="domain-bar-fill" style="width:25%"></div></div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-pct">20%</div>
+      <div class="domain-name">Storage</div>
+      <div class="domain-topics">LVM, partitioning, filesystems, RAID, mounting, swap</div>
+      <div class="domain-bar"><div class="domain-bar-fill" style="width:20%"></div></div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-pct">20%</div>
+      <div class="domain-name">Essential Commands</div>
+      <div class="domain-topics">find, grep, sed, awk, pipes, redirects, permissions, archives</div>
+      <div class="domain-bar"><div class="domain-bar-fill" style="width:20%"></div></div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-pct">10%</div>
+      <div class="domain-name">Users &amp; Groups</div>
+      <div class="domain-topics">useradd, sudo, PAM, passwd, groups, LDAP basics</div>
+      <div class="domain-bar"><div class="domain-bar-fill" style="width:10%"></div></div>
+    </div>
+  </div>
+</div>
+<hr class="section-divider">
+
+<!-- MODULES -->
+<div class="section" id="modules">
+  <p class="section-label">// Learning Path</p>
+  <h2 class="section-title">Structured Modules</h2>
+  <p class="section-sub">14 modules from essential commands to advanced security. Click any module to deep dive.</p>
+  <div class="filter-bar">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Beginner</button>
+    <button class="filter-btn">Intermediate</button>
+    <button class="filter-btn">Advanced</button>
+    <button class="filter-btn">LFCS</button>
+  </div>
+  <div class="modules-grid">
+
+    <div class="module-card">
+      <div class="module-top">
+        <div class="module-icon">⌨️</div>
+        <span class="module-level level-beginner">Beginner</span>
+      </div>
+      <div class="module-name">Essential Commands</div>
+      <div class="module-desc">Navigation, file ops, find, grep, text manipulation, pipes, redirects, stdin/stdout/stderr.</div>
+      <div class="module-tags"><span class="tag">find</span><span class="tag">grep</span><span class="tag">sed/awk</span><span class="tag">LFCS 20%</span></div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-top">
+        <div class="module-icon">🔐</div>
+        <span class="module-level level-beginner">Beginner</span>
+      </div>
+      <div class="module-name">Users, Groups &amp; Permissions</div>
+      <div class="module-desc">useradd, passwd, sudo, ACLs, chmod, chown, sticky bit, SUID/SGID, umask.</div>
+      <div class="module-tags"><span class="tag">useradd</span><span class="tag">sudo</span><span class="tag">ACL</span><span class="tag">LFCS 10%</span></div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-top">
+        <div class="module-icon">⚙️</div>
+        <span class="module-level level-beginner">Beginner</span>
+      </div>
+      <div class="module-name">systemd &amp; Service Management</div>
+      <div class="module-desc">systemctl, journalctl, unit files, targets, boot sequence, service dependencies.</div>
+      <div class="module-tags"><span class="tag">systemctl</span><span class="tag">journalctl</span><span class="tag">LFCS 25%</span></div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-top">
+        <div class="module-icon">💾</div>
+        <span class="module-level level-intermediate">Intermediate</span>
+      </div>
+      <div class="module-name">Storage &amp; Filesystems</div>
+      <div class="module-desc">Partitioning (fdisk/gdisk), mkfs, mount, fstab, swap, ext4/xfs/btrfs.</div>
+      <div class="module-tags"><span class="tag">fdisk</span><span class="tag">lvm</span><span class="tag">mount</span><span class="tag">LFCS 20%</span></div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-top">
+        <div class="module-icon">🗄️</div>
+        <span class="module-level level-intermediate">Intermediate</span>
+      </div>
+      <div class="module-name">LVM — Logical Volume Manager</div>
+      <div class="module-desc">pvcreate, vgcreate, lvcreate, resize, snapshots, thin provisioning.</div>
+      <div class="module-tags"><span class="tag">pvcreate</span><span class="tag">lvcreate</span><span class="tag">lvextend</span></div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-top">
+        <div class="module-icon">🌐</div>
+        <span class="module-level level-intermediate">Intermediate</span>
+      </div>
+      <div class="module-name">Networking Fundamentals</div>
+      <div class="module-desc">ip, nmcli, netplan, static IPs, routes, DNS resolution, ss, netstat, troubleshooting.</div>
+      <div class="module-tags"><span class="tag">ip addr</span><span class="tag">nmcli</span><span class="tag">ss</span><span class="tag">LFCS 25%</span></div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-top">
+        <div class="module-icon">🛡️</div>
+        <span class="module-level level-intermediate">Intermediate</span>
+      </div>
+      <div class="module-name">Firewall — iptables &amp; firewalld</div>
+      <div class="module-desc">iptables chains, rules, NAT, PREROUTING, firewalld zones, rich rules, persistence.</div>
+      <div class="module-tags"><span class="tag">iptables</span><span class="tag">firewalld</span><span class="tag">nft</span></div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-top">
+        <div class="module-icon">🔑</div>
+        <span class="module-level level-intermediate">Intermediate</span>
+      </div>
+      <div class="module-name">SSH &amp; Remote Access</div>
+      <div class="module-desc">Key-based auth, sshd_config hardening, port forwarding, jump hosts, scp/rsync.</div>
+      <div class="module-tags"><span class="tag">ssh-keygen</span><span class="tag">sshd</span><span class="tag">rsync</span></div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-top">
+        <div class="module-icon">📦</div>
+        <span class="module-level level-intermediate">Intermediate</span>
+      </div>
+      <div class="module-name">Package Management</div>
+      <div class="module-desc">apt/dpkg (Debian), dnf/rpm (RHEL), snap, flatpak, compiling from source.</div>
+      <div class="module-tags"><span class="tag">apt</span><span class="tag">dnf</span><span class="tag">rpm</span></div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-top">
+        <div class="module-icon">📊</div>
+        <span class="module-level level-intermediate">Intermediate</span>
+      </div>
+      <div class="module-name">Process &amp; Resource Management</div>
+      <div class="module-desc">ps, top, htop, kill, nice/renice, ulimit, cgroups, load average, memory analysis.</div>
+      <div class="module-tags"><span class="tag">ps</span><span class="tag">top</span><span class="tag">cgroups</span></div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-top">
+        <div class="module-icon">🕐</div>
+        <span class="module-level level-intermediate">Intermediate</span>
+      </div>
+      <div class="module-name">Cron &amp; Task Scheduling</div>
+      <div class="module-desc">crontab syntax, system cron, at, anacron, systemd timers — all approaches covered.</div>
+      <div class="module-tags"><span class="tag">crontab</span><span class="tag">at</span><span class="tag">systemd timer</span></div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-top">
+        <div class="module-icon">📋</div>
+        <span class="module-level level-advanced">Advanced</span>
+      </div>
+      <div class="module-name">Shell Scripting for Sysadmins</div>
+      <div class="module-desc">Bash scripting patterns, error handling, loops, functions, heredocs, real automation scripts.</div>
+      <div class="module-tags"><span class="tag">bash</span><span class="tag">scripting</span><span class="tag">automation</span></div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-top">
+        <div class="module-icon">🐳</div>
+        <span class="module-level level-advanced">Advanced</span>
+      </div>
+      <div class="module-name">Containers &amp; Docker Basics</div>
+      <div class="module-desc">docker run/build/compose, image management, networking, volumes — the LFCS container domain.</div>
+      <div class="module-tags"><span class="tag">docker</span><span class="tag">containers</span><span class="tag">LFCS</span></div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-top">
+        <div class="module-icon">🔒</div>
+        <span class="module-level level-advanced">Advanced</span>
+      </div>
+      <div class="module-name">SELinux &amp; AppArmor</div>
+      <div class="module-desc">Mandatory access control, contexts, booleans, audit logs, troubleshooting denials.</div>
+      <div class="module-tags"><span class="tag">SELinux</span><span class="tag">AppArmor</span><span class="tag">MAC</span></div>
+    </div>
+
+  </div>
+</div>
+<hr class="section-divider">
+
+<!-- AI TOOLS -->
+<div class="section" id="tools">
+  <p class="section-label">// Interactive AI Tools</p>
+  <h2 class="section-title">Built-in Linux Tools ✦ AI Powered</h2>
+  <p class="section-sub">Paste errors, describe tasks, generate configs — without leaving the page.</p>
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-icon-row">
+        <div class="tool-icon">🔴</div>
+        <span class="tool-ai-badge">✦ AI</span>
+      </div>
+      <div class="tool-name">Error Explainer</div>
+      <div class="tool-desc">Paste any Linux error or kernel panic. Get root cause, fix commands, and how to prevent it.</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon-row">
+        <div class="tool-icon">⚙️</div>
+        <span class="tool-ai-badge">✦ AI</span>
+      </div>
+      <div class="tool-name">systemd Unit Generator</div>
+      <div class="tool-desc">Describe a service in plain English → get a production-ready .service unit file with explanations.</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon-row">
+        <div class="tool-icon">📋</div>
+        <span class="tool-ai-badge">✦ AI</span>
+      </div>
+      <div class="tool-name">Bash Script Explainer</div>
+      <div class="tool-desc">Paste any shell script. Get a line-by-line breakdown, potential bugs, and safer alternatives.</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon-row">
+        <div class="tool-icon">🌐</div>
+        <span class="tool-ai-badge">✦ AI</span>
+      </div>
+      <div class="tool-name">Network Troubleshooter</div>
+      <div class="tool-desc">Describe your networking issue. Get a step-by-step debug checklist with exact commands to run.</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon-row">
+        <div class="tool-icon">🛡️</div>
+        <span class="tool-ai-badge">✦ AI</span>
+      </div>
+      <div class="tool-name">iptables Rule Builder</div>
+      <div class="tool-desc">Describe your firewall requirements → get working iptables/nftables rules with explanations.</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon-row">
+        <div class="tool-icon">💾</div>
+        <span class="tool-ai-badge">✦ AI</span>
+      </div>
+      <div class="tool-name">LVM Planner</div>
+      <div class="tool-desc">Describe your storage layout → get full LVM commands: pvcreate, vgcreate, lvcreate, resize.</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon-row">
+        <div class="tool-icon">🔐</div>
+        <span class="tool-ai-badge">✦ AI</span>
+      </div>
+      <div class="tool-name">Permission Debugger</div>
+      <div class="tool-desc">Paste a "Permission denied" error + context. Get the exact chmod/chown/ACL fix needed.</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon-row">
+        <div class="tool-icon">🕐</div>
+        <span class="tool-ai-badge">✦ AI</span>
+      </div>
+      <div class="tool-name">Cron Expression Builder</div>
+      <div class="tool-desc">Describe your schedule in English → crontab expression. Paste expressions to get explanations.</div>
+    </div>
+  </div>
+</div>
+<hr class="section-divider">
+
+<!-- CHEATSHEET PREVIEW -->
+<div class="section" id="cheatsheet">
+  <p class="section-label">// Quick Reference</p>
+  <h2 class="section-title">Linux Cheatsheet</h2>
+  <p class="section-sub">250+ commands — searchable, click any command to copy. LFCS exam shortcuts included.</p>
+  <div class="cheat-preview">
+    <div class="cheat-header">
+      <input class="cheat-search" type="text" placeholder="Search commands... (e.g. find, systemctl, lvm)">
+      <span class="cheat-count">250+ commands</span>
+    </div>
+    <div class="cheat-body">
+      <div class="cheat-row"><span class="cheat-cmd">find / -perm /4000</span><span class="cheat-exp">Find all SUID files on system</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row"><span class="cheat-cmd">journalctl -u nginx --since "1 hour ago"</span><span class="cheat-exp">View nginx logs from last hour</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row"><span class="cheat-cmd">ss -tlnp</span><span class="cheat-exp">List all TCP listening ports with process</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row"><span class="cheat-cmd">lvcreate -L 10G -n data vg0</span><span class="cheat-exp">Create 10G LVM logical volume</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row"><span class="cheat-cmd">iptables -L -n -v --line-numbers</span><span class="cheat-exp">List all iptables rules with line numbers</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row"><span class="cheat-cmd">grep -r "pattern" /etc/ --include="*.conf"</span><span class="cheat-exp">Recursive grep in .conf files only</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row"><span class="cheat-cmd">tar -czf backup.tar.gz /var/data</span><span class="cheat-exp">Create compressed tar archive</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row"><span class="cheat-cmd">rsync -avz --delete src/ user@host:/dst/</span><span class="cheat-exp">Sync with delete of removed files</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row"><span class="cheat-cmd">nmcli con mod eth0 ipv4.method manual ipv4.addresses 192.168.1.10/24</span><span class="cheat-exp">Set static IP via NetworkManager</span><span class="cheat-copy">⎘ copy</span></div>
+      <div class="cheat-row"><span class="cheat-cmd">ausearch -m avc -ts recent</span><span class="cheat-exp">Find recent SELinux denials</span><span class="cheat-copy">⎘ copy</span></div>
+    </div>
+  </div>
+</div>
+<hr class="section-divider">
+
+<!-- QUIZ PREVIEW -->
+<div class="section" id="quiz">
+  <p class="section-label">// Practice Questions</p>
+  <h2 class="section-title">LFCS Quiz — 100 Questions</h2>
+  <p class="section-sub">Scenario-based questions mapped to official LFCS domains. Filter by domain and difficulty. Track your score.</p>
+  <div class="quiz-preview" id="quiz-box">
+    <div class="quiz-meta">
+      <span class="quiz-domain">Networking · 25%</span>
+      <span class="quiz-diff">Medium</span>
+    </div>
+    <div class="quiz-q">You need to configure a persistent static IP of <code style="background:var(--bg4);padding:2px 6px;border-radius:3px;font-family:var(--mono);font-size:12px;color:var(--green)">10.0.0.5/24</code> on interface <code style="background:var(--bg4);padding:2px 6px;border-radius:3px;font-family:var(--mono);font-size:12px;color:var(--green)">eth0</code> on an Ubuntu system using NetworkManager. Which command achieves this AND survives a reboot?</div>
+    <div class="quiz-options" id="quiz-opts">
+      <div class="quiz-opt" onclick="answer(this, false)"><span class="opt-letter">A</span>ip addr add 10.0.0.5/24 dev eth0</div>
+      <div class="quiz-opt" onclick="answer(this, true)"><span class="opt-letter">B</span>nmcli con mod eth0 ipv4.method manual ipv4.addresses 10.0.0.5/24 && nmcli con up eth0</div>
+      <div class="quiz-opt" onclick="answer(this, false)"><span class="opt-letter">C</span>ifconfig eth0 10.0.0.5 netmask 255.255.255.0</div>
+      <div class="quiz-opt" onclick="answer(this, false)"><span class="opt-letter">D</span>echo "10.0.0.5/24" > /etc/network/eth0.conf && systemctl restart networking</div>
+    </div>
+    <div class="quiz-feedback" id="quiz-fb"></div>
+  </div>
+</div>
+<hr class="section-divider">
+
+<!-- LABS -->
+<div class="section" id="labs">
+  <p class="section-label">// Hands-on Scenarios</p>
+  <h2 class="section-title">Practice Labs</h2>
+  <p class="section-sub">14 full step-by-step labs modelled on production incidents and LFCS exam tasks.</p>
+  <div class="filter-bar">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Beginner</button>
+    <button class="filter-btn">Intermediate</button>
+    <button class="filter-btn">Advanced</button>
+  </div>
+  <div class="labs-list">
+    <div class="lab-item">
+      <div class="lab-num">01</div>
+      <div class="lab-info">
+        <div class="lab-name">Recover a Broken Boot — GRUB Rescue</div>
+        <div class="lab-desc">Simulate and recover from a corrupted GRUB config. Single-user mode, chroot, reinstall bootloader.</div>
+      </div>
+      <div class="lab-meta"><span class="lab-time">~45 min</span><span class="module-level level-intermediate" style="font-size:10px">Intermediate</span></div>
+    </div>
+    <div class="lab-item">
+      <div class="lab-num">02</div>
+      <div class="lab-info">
+        <div class="lab-name">LVM Full Disk — Expand Without Downtime</div>
+        <div class="lab-desc">Simulate a 100% disk usage alert. Add a PV, extend VG, resize LV, grow filesystem live.</div>
+      </div>
+      <div class="lab-meta"><span class="lab-time">~30 min</span><span class="module-level level-intermediate" style="font-size:10px">Intermediate</span></div>
+    </div>
+    <div class="lab-item">
+      <div class="lab-num">03</div>
+      <div class="lab-info">
+        <div class="lab-name">Nginx Fails to Start — Port Conflict Debug</div>
+        <div class="lab-desc">Diagnose port conflict with ss/fuser, stop conflicting service, configure nginx, persist with systemd.</div>
+      </div>
+      <div class="lab-meta"><span class="lab-time">~20 min</span><span class="module-level level-beginner" style="font-size:10px">Beginner</span></div>
+    </div>
+    <div class="lab-item">
+      <div class="lab-num">04</div>
+      <div class="lab-info">
+        <div class="lab-name">Set Up SSH Hardening — No-Password Auth</div>
+        <div class="lab-desc">Key-based auth only, disable root login, change default port, configure fail2ban, test lockout.</div>
+      </div>
+      <div class="lab-meta"><span class="lab-time">~35 min</span><span class="module-level level-intermediate" style="font-size:10px">Intermediate</span></div>
+    </div>
+    <div class="lab-item">
+      <div class="lab-num">05</div>
+      <div class="lab-info">
+        <div class="lab-name">Firewall: Isolate a Compromised Web Server</div>
+        <div class="lab-desc">Use iptables to allow only port 443 inbound, block all outbound except DNS, persist rules.</div>
+      </div>
+      <div class="lab-meta"><span class="lab-time">~40 min</span><span class="module-level level-advanced" style="font-size:10px">Advanced</span></div>
+    </div>
+    <div class="lab-item">
+      <div class="lab-num">06</div>
+      <div class="lab-info">
+        <div class="lab-name">SELinux Denial — Fix Without Disabling</div>
+        <div class="lab-desc">App fails due to SELinux AVC denial. Use audit2allow, setsebool, restorecon — never setenforce 0.</div>
+      </div>
+      <div class="lab-meta"><span class="lab-time">~45 min</span><span class="module-level level-advanced" style="font-size:10px">Advanced</span></div>
+    </div>
+  </div>
+</div>
+<hr class="section-divider">
+
+<!-- ERROR ENCYCLOPEDIA -->
+<div class="section" id="errors">
+  <p class="section-label">// Error Encyclopedia</p>
+  <h2 class="section-title">Linux Error Code Encyclopedia</h2>
+  <p class="section-sub">70+ Linux errors — root cause, fix commands, and prevention. Searchable. Click any to expand.</p>
+  <div class="filter-bar">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">systemd</button>
+    <button class="filter-btn">Network</button>
+    <button class="filter-btn">Storage</button>
+    <button class="filter-btn">Permissions</button>
+    <button class="filter-btn">Boot</button>
+  </div>
+  <div class="error-grid">
+    <div class="error-item">
+      <div class="error-header">
+        <span class="error-sev sev-high"></span>
+        <span class="error-name">Job for nginx.service failed because the control process exited with error code</span>
+        <span class="error-cat">systemd</span>
+      </div>
+    </div>
+    <div class="error-item">
+      <div class="error-header">
+        <span class="error-sev sev-high"></span>
+        <span class="error-name">bind() to 0.0.0.0:80 failed (98: Address already in use)</span>
+        <span class="error-cat">Network</span>
+      </div>
+    </div>
+    <div class="error-item">
+      <div class="error-header">
+        <span class="error-sev sev-high"></span>
+        <span class="error-name">GRUB error: unknown filesystem. Entering rescue mode...</span>
+        <span class="error-cat">Boot</span>
+      </div>
+    </div>
+    <div class="error-item">
+      <div class="error-header">
+        <span class="error-sev sev-med"></span>
+        <span class="error-name med">No space left on device (ENOSPC)</span>
+        <span class="error-cat">Storage</span>
+      </div>
+    </div>
+    <div class="error-item">
+      <div class="error-header">
+        <span class="error-sev sev-med"></span>
+        <span class="error-name med">type=AVC msg=audit: denied { read } for path=... comm="nginx"</span>
+        <span class="error-cat">Permissions</span>
+      </div>
+    </div>
+    <div class="error-item">
+      <div class="error-header">
+        <span class="error-sev sev-med"></span>
+        <span class="error-name med">ssh: connect to host 192.168.1.1 port 22: Connection refused</span>
+        <span class="error-cat">Network</span>
+      </div>
+    </div>
+    <div class="error-item">
+      <div class="error-header">
+        <span class="error-sev sev-low"></span>
+        <span class="error-name low">sudo: user not in the sudoers file. This incident will be reported.</span>
+        <span class="error-cat">Permissions</span>
+      </div>
+    </div>
+    <div class="error-item">
+      <div class="error-header">
+        <span class="error-sev sev-low"></span>
+        <span class="error-name low">E: Could not get lock /var/lib/dpkg/lock — open (11: Resource temporarily unavailable)</span>
+        <span class="error-cat">Package</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>LinuxLab · linux.eknathalabs.com · Built by <a href="https://eknathalabs.com">Eknatha Reddy</a> · Platform Engineer</div>
+  <div class="footer-links">
+    <a href="https://eknathalabs.com">eknathalabs.com</a>
+    <a href="https://kubelab.eknathalabs.com">kubelab.eknathalabs.com</a>
+    <a href="https://terraform.eknathalabs.com">terraform.eknathalabs.com</a>
+    <a href="https://github.com/eknathareddyp">GitHub</a>
+  </div>
+  <div style="margin-top:8px">© 2025 Eknatha Reddy · Free forever · No ads · No signup</div>
+</footer>
+
+<script>
+  // Filter buttons
+  document.querySelectorAll('.filter-bar').forEach(bar => {
+    bar.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  });
+
+  // Domain bar animation
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.domain-bar-fill').forEach(bar => {
+          bar.style.width = bar.style.width;
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelector('.domain-grid') && observer.observe(document.querySelector('.domain-grid'));
+
+  // Quiz
+  let answered = false;
+  function answer(el, correct) {
+    if (answered) return;
+    answered = true;
+    const fb = document.getElementById('quiz-fb');
+    if (correct) {
+      el.classList.add('correct');
+      fb.style.display = 'block';
+      fb.className = 'quiz-feedback';
+      fb.innerHTML = '✓ Correct! <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">ip addr add</code> is not persistent (lost on reboot). <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">nmcli</code> writes to NetworkManager connection files in <code style="background:rgba(57,255,110,0.15);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:11px">/etc/NetworkManager/system-connections/</code> which survive reboots.';
+    } else {
+      el.classList.add('wrong');
+      document.querySelectorAll('.quiz-opt')[1].classList.add('correct');
+      fb.style.display = 'block';
+      fb.className = 'quiz-feedback wrong-fb';
+      fb.innerHTML = '✗ Not quite. This command is either non-persistent or uses a deprecated tool. The correct answer is <strong>B</strong> — nmcli writes persistent connection files that survive reboots.';
+    }
+  }
+
+  // Cheatsheet copy simulation
+  document.querySelectorAll('.cheat-row').forEach(row => {
+    row.addEventListener('click', () => {
+      const cmd = row.querySelector('.cheat-cmd').textContent;
+      const copy = row.querySelector('.cheat-copy');
+      copy.textContent = '✓ copied';
+      copy.style.color = 'var(--green)';
+      setTimeout(() => {
+        copy.textContent = '⎘ copy';
+        copy.style.color = '';
+      }, 1500);
+    });
+  });
+</script>
+</body>
+</html>
