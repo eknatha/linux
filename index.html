@@ -15,7 +15,31 @@
   --text:#e8edf5;--text2:#8b95a8;--text3:#4f5a6a;
   --mono:'Courier New',monospace;--sans:system-ui,sans-serif;
 }
-body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.6;overflow-x:hidden}
+/* LIGHT MODE */
+body.light{
+  --bg:#f4f6fa;--bg2:#ffffff;--bg3:#edf0f7;--bg4:#e2e7f0;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.15);
+  --green:#1a9e3f;--green2:#1a9e3f;--gdim:rgba(26,158,63,0.08);--gdim2:rgba(26,158,63,0.15);
+  --amber:#c47a00;--adim:rgba(196,122,0,0.1);
+  --red:#d63031;--blue:#0052cc;
+  --text:#1a1f2e;--text2:#4a5568;--text3:#9aa5b4;
+  --mono:'Courier New',monospace;--sans:system-ui,sans-serif;
+}
+body.light nav{background:rgba(244,246,250,0.97)}
+body.light .term{box-shadow:0 8px 32px rgba(0,0,0,.12)}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.6;overflow-x:hidden;transition:background .25s,color .25s}
+
+/* COMMAND OF THE DAY */
+.cotd{max-width:1100px;margin:0 auto;padding:0 1.5rem 48px}
+.cotd-inner{background:linear-gradient(135deg,var(--bg2) 0%,var(--bg3) 100%);border:1px solid var(--border2);border-radius:12px;padding:20px 24px;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center}
+.cotd-badge{font-family:var(--mono);font-size:10px;color:var(--green);background:var(--gdim2);border:1px solid rgba(57,255,110,.3);padding:3px 9px;border-radius:3px;letter-spacing:.08em;white-space:nowrap}
+.cotd-content{min-width:0}
+.cotd-cmd{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--green);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cotd-exp{font-size:12px;color:var(--text2);line-height:1.5}
+.cotd-example{font-family:var(--mono);font-size:11px;color:var(--text3);margin-top:4px}
+.cotd-btn{font-family:var(--mono);font-size:10px;padding:6px 13px;background:var(--green);color:#060a06;border:none;border-radius:4px;cursor:pointer;font-weight:700;white-space:nowrap;transition:opacity .15s}
+.cotd-btn:hover{opacity:.85}
+@media(max-width:600px){.cotd-inner{grid-template-columns:1fr;gap:10px}}
 
 /* NAV */
 nav{position:sticky;top:0;z-index:200;background:rgba(10,12,15,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.5rem;height:50px;gap:0}
@@ -272,6 +296,7 @@ footer a{color:var(--green);text-decoration:none}
     <li><a href="#labs" onclick="navClick(event,this)">⚗ Labs</a></li>
     <li><a href="#errors" onclick="navClick(event,this)">🔴 Errors</a></li>
   </ul>
+  <button id="theme-btn" onclick="toggleTheme()" title="Toggle light/dark mode" style="margin-left:12px;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);font-size:16px;width:34px;height:34px;border-radius:7px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s">🌙</button>
 </nav>
 
 <!-- HERO -->
@@ -326,6 +351,20 @@ footer a{color:var(--green);text-decoration:none}
     <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Labs</div></div>
     <div class="stat-div"></div>
     <div class="stat-item"><div class="stat-num">LFCS</div><div class="stat-label">Exam Ready</div></div>
+  </div>
+</div>
+<hr class="divider">
+
+<!-- COMMAND OF THE DAY -->
+<div class="cotd" id="cotd-section">
+  <div class="cotd-inner">
+    <span class="cotd-badge">⚡ CMD OF THE DAY</span>
+    <div class="cotd-content">
+      <div class="cotd-cmd" id="cotd-cmd">Loading...</div>
+      <div class="cotd-exp" id="cotd-exp"></div>
+      <div class="cotd-example" id="cotd-ex"></div>
+    </div>
+    <button class="cotd-btn" onclick="copyIt(document.getElementById('cotd-cmd').textContent, document.getElementById('cotd-copy-ref'))">⎘ Copy<span id="cotd-copy-ref" class="cheat-copy" style="display:none"></span></button>
   </div>
 </div>
 <hr class="divider">
@@ -390,6 +429,8 @@ footer a{color:var(--green);text-decoration:none}
     <div class="tool-card" onclick="openTool('lvmgen')"><div class="tool-icon-row"><div class="tool-icon">💾</div><span class="tool-badge">GENERATOR</span></div><div class="tool-name">LVM Command Generator</div><div class="tool-desc">Enter disk/VG/LV names → get the full pvcreate → mkfs → mount script.</div></div>
     <div class="tool-card" onclick="openTool('signals')"><div class="tool-icon-row"><div class="tool-icon">📡</div><span class="tool-badge">REFERENCE</span></div><div class="tool-name">Signals Reference</div><div class="tool-desc">All 31 Linux signals — number, name, action, use case. Click to copy kill command.</div></div>
     <div class="tool-card" onclick="openTool('regex')"><div class="tool-icon-row"><div class="tool-icon">🔍</div><span class="tool-badge">TESTER</span></div><div class="tool-name">grep / Regex Tester</div><div class="tool-desc">Paste text + pattern → matches highlighted live. Toggle -i -E -v -n flags.</div></div>
+    <div class="tool-card" onclick="openTool('subnet')"><div class="tool-icon-row"><div class="tool-icon">🧮</div><span class="tool-badge">CALCULATOR</span></div><div class="tool-name">Subnet Calculator</div><div class="tool-desc">Enter IP + CIDR → network address, broadcast, host range, usable hosts, wildcard mask.</div></div>
+    <div class="tool-card" onclick="openTool('loganalyzer')"><div class="tool-icon-row"><div class="tool-icon">📋</div><span class="tool-badge">ANALYZER</span></div><div class="tool-name">Log Analyzer</div><div class="tool-desc">Paste any log output → highlights ERROR/WARN/CRIT, counts by severity, extracts IPs &amp; timestamps.</div></div>
   </div>
 </div>
 <hr class="divider">
@@ -539,7 +580,7 @@ sudo dpkg --configure -a</div><div class="err-sec-lbl">Prevention</div><p>Never 
 </div>
 
 <footer>
-  <div>LinuxLab · linux.eknathalabs.com · Built by <a href="https://eknathalabs.com">Eknatha Reddy</a> ·  Engineer</div>
+  <div>LinuxLab · linux.eknathalabs.com · Built by <a href="https://eknathalabs.com">Eknatha Reddy</a> · Platform Engineer</div>
   <div class="foot-links">
     <a href="https://eknathalabs.com">eknathalabs.com</a>
     <a href="https://github.com/eknathareddyp">GitHub</a>
@@ -1043,6 +1084,39 @@ regex: {
   init: function() { rxTest(); }
 }
 
+,
+
+// ── 9. SUBNET CALCULATOR ────────────────────────────────────────────────────
+subnet: {
+  title: '🧮 Subnet Calculator',
+  html: '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">' +
+    '<div><label class="t-label">IP Address</label><input id="sn-ip" class="t-input" placeholder="192.168.1.100" oninput="snCalc()"></div>' +
+    '<div><label class="t-label">CIDR Prefix (0–32)</label><input id="sn-cidr" class="t-input" type="number" min="0" max="32" value="24" oninput="snCalc()"></div>' +
+  '</div>' +
+  '<div class="t-row" style="margin-bottom:14px">' +
+    ['/8 — Class A','/16 — Class B','/24 — Class C','/25 — Half C','/26 — Quarter C','/27 — 30 hosts','/28 — 14 hosts','/30 — Point-to-point','/32 — Host'].map(function(p){
+      var c=p.split(' ')[0].slice(1);
+      return '<button class="t-preset" onclick="snPreset('+c+')">'+p+'</button>';
+    }).join('') +
+  '</div>' +
+  '<div id="sn-out" style="display:grid;grid-template-columns:1fr 1fr;gap:8px"></div>' +
+  '<pre id="sn-cmds" style="background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:11px 13px;font-family:var(--mono);font-size:12px;color:var(--green);white-space:pre;overflow-x:auto;margin-top:10px;line-height:1.9"></pre>',
+  init: function() { snCalc(); }
+},
+
+// ── 10. LOG ANALYZER ────────────────────────────────────────────────────────
+loganalyzer: {
+  title: '📋 Log Analyzer',
+  html: '<label class="t-label">Paste Log Output</label>' +
+    '<textarea id="la-txt" class="t-input" style="height:150px;resize:vertical;line-height:1.6;font-family:var(--mono);font-size:12px" oninput="laAnalyze()" placeholder="Paste any log here — syslog, journalctl, nginx, kernel dmesg, app logs…&#10;&#10;Example:&#10;Aug 12 09:41:22 web01 nginx[1234]: [error] bind() to 0.0.0.0:80 failed&#10;Aug 12 09:41:23 web01 kernel: Out of memory: Kill process 5678&#10;Aug 12 09:41:24 web01 sshd[999]: Accepted publickey for deploy&#10;Aug 12 09:41:25 web01 nginx[1234]: [warn] 1024 worker_connections are not enough"></textarea>' +
+    '<div id="la-stats" style="display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:12px 0"></div>' +
+    '<div class="t-section-lbl" style="margin-bottom:6px">Highlighted Output</div>' +
+    '<div id="la-out" style="background:var(--bg4);border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-family:var(--mono);font-size:12px;line-height:1.9;max-height:260px;overflow-y:auto;white-space:pre-wrap;color:var(--text2)">Paste log output above</div>' +
+    '<div class="t-section" style="margin-top:12px"><div class="t-section-lbl">Extracted IPs</div><div id="la-ips" style="font-family:var(--mono);font-size:12px;color:var(--text2);line-height:2;min-height:24px"></div></div>' +
+    '<div class="t-section"><div class="t-section-lbl">Top Repeated Lines (possible loop/spam)</div><div id="la-top" style="font-family:var(--mono);font-size:12px;color:var(--text2);line-height:2;min-height:24px"></div></div>',
+  init: function() { laAnalyze(); }
+}
+
 }; // end TOOLS
 
 // ── ERROR TOOL FUNCTIONS ─────────────────────────────────────────────────────
@@ -1307,6 +1381,252 @@ function rxTest() {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') { closeTool(); closeMod(); }
 });
+
+// ── DARK / LIGHT MODE ────────────────────────────────────────────────────────
+function toggleTheme() {
+  var isLight = document.body.classList.toggle('light');
+  document.getElementById('theme-btn').textContent = isLight ? '🌞' : '🌙';
+  localStorage.setItem('linuxlab-theme', isLight ? 'light' : 'dark');
+}
+(function() {
+  var saved = localStorage.getItem('linuxlab-theme');
+  if (saved === 'light') {
+    document.body.classList.add('light');
+    var btn = document.getElementById('theme-btn');
+    if (btn) btn.textContent = '🌞';
+  }
+})();
+
+// ── COMMAND OF THE DAY ───────────────────────────────────────────────────────
+var COTD_DB = [
+  {cmd:'find / -perm /4000 -type f 2>/dev/null', exp:'Find all SUID binaries on the system — essential for security audits.', ex:'# Example output: /usr/bin/passwd, /usr/bin/sudo'},
+  {cmd:'ss -tlnp', exp:'List all TCP listening sockets with the owning process — replaces netstat.', ex:'# LISTEN 0 128 0.0.0.0:22  users:(("sshd",pid=999))'},
+  {cmd:'journalctl -p err -b', exp:'Show all error-level (and above) log entries from the current boot only.', ex:'# -p 0=emerg 1=alert 2=crit 3=err 4=warning 5=notice'},
+  {cmd:'lsof -i :80', exp:'List all processes using port 80 — works across all socket types.', ex:'# nginx  1234 www-data  6u  IPv4  TCP *:http (LISTEN)'},
+  {cmd:'strace -p PID -e trace=network', exp:'Trace network system calls of a running process — powerful for debugging.', ex:'# Shows connect(), bind(), send(), recv() calls live'},
+  {cmd:'awk '{print $1}' /var/log/nginx/access.log | sort | uniq -c | sort -rn | head -10', exp:'Find top 10 IP addresses hitting your nginx server.', ex:'# 1523 192.168.1.1\n  432 10.0.0.5'},
+  {cmd:'systemctl list-units --state=failed', exp:'List all failed systemd units at a glance.', ex:'# UNIT                    LOAD   ACTIVE SUB    DESCRIPTION'},
+  {cmd:'rsync -avz --progress src/ user@host:/dst/', exp:'Sync files with verbose output and progress — preserves permissions.', ex:'# sent 1.23G bytes  received 35 bytes  12.3M bytes/sec'},
+  {cmd:'du -sh /* 2>/dev/null | sort -rh | head -15', exp:'Find the largest directories at root level — first step in disk triage.', ex:'# 4.2G /var\n 1.8G /usr\n 512M /opt'},
+  {cmd:'ps aux --sort=-%mem | head -10', exp:'Show top 10 processes by memory usage — quick OOM triage.', ex:'# USER PID %CPU %MEM VSZ RSS  COMMAND'},
+  {cmd:'cat /proc/loadavg', exp:'Show system load averages for 1, 5, 15 minutes + running/total processes.', ex:'# 0.52 0.48 0.42 2/312 18943'},
+  {cmd:'ip -s link show eth0', exp:'Show interface statistics including TX/RX bytes and error counts.', ex:'# RX: bytes=123456789  errors=0  dropped=2'},
+  {cmd:'sed -i.bak 's/old/new/g' file.txt', exp:'In-place replacement with automatic backup (.bak) — never edit without backup.', ex:'# Creates file.txt.bak before modifying'},
+  {cmd:'openssl x509 -in cert.pem -noout -dates', exp:'Check SSL certificate expiry dates — run this before renewals.', ex:'# notBefore=Jan  1 00:00:00 2024 GMT\n# notAfter=Dec 31 23:59:59 2024 GMT'},
+  {cmd:'dmesg | tail -50 | grep -iE "error|fail|warn|oom"', exp:'Scan recent kernel messages for errors — first stop after a system issue.', ex:'# [12345.678] EXT4-fs error: invalid inode'},
+  {cmd:'grep -r "password" /etc/ --include="*.conf" 2>/dev/null', exp:'Scan config files for hardcoded passwords — basic security hygiene.', ex:'# /etc/app/config.conf:password=mysecret123'},
+  {cmd:'netstat -rn', exp:'Display the kernel routing table — diagnose routing issues.', ex:'# 0.0.0.0  192.168.1.1  0.0.0.0  UG 100 eth0'},
+  {cmd:'tar -czf - /var/data | ssh user@backup "cat > /backup/data-$(date +%Y%m%d).tar.gz"', exp:'Stream a tar archive directly to a remote backup server — no local temp file.', ex:'# Efficient for large directories'},
+  {cmd:'iptables -L -n -v --line-numbers', exp:'List all iptables rules with packet counts, byte counts, and line numbers.', ex:'# Chain INPUT (policy ACCEPT 1234 packets)'},
+  {cmd:'ausearch -m avc -ts recent | audit2why', exp:'Find recent SELinux denials and explain why they were blocked.', ex:'# Was caused by: Missing type enforcement (TE) allow rule'},
+  {cmd:'useradd -m -s /bin/bash -G sudo,docker devuser && passwd devuser', exp:'Create a developer user with home dir, bash shell, and relevant group memberships.', ex:'# -m creates /home/devuser  -s sets shell  -G adds groups'},
+  {cmd:'lvextend -L +20G /dev/vg0/data && resize2fs /dev/vg0/data', exp:'Extend an LVM logical volume and grow the ext4 filesystem in one step.', ex:'# Works online — no unmounting needed for ext4'},
+  {cmd:'curl -o /dev/null -s -w "%{http_code} %{time_total}s\n" https://example.com', exp:'Test HTTP response code and total request time — quick health check.', ex:'# 200 0.234s'},
+  {cmd:'watch -n 2 "ss -s"', exp:'Monitor socket statistics live every 2 seconds — useful during load testing.', ex:'# Total: 142 (kernel 165)\nTCP: 38 (estab 12, closed 20)'},
+  {cmd:'find /var/log -name "*.log" -mtime +30 -exec gzip {} \;', exp:'Compress log files older than 30 days — basic log hygiene automation.', ex:'# Saves disk space without deleting logs'},
+  {cmd:'nmcli con mod eth0 ipv4.method manual ipv4.addresses 10.0.0.5/24 ipv4.gateway 10.0.0.1', exp:'Set a persistent static IP via NetworkManager — survives reboots.', ex:'# Follow with: nmcli con up eth0'},
+  {cmd:'timedatectl set-timezone Asia/Kolkata', exp:'Set the system timezone — critical for log correlation across servers.', ex:'# Check: timedatectl status'},
+  {cmd:'journalctl --disk-usage && journalctl --vacuum-size=500M', exp:'Check journal disk usage then trim it to 500MB — quick log cleanup.', ex:'# Archived and active journals take up 2.3G'},
+  {cmd:'chmod -R u=rwX,g=rX,o= /var/www/html', exp:'Set web directory permissions correctly — X sets execute only on directories.', ex:'# Capital X = execute only if dir or already executable'},
+  {cmd:'ss -o state established '( dport = :ssh or sport = :ssh )'', exp:'Show all established SSH connections — useful for audit and security checks.', ex:'# Netid  State  Recv-Q  Send-Q  Local Address:Port  Peer Address'},
+];
+(function() {
+  var today = new Date();
+  var idx = (today.getFullYear()*10000 + (today.getMonth()+1)*100 + today.getDate()) % COTD_DB.length;
+  var cmd = COTD_DB[idx];
+  var cmdEl = document.getElementById('cotd-cmd');
+  var expEl = document.getElementById('cotd-exp');
+  var exEl  = document.getElementById('cotd-ex');
+  if (cmdEl) cmdEl.textContent = cmd.cmd;
+  if (expEl) expEl.textContent = cmd.exp;
+  if (exEl)  exEl.textContent  = cmd.ex;
+})();
+
+// ── SUBNET CALCULATOR ────────────────────────────────────────────────────────
+function snCalc() {
+  var ipStr  = (document.getElementById('sn-ip')   || {}).value || '192.168.1.100';
+  var cidrStr= (document.getElementById('sn-cidr') || {}).value || '24';
+  var cidr   = parseInt(cidrStr);
+  var out    = document.getElementById('sn-out');
+  var cmds   = document.getElementById('sn-cmds');
+  if (!out || !cmds) return;
+
+  // Validate IP
+  var parts = ipStr.trim().split('.');
+  if (parts.length !== 4 || parts.some(function(p){return isNaN(p)||p===''||parseInt(p)<0||parseInt(p)>255;})) {
+    out.innerHTML = '<div style="color:var(--red);font-family:var(--mono);font-size:12px;grid-column:1/-1">Invalid IP address</div>';
+    cmds.textContent = '';
+    return;
+  }
+  if (isNaN(cidr) || cidr < 0 || cidr > 32) {
+    out.innerHTML = '<div style="color:var(--red);font-family:var(--mono);font-size:12px;grid-column:1/-1">CIDR must be 0–32</div>';
+    cmds.textContent = '';
+    return;
+  }
+
+  var ip32 = parts.reduce(function(acc,p){return (acc<<8)|parseInt(p);}, 0) >>> 0;
+  var mask32 = cidr === 0 ? 0 : (0xFFFFFFFF << (32 - cidr)) >>> 0;
+  var net32  = (ip32 & mask32) >>> 0;
+  var bcast32= (net32 | (~mask32 >>> 0)) >>> 0;
+  var first32= cidr < 31 ? (net32 + 1) >>> 0 : net32;
+  var last32 = cidr < 31 ? (bcast32 - 1) >>> 0 : bcast32;
+  var hosts  = cidr >= 31 ? Math.pow(2, 32-cidr) : Math.max(0, Math.pow(2, 32-cidr) - 2);
+  var wild32 = (~mask32) >>> 0;
+
+  function to4(n) {
+    n = n >>> 0;
+    return [(n>>>24)&0xFF,(n>>>16)&0xFF,(n>>>8)&0xFF,n&0xFF].join('.');
+  }
+
+  var rows = [
+    ['IP Address', ipStr.trim()],
+    ['Network Address', to4(net32)],
+    ['Subnet Mask', to4(mask32)],
+    ['Wildcard Mask', to4(wild32)],
+    ['Broadcast Address', to4(bcast32)],
+    ['First Usable Host', cidr < 31 ? to4(first32) : 'N/A (p2p)'],
+    ['Last Usable Host',  cidr < 31 ? to4(last32)  : 'N/A (p2p)'],
+    ['Usable Hosts', hosts.toLocaleString()],
+    ['CIDR Notation', to4(net32)+'/'+cidr],
+    ['Total Addresses', Math.pow(2, 32-cidr).toLocaleString()],
+  ];
+
+  out.innerHTML = rows.map(function(r) {
+    return '<div style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:10px 12px">' +
+      '<div style="font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">'+r[0]+'</div>' +
+      '<div style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--green)">'+r[1]+'</div>' +
+      '</div>';
+  }).join('');
+
+  cmds.textContent =
+    '# Linux commands for this subnet
+' +
+    'ip addr add '+ipStr.trim()+'/'+cidr+' dev eth0
+' +
+    'ip route add '+to4(net32)+'/'+cidr+' dev eth0
+
+' +
+    '# Scan the subnet
+nmap -sn '+to4(net32)+'/'+cidr+'
+
+' +
+    '# iptables — allow traffic from this subnet
+iptables -A INPUT -s '+to4(net32)+'/'+cidr+' -j ACCEPT
+
+' +
+    '# /etc/fstab network mount (NFS)
+# '+to4(net32)+' covers '+hosts.toLocaleString()+' hosts ('+to4(first32)+' — '+to4(last32)+')';
+}
+
+function snPreset(cidr) {
+  var el = document.getElementById('sn-cidr');
+  if (el) { el.value = cidr; snCalc(); }
+}
+
+// ── LOG ANALYZER ─────────────────────────────────────────────────────────────
+function laAnalyze() {
+  var txt = (document.getElementById('la-txt') || {}).value || '';
+  var outEl   = document.getElementById('la-out');
+  var statsEl = document.getElementById('la-stats');
+  var ipsEl   = document.getElementById('la-ips');
+  var topEl   = document.getElementById('la-top');
+  if (!outEl) return;
+
+  if (!txt.trim()) {
+    outEl.innerHTML = '<span style="color:var(--text3)">Paste log output above</span>';
+    if (statsEl) statsEl.innerHTML = '';
+    if (ipsEl) ipsEl.innerHTML = '';
+    if (topEl) topEl.innerHTML = '';
+    return;
+  }
+
+  var lines = txt.split('
+');
+  var counts = {CRIT:0, ERROR:0, WARN:0, INFO:0, DEBUG:0, OTHER:0};
+  var ipSet = {};
+  var lineFreq = {};
+
+  // Classify each line
+  var classified = lines.map(function(line) {
+    var lo = line.toLowerCase();
+    var key = line.trim().replace(/\d{4}-\d{2}-\d{2}T[\d:\.Z+\-]+/g,'').replace(/\d+/g,'#').trim();
+    lineFreq[key] = (lineFreq[key]||0) + 1;
+
+    // Extract IPs
+    var ipMatches = line.match(/\b(?:\d{1,3}\.){3}\d{1,3}\b/g);
+    if (ipMatches) ipMatches.forEach(function(ip){
+      // Filter out version numbers like 1.0.0.1 style that are too small
+      var valid = ip.split('.').every(function(p){return parseInt(p)<=255;});
+      if (valid) ipSet[ip] = (ipSet[ip]||0)+1;
+    });
+
+    var level, color, bg;
+    if (/critical|crit\b|panic|emerg|fatal/.test(lo)) {
+      level='CRIT'; color='#ff4757'; bg='rgba(255,71,87,.12)'; counts.CRIT++;
+    } else if (/\berror\b|err\b|failed|failure|exception|traceback|oom|killed/.test(lo)) {
+      level='ERROR'; color='#ff7675'; bg='rgba(255,118,117,.08)'; counts.ERROR++;
+    } else if (/\bwarn\b|warning\b|deprecated|slow/.test(lo)) {
+      level='WARN'; color='#f5a623'; bg='rgba(245,166,35,.08)'; counts.WARN++;
+    } else if (/\binfo\b|notice\b|start|stop|reload|accept|connect|listen/.test(lo)) {
+      level='INFO'; color='var(--green2)'; bg='transparent'; counts.INFO++;
+    } else if (/\bdebug\b|trace\b|verbose/.test(lo)) {
+      level='DEBUG'; color='var(--text3)'; bg='transparent'; counts.DEBUG++;
+    } else {
+      level=''; color='var(--text2)'; bg='transparent'; counts.OTHER++;
+    }
+
+    return {line:line, level:level, color:color, bg:bg};
+  });
+
+  // Stats bar
+  var total = lines.filter(function(l){return l.trim();}).length;
+  var statItems = [
+    {label:'Total',val:total,color:'var(--text2)'},
+    {label:'CRIT',val:counts.CRIT,color:'#ff4757'},
+    {label:'ERROR',val:counts.ERROR,color:'#ff7675'},
+    {label:'WARN',val:counts.WARN,color:'var(--amber)'},
+    {label:'INFO',val:counts.INFO,color:'var(--green2)'},
+  ];
+  if (statsEl) {
+    statsEl.innerHTML = statItems.map(function(s) {
+      return '<div style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:9px 10px;text-align:center">' +
+        '<div style="font-family:var(--mono);font-size:1.3rem;font-weight:700;color:'+s.color+';line-height:1">'+s.val+'</div>' +
+        '<div style="font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;margin-top:3px">'+s.label+'</div>' +
+        '</div>';
+    }).join('');
+  }
+
+  // Highlighted output
+  outEl.innerHTML = classified.filter(function(c){return c.line.trim();}).map(function(c) {
+    return '<div style="padding:1px 4px;border-radius:3px;background:'+c.bg+'">'+
+      (c.level?'<span style="font-family:var(--mono);font-size:10px;color:'+c.color+';font-weight:700;margin-right:6px;min-width:38px;display:inline-block">'+c.level+'</span>':'<span style="min-width:44px;display:inline-block"></span>')+
+      '<span style="color:'+c.color+'">'+escHtml(c.line)+'</span>'+
+      '</div>';
+  }).join('');
+
+  // Extracted IPs
+  var ipList = Object.keys(ipSet).sort(function(a,b){return ipSet[b]-ipSet[a];}).slice(0,20);
+  if (ipsEl) {
+    ipsEl.innerHTML = ipList.length
+      ? ipList.map(function(ip){
+          return '<span style="display:inline-block;background:var(--bg4);border:1px solid var(--border2);border-radius:4px;padding:2px 9px;margin:2px;cursor:pointer;color:var(--green);font-size:12px" onclick="clipCopy(''+ip+'')" title="Click to copy">'+ip+' <span style="color:var(--text3)">('+ipSet[ip]+'×)</span></span>';
+        }).join('')
+      : '<span style="color:var(--text3)">No IP addresses found</span>';
+  }
+
+  // Top repeated lines
+  var topLines = Object.keys(lineFreq)
+    .filter(function(k){return lineFreq[k]>1 && k.length > 5;})
+    .sort(function(a,b){return lineFreq[b]-lineFreq[a];})
+    .slice(0,5);
+  if (topEl) {
+    topEl.innerHTML = topLines.length
+      ? topLines.map(function(k){
+          return '<div style="margin-bottom:4px"><span style="font-family:var(--mono);font-size:11px;color:var(--amber);margin-right:8px">×'+lineFreq[k]+'</span><span style="font-size:12px;color:var(--text2)">'+escHtml(k.slice(0,100))+'</span></div>';
+        }).join('')
+      : '<span style="color:var(--text3)">No repeated lines detected</span>';
+  }
+}
 </script>
 </body>
 </html>
