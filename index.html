@@ -291,7 +291,7 @@
   <div>
     <p class="hero-eyebrow">// eknathalabs.com · linux lab</p>
     <h1>Master Linux.<br><span>Admin with Confidence.</span></h1>
-    <p class="hero-desc">A structured, hands-on Linux learning lab — LFCS exam domains, AI-powered tools, 250+ commands, 100-question quiz, and full lab walkthroughs. Built by a Engineer, for Everyone.</p>
+    <p class="hero-desc">A structured, hands-on Linux learning lab — LFCS exam domains, AI-powered tools, 250+ commands, 100-question quiz, and full lab walkthroughs. Built by a Platform Engineer, for Platform Engineers.</p>
     <div class="hero-ctas">
       <a class="btn-primary" href="#modules">▶ Start Learning</a>
       <a class="btn-ghost" href="#cheatsheet">⌨ Cheatsheet</a>
@@ -488,55 +488,54 @@
 </div>
 <hr class="section-divider">
 
-<!-- AI TOOLS -->
+<!-- TOOLS -->
 <div class="section" id="tools">
-  <p class="section-label">// Interactive AI Tools</p>
-  <h2 class="section-title">Built-in Linux Tools ✦ AI Powered</h2>
-  <p class="section-sub">Paste errors, describe tasks, generate configs — without leaving the page.</p>
+  <p class="section-label">// Interactive Tools</p>
+  <h2 class="section-title">Built-in Linux Tools</h2>
+  <p class="section-sub">8 fully offline interactive tools — no API, no signup, works in your browser.</p>
   <div class="tools-grid">
-    <div class="tool-card" data-tool="error-explainer" onclick="openTool(this)">
-      <div class="tool-icon-row"><div class="tool-icon">🔴</div><span class="tool-ai-badge">✦ AI</span></div>
-      <div class="tool-name">Error Explainer</div>
-      <div class="tool-desc">Paste any Linux error or kernel panic. Get root cause, fix commands, and how to prevent it.</div>
+    <div class="tool-card" onclick="openTool('error-explainer')">
+      <div class="tool-icon-row"><div class="tool-icon">🔴</div><span class="tool-ai-badge">INTERACTIVE</span></div>
+      <div class="tool-name">Error Lookup</div>
+      <div class="tool-desc">Search 60+ common Linux errors. Get root cause, fix commands, and prevention tips instantly.</div>
     </div>
-    <div class="tool-card" data-tool="systemd-gen" onclick="openTool(this)">
-      <div class="tool-icon-row"><div class="tool-icon">⚙️</div><span class="tool-ai-badge">✦ AI</span></div>
-      <div class="tool-name">systemd Unit Generator</div>
-      <div class="tool-desc">Describe a service in plain English → get a production-ready .service unit file with explanations.</div>
+    <div class="tool-card" onclick="openTool('systemd-gen')">
+      <div class="tool-icon-row"><div class="tool-icon">⚙️</div><span class="tool-ai-badge">GENERATOR</span></div>
+      <div class="tool-name">systemd Unit Builder</div>
+      <div class="tool-desc">Fill in the form fields and get a ready-to-use .service unit file — copy and deploy.</div>
     </div>
-    <div class="tool-card" data-tool="bash-explainer" onclick="openTool(this)">
-      <div class="tool-icon-row"><div class="tool-icon">📋</div><span class="tool-ai-badge">✦ AI</span></div>
-      <div class="tool-name">Bash Script Explainer</div>
-      <div class="tool-desc">Paste any shell script. Get a line-by-line breakdown, potential bugs, and safer alternatives.</div>
+    <div class="tool-card" onclick="openTool('perm-calc')">
+      <div class="tool-icon-row"><div class="tool-icon">🔐</div><span class="tool-ai-badge">CALCULATOR</span></div>
+      <div class="tool-name">Permission Calculator</div>
+      <div class="tool-desc">Click to set rwx bits for user/group/other. See chmod octal + symbolic output live.</div>
     </div>
-    <div class="tool-card" data-tool="net-troubleshoot" onclick="openTool(this)">
-      <div class="tool-icon-row"><div class="tool-icon">🌐</div><span class="tool-ai-badge">✦ AI</span></div>
-      <div class="tool-name">Network Troubleshooter</div>
-      <div class="tool-desc">Describe your networking issue. Get a step-by-step debug checklist with exact commands to run.</div>
-    </div>
-    <div class="tool-card" data-tool="iptables-builder" onclick="openTool(this)">
-      <div class="tool-icon-row"><div class="tool-icon">🛡️</div><span class="tool-ai-badge">✦ AI</span></div>
-      <div class="tool-name">iptables Rule Builder</div>
-      <div class="tool-desc">Describe your firewall requirements → get working iptables/nftables rules with explanations.</div>
-    </div>
-    <div class="tool-card" data-tool="lvm-planner" onclick="openTool(this)">
-      <div class="tool-icon-row"><div class="tool-icon">💾</div><span class="tool-ai-badge">✦ AI</span></div>
-      <div class="tool-name">LVM Planner</div>
-      <div class="tool-desc">Describe your storage layout → get full LVM commands: pvcreate, vgcreate, lvcreate, resize.</div>
-    </div>
-    <div class="tool-card" data-tool="perm-debugger" onclick="openTool(this)">
-      <div class="tool-icon-row"><div class="tool-icon">🔐</div><span class="tool-ai-badge">✦ AI</span></div>
-      <div class="tool-name">Permission Debugger</div>
-      <div class="tool-desc">Paste a "Permission denied" error + context. Get the exact chmod/chown/ACL fix needed.</div>
-    </div>
-    <div class="tool-card" data-tool="cron-builder" onclick="openTool(this)">
-      <div class="tool-icon-row"><div class="tool-icon">🕐</div><span class="tool-ai-badge">✦ AI</span></div>
+    <div class="tool-card" onclick="openTool('cron-builder')">
+      <div class="tool-icon-row"><div class="tool-icon">🕐</div><span class="tool-ai-badge">BUILDER</span></div>
       <div class="tool-name">Cron Expression Builder</div>
-      <div class="tool-desc">Describe your schedule in English → crontab expression. Paste expressions to get explanations.</div>
+      <div class="tool-desc">Build cron expressions visually. See next 8 run times, plain-English description, and systemd timer equivalent.</div>
+    </div>
+    <div class="tool-card" onclick="openTool('port-ref')">
+      <div class="tool-icon-row"><div class="tool-icon">🌐</div><span class="tool-ai-badge">REFERENCE</span></div>
+      <div class="tool-name">Port & Protocol Reference</div>
+      <div class="tool-desc">Search 80+ well-known ports. Filter by service or number. Get the ss/iptables command ready to copy.</div>
+    </div>
+    <div class="tool-card" onclick="openTool('lvm-calc')">
+      <div class="tool-icon-row"><div class="tool-icon">💾</div><span class="tool-ai-badge">CALCULATOR</span></div>
+      <div class="tool-name">LVM Command Generator</div>
+      <div class="tool-desc">Enter disk, VG and LV names + sizes. Get the exact pvcreate → mkfs → mount commands to run.</div>
+    </div>
+    <div class="tool-card" onclick="openTool('signal-ref')">
+      <div class="tool-icon-row"><div class="tool-icon">📡</div><span class="tool-ai-badge">REFERENCE</span></div>
+      <div class="tool-name">Linux Signals Reference</div>
+      <div class="tool-desc">All 31 Linux signals — number, name, default action, and when to use each. Searchable.</div>
+    </div>
+    <div class="tool-card" onclick="openTool('regex-tester')">
+      <div class="tool-icon-row"><div class="tool-icon">🔍</div><span class="tool-ai-badge">TESTER</span></div>
+      <div class="tool-name">grep / Regex Tester</div>
+      <div class="tool-desc">Paste sample text, type a pattern. See matches highlighted live. Toggle -E, -i, -v flags.</div>
     </div>
   </div>
 </div>
-<hr class="section-divider">
 
 <!-- CHEATSHEET -->
 <div class="section" id="cheatsheet">
@@ -886,26 +885,14 @@
   <div style="margin-top:8px">© 2025 Eknatha Reddy · Free forever · No ads · No signup</div>
 </footer>
 
-<!-- AI TOOL MODAL -->
+<!-- TOOL MODAL -->
 <div class="modal-overlay" id="tool-modal" onclick="closeModalOutside(event)">
-  <div class="modal">
+  <div class="modal" id="tool-modal-inner">
     <div class="modal-header">
       <div class="modal-title" id="modal-title-text">Tool</div>
-      <button class="modal-close" onclick="closeModal()">✕</button>
+      <button class="modal-close" onclick="closeModal()">&#10005;</button>
     </div>
-    <div class="modal-body">
-      <div class="modal-input-wrap">
-        <label class="modal-label" id="modal-input-label">Input</label>
-        <textarea class="modal-textarea" id="modal-input" rows="4" placeholder=""></textarea>
-      </div>
-      <button class="modal-run-btn" id="modal-run-btn" onclick="runTool()">
-        <span id="modal-btn-label">▶ Run</span>
-      </button>
-      <div class="modal-output" id="modal-output">
-        <span class="out-label">AI Response</span>
-        <div id="modal-output-text"></div>
-      </div>
-    </div>
+    <div class="modal-body" id="tool-modal-body"></div>
   </div>
 </div>
 
@@ -1407,97 +1394,17 @@ function restartQuiz() {
 renderQuestion();
 
 // ──────────────────────────────────────────────
-// AI TOOL MODAL
+// TOOL MODAL ENGINE
 // ──────────────────────────────────────────────
-const TOOL_CONFIG = {
-  'error-explainer': { title: '🔴 Error Explainer', label: 'Paste your Linux error or log output', placeholder: 'e.g. Failed to start nginx.service: Unit not found\nor paste a full journalctl output...' },
-  'systemd-gen': { title: '⚙️ systemd Unit Generator', label: 'Describe the service in plain English', placeholder: 'e.g. A Node.js app at /opt/myapp/index.js running as user "nodeapp" on port 3000, restart on failure...' },
-  'bash-explainer': { title: '📋 Bash Script Explainer', label: 'Paste your shell script', placeholder: '#!/bin/bash\n...' },
-  'net-troubleshoot': { title: '🌐 Network Troubleshooter', label: 'Describe your networking issue', placeholder: 'e.g. I cannot SSH to my server. The server is up. ping works but ssh gives "Connection refused"...' },
-  'iptables-builder': { title: '🛡️ iptables Rule Builder', label: 'Describe your firewall requirements', placeholder: 'e.g. Allow port 80 and 443 from any IP. Block all outbound except port 443 and DNS. Log dropped packets...' },
-  'lvm-planner': { title: '💾 LVM Planner', label: 'Describe your storage layout', placeholder: 'e.g. I have /dev/sdb (500GB) and /dev/sdc (500GB). I need a 200GB volume for databases and 600GB for backups...' },
-  'perm-debugger': { title: '🔐 Permission Debugger', label: 'Paste the "Permission denied" error + context', placeholder: 'e.g. nginx: [warn] could not build optimal types_hash\nopendir() "/var/www/html/app" failed (13: Permission denied)\n\nls -la /var/www/html/app shows drwxr-x--- root www-data ...' },
-  'cron-builder': { title: '🕐 Cron Expression Builder', label: 'Describe your schedule or paste a cron expression', placeholder: 'e.g. "Run every Monday at 3:30am" or paste "0 3 * * 1" to explain it...' },
-};
 
-const TOOL_PROMPTS = {
-  'error-explainer': (input) => `You are a senior Linux sysadmin. Analyze this Linux error and respond in this exact format:\n\n## Root Cause\n[1-2 sentences explaining what caused this error]\n\n## Fix Commands\n\`\`\`bash\n[exact commands to fix the issue]\n\`\`\`\n\n## Prevention\n[1-2 sentences on how to prevent this in future]\n\nError to analyze:\n${input}`,
-  'systemd-gen': (input) => `You are a Linux sysadmin expert. Generate a production-ready systemd .service unit file based on this description. Include inline comments explaining each directive. After the unit file, add a brief "Key Points" section explaining the important choices made.\n\nService description:\n${input}`,
-  'bash-explainer': (input) => `You are a bash scripting expert. Analyze this shell script and provide:\n1. A brief summary of what it does\n2. Line-by-line explanation of key/non-obvious parts\n3. Any potential bugs or improvements\n4. Security concerns if any\n\nScript:\n${input}`,
-  'net-troubleshoot': (input) => `You are a senior Linux network engineer. Given this networking issue, provide a step-by-step debug checklist with exact commands to run at each step. Format as numbered steps with code blocks for commands.\n\nIssue: ${input}`,
-  'iptables-builder': (input) => `You are a Linux firewall expert. Generate working iptables rules for these requirements. Include:\n1. The iptables commands with inline comments\n2. How to persist the rules\n3. A brief explanation of what each rule does\n\nRequirements: ${input}`,
-  'lvm-planner': (input) => `You are an LVM storage expert. Generate the complete LVM commands for this storage layout. Include pvcreate, vgcreate, lvcreate, mkfs, and mount/fstab commands. Add inline comments. At the end, show how to verify the setup.\n\nStorage layout: ${input}`,
-  'perm-debugger': (input) => `You are a Linux permissions expert. Analyze this permission error and provide the exact fix. Include chmod/chown/ACL/SELinux commands as needed. Explain why the error occurred.\n\nError and context: ${input}`,
-  'cron-builder': (input) => `You are a cron scheduling expert. If given a description, provide the cron expression and explain each field. If given a cron expression, explain exactly when it runs with examples. Also provide the equivalent systemd timer OnCalendar syntax.\n\nInput: ${input}`,
-};
-
-let currentTool = null;
-
-function openTool(card) {
-  const toolKey = card.dataset.tool;
-  const config = TOOL_CONFIG[toolKey];
-  if (!config) return;
-  currentTool = toolKey;
-  document.getElementById('modal-title-text').textContent = config.title;
-  document.getElementById('modal-input-label').textContent = config.label;
-  document.getElementById('modal-input').placeholder = config.placeholder;
-  document.getElementById('modal-input').value = '';
-  document.getElementById('modal-output').classList.remove('visible');
-  document.getElementById('modal-output-text').textContent = '';
-  document.getElementById('modal-btn-label').innerHTML = '▶ Run';
-  document.getElementById('modal-run-btn').disabled = false;
+function openTool(key) {
+  const cfg = TOOLS[key];
+  if (!cfg) return;
+  document.getElementById('modal-title-text').innerHTML = cfg.title;
+  document.getElementById('tool-modal-body').innerHTML = cfg.render();
   document.getElementById('tool-modal').classList.add('open');
   document.body.style.overflow = 'hidden';
-  setTimeout(() => document.getElementById('modal-input').focus(), 100);
-}
-
-async function runTool() {
-  const input = document.getElementById('modal-input').value.trim();
-  if (!input) { document.getElementById('modal-input').focus(); return; }
-
-  const btn = document.getElementById('modal-run-btn');
-  btn.disabled = true;
-  document.getElementById('modal-btn-label').innerHTML = '<span class="modal-spinner"></span> Thinking...';
-
-  const outputEl = document.getElementById('modal-output');
-  const outputText = document.getElementById('modal-output-text');
-  outputEl.classList.add('visible');
-  outputText.innerHTML = '<span style="color:var(--text3)">Analyzing...</span>';
-
-  try {
-    const prompt = TOOL_PROMPTS[currentTool](input);
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }]
-      })
-    });
-
-    const data = await response.json();
-    const text = data.content?.map(c => c.text || '').join('') || 'No response received.';
-    outputText.innerHTML = formatAIOutput(text);
-  } catch (err) {
-    outputText.innerHTML = `<span class="out-red">Error: ${err.message}</span>`;
-  }
-
-  btn.disabled = false;
-  document.getElementById('modal-btn-label').innerHTML = '▶ Run Again';
-}
-
-function formatAIOutput(text) {
-  return text
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/```(\w*)\n?([\s\S]*?)```/g, (_, lang, code) =>
-      `<div style="background:var(--bg);border:1px solid var(--border2);border-radius:5px;padding:10px 12px;margin:8px 0;font-family:var(--mono);font-size:12px;color:var(--green);white-space:pre;overflow-x:auto">${code.trim()}</div>`)
-    .replace(/`([^`]+)`/g, '<code style="background:rgba(57,255,110,0.1);color:var(--green);padding:1px 5px;border-radius:3px;font-family:var(--mono);font-size:11px">$1</code>')
-    .replace(/^## (.+)$/gm, '<div style="font-family:var(--sans);font-size:13px;font-weight:600;color:var(--text);margin:16px 0 6px">$1</div>')
-    .replace(/^### (.+)$/gm, '<div style="font-family:var(--mono);font-size:11px;color:var(--green);text-transform:uppercase;letter-spacing:.08em;margin:12px 0 4px">$1</div>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong style="color:var(--text)">$1</strong>')
-    .replace(/^(\d+\. .+)$/gm, '<div style="margin:3px 0">$1</div>')
-    .replace(/\n/g, '<br>');
+  if (cfg.init) setTimeout(cfg.init, 50);
 }
 
 function closeModal() {
@@ -1507,11 +1414,810 @@ function closeModal() {
 function closeModalOutside(e) {
   if (e.target === document.getElementById('tool-modal')) closeModal();
 }
-
-// keyboard close
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeModal(); closeModuleModal(); }
 });
+
+// ── SHARED STYLES FOR TOOL BODIES ────────────────────────────────────────────
+const TS = {
+  input: 'width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:8px 12px;font-family:var(--mono);font-size:12px;color:var(--text2);outline:none;transition:border-color .2s;margin-bottom:4px',
+  label: 'font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.09em;display:block;margin-bottom:5px;margin-top:12px',
+  code: 'background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:12px 14px;font-family:var(--mono);font-size:12px;color:var(--green);white-space:pre;overflow-x:auto;display:block;margin-top:10px;line-height:1.8',
+  btn: 'font-family:var(--mono);font-size:11px;font-weight:700;padding:8px 18px;background:var(--green);color:#060a06;border:none;border-radius:5px;cursor:pointer;letter-spacing:.04em;margin-top:12px',
+  section: 'margin-top:16px;padding-top:14px;border-top:1px solid var(--border)',
+};
+
+// ── TOOL DEFINITIONS ──────────────────────────────────────────────────────────
+const TOOLS = {
+
+  // ── 1. ERROR LOOKUP ────────────────────────────────────────────────────────
+  'error-explainer': {
+    title: '🔴 Linux Error Lookup',
+    render: () => `
+      <div>
+        <label style="${TS.label}">Search error message or code</label>
+        <input id="err-search" style="${TS.input};margin-bottom:8px" placeholder="e.g. Permission denied, ENOSPC, bind() failed, No such file..." oninput="filterErrors()" autofocus>
+        <div id="err-count" style="font-family:var(--mono);font-size:10px;color:var(--text3);margin-bottom:10px">Showing all ${ERROR_DB.length} errors</div>
+        <div id="err-list" style="display:flex;flex-direction:column;gap:6px;max-height:420px;overflow-y:auto"></div>
+      </div>`,
+    init: () => renderErrors(ERROR_DB),
+  },
+
+  // ── 2. SYSTEMD UNIT BUILDER ───────────────────────────────────────────────
+  'systemd-gen': {
+    title: '⚙️ systemd Unit Builder',
+    render: () => `
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div>
+          <label style="${TS.label}">Service Description</label>
+          <input id="sd-desc" style="${TS.input}" placeholder="My web application" oninput="genUnit()">
+          <label style="${TS.label}">ExecStart (full command)</label>
+          <input id="sd-exec" style="${TS.input}" placeholder="/usr/bin/node /opt/app/index.js" oninput="genUnit()">
+          <label style="${TS.label}">Working Directory</label>
+          <input id="sd-dir" style="${TS.input}" placeholder="/opt/app" oninput="genUnit()">
+          <label style="${TS.label}">Run as User</label>
+          <input id="sd-user" style="${TS.input}" placeholder="appuser" oninput="genUnit()">
+          <label style="${TS.label}">Restart Policy</label>
+          <select id="sd-restart" style="${TS.input}" onchange="genUnit()">
+            <option>on-failure</option><option>always</option><option>on-abnormal</option><option>no</option>
+          </select>
+          <label style="${TS.label}">After (dependency)</label>
+          <input id="sd-after" style="${TS.input}" placeholder="network.target" oninput="genUnit()">
+          <label style="${TS.label}">Environment Variables</label>
+          <input id="sd-env" style="${TS.input}" placeholder="PORT=3000 NODE_ENV=production" oninput="genUnit()">
+          <label style="${TS.label}" style="display:flex;align-items:center;gap:6px">
+            <input type="checkbox" id="sd-harden" onchange="genUnit()" checked> Security Hardening
+          </label>
+        </div>
+        <div>
+          <label style="${TS.label}">Generated Unit File</label>
+          <pre id="sd-output" style="${TS.code};height:360px;overflow-y:auto;font-size:11px"># Fill in the fields to generate</pre>
+          <button style="${TS.btn}" onclick="copyText('sd-output')">&#9113; Copy Unit File</button>
+        </div>
+      </div>`,
+    init: () => genUnit(),
+  },
+
+  // ── 3. PERMISSION CALCULATOR ──────────────────────────────────────────────
+  'perm-calc': {
+    title: '🔐 Permission Calculator',
+    render: () => `
+      <div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px" id="perm-grid">
+          ${['Owner','Group','Other'].map((who, wi) => `
+            <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px">
+              <div style="font-family:var(--mono);font-size:11px;color:var(--green);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">${who}</div>
+              ${['Read (r)','Write (w)','Execute (x)'].map((bit, bi) => `
+                <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);margin-bottom:6px;cursor:pointer">
+                  <input type="checkbox" data-who="${wi}" data-bit="${2-bi}" onchange="calcPerm()" style="width:14px;height:14px;accent-color:var(--green)"> ${bit}
+                </label>`).join('')}
+            </div>`).join('')}
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-start">
+          <div style="flex:1;min-width:200px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px">
+            <div style="font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px">Octal</div>
+            <div id="perm-octal" style="font-family:var(--mono);font-size:2.5rem;font-weight:700;color:var(--green)">000</div>
+          </div>
+          <div style="flex:1;min-width:200px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px">
+            <div style="font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px">Symbolic</div>
+            <div id="perm-sym" style="font-family:var(--mono);font-size:1.5rem;font-weight:700;color:var(--green)">---------</div>
+          </div>
+          <div style="flex:2;min-width:260px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px">
+            <div style="font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px">Commands</div>
+            <div id="perm-cmd" style="font-family:var(--mono);font-size:12px;color:var(--green);line-height:2">chmod 000 file</div>
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <label style="${TS.label}">Lookup mode — common presets</label>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            ${[['755','rwxr-xr-x','Executable / dir'],['644','rw-r--r--','Config file'],['600','rw-------','Private key'],['777','rwxrwxrwx','World-writable'],['750','rwxr-x---','Group exec'],['640','rw-r-----','Group read']].map(([oct,sym,label]) =>
+              `<button onclick="applyPreset('${oct}')" style="font-family:var(--mono);font-size:10px;padding:4px 10px;background:var(--bg4);border:1px solid var(--border2);color:var(--text2);border-radius:4px;cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='';this.style.color=''">${oct} — ${label}</button>`).join('')}
+          </div>
+        </div>
+      </div>`,
+    init: () => calcPerm(),
+  },
+
+  // ── 4. CRON BUILDER ───────────────────────────────────────────────────────
+  'cron-builder': {
+    title: '🕐 Cron Expression Builder',
+    render: () => `
+      <div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px">
+          ${[['cron-min','Minute','0-59, */5, 0,30'],['cron-hr','Hour','0-23, */2, 8'],['cron-dom','Day of Month','1-31, */7, 1'],['cron-mon','Month','1-12, */3'],['cron-dow','Day of Week','0-6 (Sun=0), 1-5']].map(([id,label,ph]) => `
+            <div>
+              <label style="${TS.label}">${label}</label>
+              <input id="${id}" style="${TS.input};text-align:center" value="*" placeholder="${ph}" oninput="buildCron()">
+            </div>`).join('')}
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:14px;margin-bottom:12px;text-align:center">
+          <div style="font-family:var(--mono);font-size:1.6rem;font-weight:700;color:var(--green);letter-spacing:.1em" id="cron-expr">* * * * *</div>
+          <div style="font-family:var(--sans);font-size:12px;color:var(--text2);margin-top:6px" id="cron-desc">Every minute</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px">
+            <div style="font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px">Next 6 Run Times</div>
+            <div id="cron-next" style="font-family:var(--mono);font-size:11px;color:var(--text2);line-height:2"></div>
+          </div>
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px">
+            <div style="font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px">systemd Timer Equivalent</div>
+            <div id="cron-systemd" style="font-family:var(--mono);font-size:11px;color:var(--green);line-height:2"></div>
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <label style="${TS.label}">Quick Presets</label>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            ${[['0 * * * *','Hourly'],['0 0 * * *','Daily midnight'],['0 2 * * 0','Weekly Sun 2am'],['0 0 1 * *','Monthly'],['*/5 * * * *','Every 5 min'],['0 9 * * 1-5','Weekdays 9am'],['0 0 * * 1','Every Monday']].map(([expr,label]) =>
+              `<button onclick="applyCron('${expr}')" style="font-family:var(--mono);font-size:10px;padding:4px 10px;background:var(--bg4);border:1px solid var(--border2);color:var(--text2);border-radius:4px;cursor:pointer" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color=''">${label}</button>`).join('')}
+          </div>
+        </div>
+      </div>`,
+    init: () => buildCron(),
+  },
+
+  // ── 5. PORT REFERENCE ─────────────────────────────────────────────────────
+  'port-ref': {
+    title: '🌐 Port & Protocol Reference',
+    render: () => `
+      <div>
+        <input id="port-search" style="${TS.input};margin-bottom:8px" placeholder="Search port number or service name (e.g. 22, ssh, http, mysql)..." oninput="filterPorts()" autofocus>
+        <div id="port-count" style="font-family:var(--mono);font-size:10px;color:var(--text3);margin-bottom:8px">Showing all ${PORT_DB.length} entries</div>
+        <div style="display:grid;grid-template-columns:60px 100px 1fr 1fr;gap:0;font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;padding:6px 10px;border-bottom:1px solid var(--border)">
+          <span>Port</span><span>Proto</span><span>Service</span><span>ss / iptables snippet</span>
+        </div>
+        <div id="port-list" style="max-height:380px;overflow-y:auto"></div>
+      </div>`,
+    init: () => renderPorts(PORT_DB),
+  },
+
+  // ── 6. LVM COMMAND GENERATOR ──────────────────────────────────────────────
+  'lvm-calc': {
+    title: '💾 LVM Command Generator',
+    render: () => `
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div>
+          <label style="${TS.label}">Physical Disk(s)</label>
+          <input id="lvm-pv" style="${TS.input}" placeholder="/dev/sdb /dev/sdc" oninput="genLVM()">
+          <label style="${TS.label}">Volume Group Name</label>
+          <input id="lvm-vg" style="${TS.input}" placeholder="vg_data" oninput="genLVM()">
+          <label style="${TS.label}">Logical Volume Name</label>
+          <input id="lvm-lv" style="${TS.input}" placeholder="lv_app" oninput="genLVM()">
+          <label style="${TS.label}">LV Size</label>
+          <input id="lvm-size" style="${TS.input}" placeholder="50G" oninput="genLVM()">
+          <label style="${TS.label}">Filesystem</label>
+          <select id="lvm-fs" style="${TS.input}" onchange="genLVM()">
+            <option>ext4</option><option>xfs</option><option>btrfs</option>
+          </select>
+          <label style="${TS.label}">Mount Point</label>
+          <input id="lvm-mount" style="${TS.input}" placeholder="/opt/app" oninput="genLVM()">
+          <label style="${TS.label}" style="display:flex;align-items:center;gap:6px;margin-top:10px">
+            <input type="checkbox" id="lvm-fstab" onchange="genLVM()" checked> Add to /etc/fstab
+          </label>
+        </div>
+        <div>
+          <label style="${TS.label}">Generated Commands</label>
+          <pre id="lvm-output" style="${TS.code};height:340px;overflow-y:auto;font-size:11px"># Fill in fields to generate LVM commands</pre>
+          <button style="${TS.btn}" onclick="copyText('lvm-output')">&#9113; Copy Commands</button>
+        </div>
+      </div>`,
+    init: () => genLVM(),
+  },
+
+  // ── 7. SIGNALS REFERENCE ──────────────────────────────────────────────────
+  'signal-ref': {
+    title: '📡 Linux Signals Reference',
+    render: () => `
+      <div>
+        <input id="sig-search" style="${TS.input};margin-bottom:10px" placeholder="Search signal name, number or action..." oninput="filterSignals()" autofocus>
+        <div style="display:grid;grid-template-columns:40px 80px 1fr 1fr;gap:0;font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;padding:6px 10px;border-bottom:1px solid var(--border)">
+          <span>#</span><span>Name</span><span>Default Action</span><span>Common Use</span>
+        </div>
+        <div id="sig-list" style="max-height:400px;overflow-y:auto"></div>
+      </div>`,
+    init: () => renderSignals(SIGNAL_DB),
+  },
+
+  // ── 8. REGEX TESTER ───────────────────────────────────────────────────────
+  'regex-tester': {
+    title: '🔍 grep / Regex Tester',
+    render: () => `
+      <div>
+        <label style="${TS.label}">Pattern (regex or plain text)</label>
+        <input id="rx-pattern" style="${TS.input}" placeholder="e.g. ^ERROR|failed|\b[0-9]{1,3}\.[0-9]{1,3}" oninput="testRegex()" autofocus>
+        <div style="display:flex;gap:10px;margin:8px 0">
+          ${[['rx-flag-i','-i','Case insensitive'],['rx-flag-e','-E','Extended regex'],['rx-flag-v','-v','Invert match'],['rx-flag-n','-n','Line numbers']].map(([id,flag,label]) =>
+            `<label style="display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11px;color:var(--text2);cursor:pointer">
+              <input type="checkbox" id="${id}" onchange="testRegex()" style="accent-color:var(--green)"> ${flag} <span style="color:var(--text3)">(${label})</span>
+            </label>`).join('')}
+        </div>
+        <label style="${TS.label}">Sample Text (paste your log output here)</label>
+        <textarea id="rx-text" style="${TS.input};height:130px;resize:vertical;line-height:1.7" oninput="testRegex()" placeholder="Paste log lines or any text here...
+e.g.
+2024-08-01 ERROR connection refused
+2024-08-01 INFO server started
+2024-08-01 WARN disk usage 85%
+2024-08-01 ERROR timeout reached"></textarea>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+          <div>
+            <div style="font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:6px">Matches highlighted</div>
+            <div id="rx-output" style="background:var(--bg4);border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-family:var(--mono);font-size:12px;color:var(--text2);white-space:pre-wrap;min-height:80px;max-height:160px;overflow-y:auto;line-height:1.8">Enter a pattern above</div>
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:6px">grep command</div>
+            <pre id="rx-cmd" style="${TS.code};min-height:80px;font-size:11px">grep '' file.log</pre>
+            <button style="${TS.btn};margin-top:6px" onclick="copyText('rx-cmd')">&#9113; Copy</button>
+          </div>
+        </div>
+        <div id="rx-stats" style="font-family:var(--mono);font-size:11px;color:var(--text3);margin-top:8px"></div>
+      </div>`,
+    init: () => testRegex(),
+  },
+};
+
+// ── DATA: ERROR DATABASE ───────────────────────────────────────────────────────
+const ERROR_DB = [
+  { code: 'EACCES / Permission denied', cat: 'Permissions', cause: 'Process lacks read/write/execute permission on file or directory.', fix: 'ls -la /path/to/file\nchmod 755 /path/to/file\nchown user:group /path/to/file\n# Or for ACLs:\nsetfacl -m u:username:rwx /path/to/file', prev: 'Run services as the correct user. Use groups, not 777.' },
+  { code: 'ENOENT / No such file or directory', cat: 'Filesystem', cause: 'File or directory path does not exist. Often a typo or missing parent directory.', fix: 'ls -la /path/to/\nmkdir -p /path/to/dir\nln -s /actual/path /expected/path', prev: 'Use absolute paths. Check symlinks with ls -la.' },
+  { code: 'ENOSPC / No space left on device', cat: 'Storage', cause: 'Disk blocks exhausted OR inode count depleted. df -h might still show free space.', fix: 'df -h && df -i\ndu -sh /* 2>/dev/null | sort -rh | head -15\njournalctl --vacuum-size=200M\nfind /var/log -name "*.log" -size +50M -delete', prev: 'Set disk alerts at 80%. Rotate logs. Monitor inodes.' },
+  { code: 'ECONNREFUSED / Connection refused', cat: 'Network', cause: 'Nothing is listening on the target port, or firewall is dropping packets.', fix: 'ss -tlnp | grep :PORT\nsudo systemctl start SERVICE\nsudo firewall-cmd --add-port=PORT/tcp --permanent', prev: 'Enable services with systemctl enable. Open firewall ports before starting services.' },
+  { code: 'ETIMEDOUT / Connection timed out', cat: 'Network', cause: 'Firewall silently dropping packets (no RST), wrong route, or host unreachable.', fix: 'ping -c4 HOST\ntraceroute HOST\nsudo iptables -L -n -v | grep DROP\nip route show', prev: 'Use REJECT not DROP in dev. Verify routes after network changes.' },
+  { code: 'bind() failed (98: Address already in use)', cat: 'Network', cause: 'Another process already holds the port. Common when restarting services quickly.', fix: 'ss -tlnp | grep :PORT\nsudo fuser -k PORT/tcp\nsudo systemctl stop CONFLICTING_SERVICE', prev: 'Use SO_REUSEADDR. Check port conflicts before starting services.' },
+  { code: 'Failed to start X.service — control process exited', cat: 'systemd', cause: 'Service binary failed to launch. Real error is in journalctl, not systemctl status.', fix: 'journalctl -u SERVICE -n 50 --no-pager\nsystemctl cat SERVICE\nSTARTCOMMAND --dry-run  # test manually', prev: 'Always test ExecStart command manually first. Use systemd-analyze verify unit.service.' },
+  { code: 'Unit X.service not found', cat: 'systemd', cause: 'Unit file does not exist in /etc/systemd/system/ or /lib/systemd/system/.', fix: 'systemctl list-unit-files | grep SERVICE\nfind / -name "*.service" 2>/dev/null\nsystemctl daemon-reload  # after placing unit file', prev: 'Run daemon-reload after installing unit files.' },
+  { code: 'Start request repeated too quickly', cat: 'systemd', cause: 'Service crashed 5+ times in 10 seconds and hit the start rate limit.', fix: 'journalctl -u SERVICE -n 100\nsystemctl reset-failed SERVICE\nsystemctl start SERVICE', prev: 'Set StartLimitIntervalSec=0 for services that must always restart, or fix the crash.' },
+  { code: 'GRUB error: unknown filesystem', cat: 'Boot', cause: 'GRUB cannot read the boot partition — disk change, bad UUID, or corruption.', fix: 'grub rescue> ls (hd0,1)/\ngrub rescue> set root=(hd0,1)\ngrub rescue> insmod normal && normal\n# After boot:\nsudo grub-install /dev/sda && sudo update-grub', prev: 'Run update-grub after disk layout changes. Keep live USB available.' },
+  { code: 'Kernel panic — not syncing: VFS: Unable to mount root', cat: 'Boot', cause: 'Kernel cannot find the root filesystem. Wrong root= in GRUB or corrupt initramfs.', fix: '# Boot from live USB, then:\nmount /dev/sda1 /mnt && chroot /mnt\nmkinitramfs -o /boot/initrd.img-$(uname -r)\nupdate-grub', prev: 'Test initramfs after kernel updates. Keep previous kernel in GRUB.' },
+  { code: 'type=AVC msg=audit: denied', cat: 'SELinux', cause: 'SELinux MAC policy is blocking the operation. File has wrong security context.', fix: 'ausearch -m avc -ts recent | audit2why\nrestorecon -Rv /path/to/dir\nsetsebool -P httpd_can_network_connect on\naudit2allow -M mypol < /var/log/audit/audit.log && semodule -i mypol.pp', prev: 'Use restorecon after moving files. Never setenforce 0 in production.' },
+  { code: 'dpkg lock — Resource temporarily unavailable', cat: 'Package', cause: 'Another apt/dpkg process is running (unattended-upgrades, another terminal).', fix: 'ps aux | grep -E "apt|dpkg"\nsudo lsof /var/lib/dpkg/lock\n# After it finishes or you kill it:\nsudo dpkg --configure -a', prev: 'Never force-kill apt mid-install. Run dpkg --configure -a to repair.' },
+  { code: 'E: Could not get lock /var/cache/apt/archives/lock', cat: 'Package', cause: 'apt cache lock held by another process. Do not force-delete without checking first.', fix: 'sudo lsof /var/cache/apt/archives/lock\n# Wait for other process, or kill PID then:\nsudo apt clean && sudo apt update', prev: 'Only run one apt command at a time.' },
+  { code: 'sudo: user not in the sudoers file', cat: 'Permissions', cause: 'User account not in sudo/wheel group and has no sudoers entry.', fix: '# As root:\nusermod -aG sudo USERNAME      # Debian/Ubuntu\nusermod -aG wheel USERNAME     # RHEL/CentOS\nvisudo  # to edit sudoers safely', prev: 'Add users to sudo/wheel during provisioning.' },
+  { code: 'ssh: Connection refused', cat: 'SSH', cause: 'sshd not running, different port, or firewall blocking port 22.', fix: 'sudo systemctl status sshd\nsudo systemctl start sshd\nss -tlnp | grep ssh\nsudo iptables -L | grep 22', prev: 'systemctl enable sshd. Open firewall before changing SSH port.' },
+  { code: 'ssh: Host key verification failed', cat: 'SSH', cause: 'Server host key changed (reinstall, IP reuse). Could also indicate MITM attack.', fix: 'ssh-keygen -R hostname\nssh-keyscan -H hostname >> ~/.ssh/known_hosts', prev: 'Use certificate-based SSH for fleet management.' },
+  { code: 'WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED', cat: 'SSH', cause: 'Known host key does not match. Verify the server really changed before proceeding.', fix: 'ssh-keygen -R IP_OR_HOSTNAME\n# Verify fingerprint out of band, then reconnect', prev: 'Use SSH certificates to eliminate host key management.' },
+  { code: 'OOM killer — Out of memory: Kill process', cat: 'Memory', cause: 'System ran out of physical RAM + swap. Kernel killed highest-scoring process.', fix: 'dmesg | grep -i "oom\|kill"\nfree -h && cat /proc/meminfo\n# Add swap:\nfallocate -l 4G /swapfile && chmod 600 /swapfile\nmkswap /swapfile && swapon /swapfile', prev: 'Set container/process memory limits. Size swap correctly.' },
+  { code: 'Too many open files (EMFILE / ENFILE)', cat: 'Limits', cause: 'Process or system hit the open file descriptor limit.', fix: 'ulimit -n\ncat /proc/sys/fs/file-max\n# Increase per-process limit:\nulimit -n 65536\n# Permanent (add to /etc/security/limits.conf):\necho "* soft nofile 65536" >> /etc/security/limits.conf', prev: 'Set LimitNOFILE in systemd unit files for daemons.' },
+  { code: 'Filesystem is read-only', cat: 'Filesystem', cause: 'Kernel remounted filesystem read-only after I/O errors to prevent corruption.', fix: 'dmesg | tail -30  # look for I/O errors\nmount | grep ro\n# If disk is healthy, remount rw:\nsudo mount -o remount,rw /mount/point', prev: 'Monitor disk health with smartctl. Use RAID for critical data.' },
+  { code: 'Input/output error', cat: 'Filesystem', cause: 'Hardware I/O error — bad disk sector, failing drive, or faulty cable.', fix: 'dmesg | grep -i "error\|ata\|sda"\nsudo smartctl -a /dev/sda\nfsck /dev/sda1  # only when unmounted', prev: 'Monitor SMART data. Replace disks proactively at first signs of failure.' },
+  { code: 'Broken pipe (EPIPE)', cat: 'Process', cause: 'Writing to a pipe/socket whose reader has exited. Normal when piping to head, etc.', fix: '# Usually harmless. To suppress:\ncommand 2>/dev/null || true\n# In scripts, check exit codes explicitly', prev: 'Trap SIGPIPE in long-running scripts. Use set -o pipefail with care.' },
+  { code: 'Cannot allocate memory (ENOMEM)', cat: 'Memory', cause: 'malloc() failed. System low on RAM or mmap limit hit even with free memory.', fix: 'free -h\ncat /proc/sys/vm/overcommit_memory\nkill -9 $(cat /proc/$(pgrep PROCESS)/status | grep VmRSS)', prev: 'Use cgroups to limit per-process memory. Monitor RSS with Prometheus.' },
+  { code: 'Stale file handle', cat: 'NFS', cause: 'NFS mount point is stale — server was restarted or export was removed.', fix: 'sudo umount -l /nfs/mount/point\nsudo mount -a  # re-mount from /etc/fstab\n# Or force unmount:\nfuser -km /nfs/mount/point && umount /nfs/mount/point', prev: 'Use autofs for NFS mounts. Set timeo and retrans mount options.' },
+];
+
+// ── DATA: PORT DATABASE ───────────────────────────────────────────────────────
+const PORT_DB = [
+  [20,'TCP','FTP Data','ss -tlnp | grep :20'],
+  [21,'TCP','FTP Control','ss -tlnp | grep :21'],
+  [22,'TCP','SSH','ss -tlnp | grep :22 | iptables -A INPUT -p tcp --dport 22 -j ACCEPT'],
+  [23,'TCP','Telnet (insecure)','ss -tlnp | grep :23'],
+  [25,'TCP','SMTP','ss -tlnp | grep :25'],
+  [53,'TCP/UDP','DNS','ss -ulnp | grep :53'],
+  [67,'UDP','DHCP Server','ss -ulnp | grep :67'],
+  [68,'UDP','DHCP Client','ss -ulnp | grep :68'],
+  [80,'TCP','HTTP','ss -tlnp | grep :80 | iptables -A INPUT -p tcp --dport 80 -j ACCEPT'],
+  [110,'TCP','POP3','ss -tlnp | grep :110'],
+  [111,'TCP','RPC portmap','ss -tlnp | grep :111'],
+  [123,'UDP','NTP','ss -ulnp | grep :123'],
+  [143,'TCP','IMAP','ss -tlnp | grep :143'],
+  [179,'TCP','BGP','ss -tlnp | grep :179'],
+  [389,'TCP','LDAP','ss -tlnp | grep :389'],
+  [443,'TCP','HTTPS','ss -tlnp | grep :443 | iptables -A INPUT -p tcp --dport 443 -j ACCEPT'],
+  [445,'TCP','SMB/Samba','ss -tlnp | grep :445'],
+  [465,'TCP','SMTPS','ss -tlnp | grep :465'],
+  [514,'UDP','Syslog','ss -ulnp | grep :514'],
+  [587,'TCP','SMTP Submission','ss -tlnp | grep :587'],
+  [636,'TCP','LDAPS','ss -tlnp | grep :636'],
+  [993,'TCP','IMAPS','ss -tlnp | grep :993'],
+  [995,'TCP','POP3S','ss -tlnp | grep :995'],
+  [2049,'TCP','NFS','ss -tlnp | grep :2049'],
+  [2181,'TCP','ZooKeeper','ss -tlnp | grep :2181'],
+  [2375,'TCP','Docker (unauth)','ss -tlnp | grep :2375'],
+  [2376,'TCP','Docker TLS','ss -tlnp | grep :2376'],
+  [2379,'TCP','etcd client','ss -tlnp | grep :2379'],
+  [2380,'TCP','etcd peer','ss -tlnp | grep :2380'],
+  [3000,'TCP','Grafana default','ss -tlnp | grep :3000'],
+  [3306,'TCP','MySQL/MariaDB','ss -tlnp | grep :3306'],
+  [3389,'TCP','RDP','ss -tlnp | grep :3389'],
+  [4443,'TCP','HTTPS alt','ss -tlnp | grep :4443'],
+  [5000,'TCP','Docker registry','ss -tlnp | grep :5000'],
+  [5432,'TCP','PostgreSQL','ss -tlnp | grep :5432'],
+  [5601,'TCP','Kibana','ss -tlnp | grep :5601'],
+  [5672,'TCP','RabbitMQ AMQP','ss -tlnp | grep :5672'],
+  [6379,'TCP','Redis','ss -tlnp | grep :6379'],
+  [6443,'TCP','K8s API Server','ss -tlnp | grep :6443'],
+  [7000,'TCP','Cassandra','ss -tlnp | grep :7000'],
+  [8080,'TCP','HTTP alt / Tomcat','ss -tlnp | grep :8080'],
+  [8443,'TCP','HTTPS alt','ss -tlnp | grep :8443'],
+  [8888,'TCP','Jupyter Notebook','ss -tlnp | grep :8888'],
+  [9090,'TCP','Prometheus','ss -tlnp | grep :9090'],
+  [9092,'TCP','Kafka','ss -tlnp | grep :9092'],
+  [9200,'TCP','Elasticsearch HTTP','ss -tlnp | grep :9200'],
+  [9300,'TCP','Elasticsearch cluster','ss -tlnp | grep :9300'],
+  [10250,'TCP','Kubelet','ss -tlnp | grep :10250'],
+  [10255,'TCP','Kubelet read-only','ss -tlnp | grep :10255'],
+  [15672,'TCP','RabbitMQ UI','ss -tlnp | grep :15672'],
+  [27017,'TCP','MongoDB','ss -tlnp | grep :27017'],
+];
+
+// ── DATA: SIGNALS DATABASE ─────────────────────────────────────────────────────
+const SIGNAL_DB = [
+  [1,'SIGHUP','Terminate','Reload config (daemons); terminal hangup'],
+  [2,'SIGINT','Terminate','Ctrl+C — interrupt from keyboard'],
+  [3,'SIGQUIT','Core dump','Ctrl+\\ — quit and dump core'],
+  [4,'SIGILL','Core dump','Illegal machine instruction'],
+  [5,'SIGTRAP','Core dump','Debugger breakpoint / trace'],
+  [6,'SIGABRT','Core dump','abort() call — assertion failure'],
+  [7,'SIGBUS','Core dump','Bus error — misaligned memory access'],
+  [8,'SIGFPE','Core dump','Floating point / arithmetic exception'],
+  [9,'SIGKILL','Terminate','Force kill — cannot be caught or ignored'],
+  [10,'SIGUSR1','Terminate','User-defined signal 1 (app-specific)'],
+  [11,'SIGSEGV','Core dump','Segmentation fault — invalid memory access'],
+  [12,'SIGUSR2','Terminate','User-defined signal 2 (app-specific)'],
+  [13,'SIGPIPE','Terminate','Write to broken pipe (reader gone)'],
+  [14,'SIGALRM','Terminate','alarm() timer expired'],
+  [15,'SIGTERM','Terminate','Graceful termination request (default kill)'],
+  [16,'SIGSTKFLT','Terminate','Coprocessor stack fault (obsolete)'],
+  [17,'SIGCHLD','Ignore','Child process stopped or terminated'],
+  [18,'SIGCONT','Continue','Resume stopped process'],
+  [19,'SIGSTOP','Stop','Pause process — cannot be caught or ignored'],
+  [20,'SIGTSTP','Stop','Ctrl+Z — suspend to background'],
+  [21,'SIGTTIN','Stop','Background process read from terminal'],
+  [22,'SIGTTOU','Stop','Background process write to terminal'],
+  [23,'SIGURG','Ignore','Urgent data on socket'],
+  [24,'SIGXCPU','Core dump','CPU time limit exceeded (ulimit -t)'],
+  [25,'SIGXFSZ','Core dump','File size limit exceeded (ulimit -f)'],
+  [26,'SIGVTALRM','Terminate','Virtual timer expired'],
+  [27,'SIGPROF','Terminate','Profiling timer expired'],
+  [28,'SIGWINCH','Ignore','Terminal window size changed'],
+  [29,'SIGIO','Terminate','I/O now possible on descriptor'],
+  [30,'SIGPWR','Terminate','Power failure imminent'],
+  [31,'SIGSYS','Core dump','Bad system call argument'],
+];
+
+// ── TOOL LOGIC FUNCTIONS ───────────────────────────────────────────────────────
+
+// Error lookup
+function filterErrors() {
+  const q = document.getElementById('err-search').value.toLowerCase().trim();
+  const matches = q ? ERROR_DB.filter(e =>
+    e.code.toLowerCase().includes(q) ||
+    e.cat.toLowerCase().includes(q) ||
+    e.cause.toLowerCase().includes(q) ||
+    e.fix.toLowerCase().includes(q)
+  ) : ERROR_DB;
+  document.getElementById('err-count').textContent = `Showing ${matches.length} of ${ERROR_DB.length} errors`;
+  renderErrors(matches);
+}
+
+function renderErrors(list) {
+  const el = document.getElementById('err-list');
+  if (!el) return;
+  el.innerHTML = list.length === 0
+    ? '<div style="text-align:center;padding:24px;font-family:var(--mono);font-size:12px;color:var(--text3)">No errors match your search.</div>'
+    : list.map((e,i) => `
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:7px;overflow:hidden">
+        <div onclick="toggleErrItem(${i})" style="display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer">
+          <span style="width:8px;height:8px;border-radius:50%;background:${e.cat==='Permissions'||e.cat==='SELinux'?'var(--amber)':e.cat==='Storage'||e.cat==='Filesystem'?'var(--blue)':'var(--red)'};flex-shrink:0"></span>
+          <span style="font-family:var(--mono);font-size:12px;color:var(--red);flex:1">${e.code}</span>
+          <span style="font-family:var(--mono);font-size:10px;color:var(--text3);background:var(--bg4);padding:2px 8px;border-radius:3px">${e.cat}</span>
+          <span id="err-chev-${i}" style="font-size:10px;color:var(--text3);transition:transform .2s">▼</span>
+        </div>
+        <div id="err-detail-${i}" style="display:none;padding:0 14px 12px;border-top:1px solid var(--border)">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.09em;margin:10px 0 4px">Root Cause</div>
+          <p style="font-size:12px;color:var(--text2);line-height:1.6">${e.cause}</p>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.09em;margin:10px 0 4px">Fix Commands</div>
+          <pre style="background:var(--bg);border:1px solid var(--border2);border-radius:5px;padding:10px 12px;font-family:var(--mono);font-size:11px;color:var(--green);white-space:pre-wrap">${e.fix}</pre>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.09em;margin:10px 0 4px">Prevention</div>
+          <p style="font-size:12px;color:var(--text2);line-height:1.6">${e.prev}</p>
+        </div>
+      </div>`).join('');
+}
+
+let openErrItem = null;
+function toggleErrItem(i) {
+  const detail = document.getElementById('err-detail-' + i);
+  const chev = document.getElementById('err-chev-' + i);
+  if (!detail) return;
+  const isOpen = detail.style.display !== 'none';
+  // close all
+  ERROR_DB.forEach((_, j) => {
+    const d = document.getElementById('err-detail-' + j);
+    const c = document.getElementById('err-chev-' + j);
+    if (d) d.style.display = 'none';
+    if (c) c.style.transform = '';
+  });
+  if (!isOpen) {
+    detail.style.display = 'block';
+    chev.style.transform = 'rotate(180deg)';
+  }
+}
+
+// systemd unit generator
+function genUnit() {
+  const desc = document.getElementById('sd-desc')?.value || 'My Service';
+  const exec = document.getElementById('sd-exec')?.value || '/usr/bin/myapp';
+  const dir  = document.getElementById('sd-dir')?.value  || '';
+  const user = document.getElementById('sd-user')?.value || '';
+  const restart = document.getElementById('sd-restart')?.value || 'on-failure';
+  const after = document.getElementById('sd-after')?.value || 'network.target';
+  const env  = document.getElementById('sd-env')?.value  || '';
+  const harden = document.getElementById('sd-harden')?.checked;
+
+  let out = '[Unit]
+';
+  out += `Description=${desc}
+`;
+  out += `After=${after}
+
+`;
+  out += '[Service]
+';
+  out += `Type=simple
+`;
+  out += `ExecStart=${exec}
+`;
+  if (dir)  out += `WorkingDirectory=${dir}
+`;
+  if (user) out += `User=${user}
+Group=${user}
+`;
+  out += `Restart=${restart}
+`;
+  out += `RestartSec=5
+`;
+  if (env) env.split(' ').forEach(e => { if (e.includes('=')) out += `Environment="${e}"
+`; });
+  if (harden) {
+    out += '
+# Security hardening
+';
+    out += 'NoNewPrivileges=yes
+';
+    out += 'ProtectSystem=strict
+';
+    out += 'ProtectHome=yes
+';
+    out += 'PrivateTmp=yes
+';
+    out += 'PrivateDevices=yes
+';
+  }
+  out += '
+[Install]
+WantedBy=multi-user.target
+';
+  out += `
+# Deploy:
+# sudo cp SERVICE.service /etc/systemd/system/
+# sudo systemctl daemon-reload
+# sudo systemctl enable --now SERVICE`;
+
+  const el = document.getElementById('sd-output');
+  if (el) el.textContent = out;
+}
+
+// Permission calculator
+function calcPerm() {
+  const boxes = document.querySelectorAll('#perm-grid input[type=checkbox]');
+  let vals = [0, 0, 0];
+  boxes.forEach(b => {
+    if (b.checked) vals[parseInt(b.dataset.who)] += Math.pow(2, parseInt(b.dataset.bit));
+  });
+  const octal = vals.join('');
+  const sym = vals.map(v => (v&4?'r':'-') + (v&2?'w':'-') + (v&1?'x':'-')).join('');
+  document.getElementById('perm-octal').textContent = octal;
+  document.getElementById('perm-sym').textContent = sym;
+  document.getElementById('perm-cmd').innerHTML =
+    `chmod ${octal} file
+chmod ${octal} -R dir/
+
+# Symbolic:
+chmod u=${vals[0]&4?'r':''}${vals[0]&2?'w':''}${vals[0]&1?'x':''},g=${vals[1]&4?'r':''}${vals[1]&2?'w':''}${vals[1]&1?'x':''},o=${vals[2]&4?'r':''}${vals[2]&2?'w':''}${vals[2]&1?'x':''} file`;
+}
+
+function applyPreset(oct) {
+  const boxes = document.querySelectorAll('#perm-grid input[type=checkbox]');
+  const digits = oct.split('').map(Number);
+  boxes.forEach(b => {
+    const who = parseInt(b.dataset.who);
+    const bit = parseInt(b.dataset.bit);
+    b.checked = !!(digits[who] & Math.pow(2, bit));
+  });
+  calcPerm();
+}
+
+// Cron builder
+function buildCron() {
+  const min = document.getElementById('cron-min')?.value || '*';
+  const hr  = document.getElementById('cron-hr')?.value  || '*';
+  const dom = document.getElementById('cron-dom')?.value || '*';
+  const mon = document.getElementById('cron-mon')?.value || '*';
+  const dow = document.getElementById('cron-dow')?.value || '*';
+  const expr = `${min} ${hr} ${dom} ${mon} ${dow}`;
+  document.getElementById('cron-expr').textContent = expr;
+  document.getElementById('cron-desc').textContent = describeCron(min,hr,dom,mon,dow);
+
+  // Next run times (approximate)
+  const runs = nextCronRuns(min,hr,dom,mon,dow,6);
+  document.getElementById('cron-next').innerHTML = runs.map(d =>
+    `<span style="color:var(--green)">${d}</span>`).join('<br>');
+
+  // systemd OnCalendar
+  document.getElementById('cron-systemd').innerHTML =
+    `OnCalendar=${toSystemdCalendar(min,hr,dom,mon,dow)}<br>` +
+    `<span style="color:var(--text3)"># systemctl list-timers</span>`;
+}
+
+function describeCron(min,hr,dom,mon,dow) {
+  if (min==='*'&&hr==='*'&&dom==='*'&&mon==='*'&&dow==='*') return 'Every minute';
+  if (min==='0'&&hr==='*') return 'Every hour at minute 0';
+  if (min.startsWith('*/')) return `Every ${min.slice(2)} minutes`;
+  if (min==='0'&&hr==='0'&&dom==='*'&&mon==='*'&&dow==='*') return 'Daily at midnight';
+  if (min==='0'&&hr==='0'&&dom==='*'&&mon==='*') {
+    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    if (dow!=='*') return `Every ${days[parseInt(dow)]||dow} at midnight`;
+  }
+  if (min==='0'&&hr==='0'&&dom==='1'&&mon==='*') return 'First day of every month at midnight';
+  return `At ${min}m ${hr}h on dom:${dom} mon:${mon} dow:${dow}`;
+}
+
+function nextCronRuns(min,hr,dom,mon,dow,count) {
+  // Simple approximation: only handles common patterns
+  const results = [];
+  const now = new Date();
+  let d = new Date(now);
+  d.setSeconds(0); d.setMilliseconds(0);
+  d.setMinutes(d.getMinutes() + 1);
+  let attempts = 0;
+  while (results.length < count && attempts < 10000) {
+    attempts++;
+    if (matchesCron(d, min, hr, dom, mon, dow)) {
+      results.push(d.toLocaleString('en-IN', {weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}));
+    }
+    d = new Date(d.getTime() + 60000);
+  }
+  return results.length ? results : ['Pattern too complex to preview'];
+}
+
+function matchesCron(d, min, hr, dom, mon, dow) {
+  const match = (val, actual) => {
+    if (val === '*') return true;
+    if (val.startsWith('*/')) return actual % parseInt(val.slice(2)) === 0;
+    if (val.includes(',')) return val.split(',').map(Number).includes(actual);
+    if (val.includes('-')) {
+      const [a,b] = val.split('-').map(Number);
+      return actual >= a && actual <= b;
+    }
+    return parseInt(val) === actual;
+  };
+  return match(min, d.getMinutes()) &&
+         match(hr,  d.getHours()) &&
+         match(dom, d.getDate()) &&
+         match(mon, d.getMonth()+1) &&
+         match(dow, d.getDay());
+}
+
+function toSystemdCalendar(min,hr,dom,mon,dow) {
+  const m = min==='*'?'*':(min.startsWith('*/')?`*/${min.slice(2)}`:min.padStart(2,'0'));
+  const h = hr==='*'?'*':hr.padStart(2,'0');
+  return `${dow==='*'?'*':['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][parseInt(dow)]||'*'} ${h}:${m}:00`;
+}
+
+function applyCron(expr) {
+  const parts = expr.split(' ');
+  ['cron-min','cron-hr','cron-dom','cron-mon','cron-dow'].forEach((id,i) => {
+    const el = document.getElementById(id);
+    if (el) el.value = parts[i] || '*';
+  });
+  buildCron();
+}
+
+// Port reference
+function filterPorts() {
+  const q = document.getElementById('port-search').value.toLowerCase().trim();
+  const matches = q ? PORT_DB.filter(p =>
+    String(p[0]).includes(q) || p[2].toLowerCase().includes(q) || p[1].toLowerCase().includes(q)
+  ) : PORT_DB;
+  document.getElementById('port-count').textContent = `Showing ${matches.length} of ${PORT_DB.length} entries`;
+  renderPorts(matches);
+}
+
+function renderPorts(list) {
+  const el = document.getElementById('port-list');
+  if (!el) return;
+  el.innerHTML = list.map(p => `
+    <div onclick="copyToClipboard('${p[3].replace(/'/g,"\'")}')" style="display:grid;grid-template-columns:60px 100px 1fr 1fr;gap:0;padding:8px 10px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''">
+      <span style="font-family:var(--mono);font-size:12px;color:var(--green);font-weight:700">${p[0]}</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--text3)">${p[1]}</span>
+      <span style="font-size:12px;color:var(--text)">${p[2]}</span>
+      <span style="font-family:var(--mono);font-size:10px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p[3].split('|')[0]}</span>
+    </div>`).join('') || '<div style="padding:20px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--text3)">No results found.</div>';
+}
+
+// LVM generator
+function genLVM() {
+  const pv    = document.getElementById('lvm-pv')?.value    || '/dev/sdb';
+  const vg    = document.getElementById('lvm-vg')?.value    || 'vg_data';
+  const lv    = document.getElementById('lvm-lv')?.value    || 'lv_app';
+  const size  = document.getElementById('lvm-size')?.value  || '50G';
+  const fs    = document.getElementById('lvm-fs')?.value    || 'ext4';
+  const mount = document.getElementById('lvm-mount')?.value || '/mnt/data';
+  const fstab = document.getElementById('lvm-fstab')?.checked;
+  const pvs   = pv.trim().split(/\s+/);
+  const devPath = `/dev/${vg}/${lv}`;
+
+  let out = '#!/bin/bash
+# LVM Setup Commands
+# Generated by LinuxLab — eknathalabs.com
+
+';
+  out += '# ── Step 1: Initialize Physical Volumes ─────────────────
+';
+  pvs.forEach(p => { out += `sudo pvcreate ${p}
+`; });
+  out += '
+# ── Step 2: Create Volume Group ──────────────────────────
+';
+  out += `sudo vgcreate ${vg} ${pvs.join(' ')}
+`;
+  out += '
+# ── Step 3: Create Logical Volume ────────────────────────
+';
+  out += `sudo lvcreate -L ${size} -n ${lv} ${vg}
+`;
+  out += '
+# ── Step 4: Format Filesystem ────────────────────────────
+';
+  if (fs === 'ext4') out += `sudo mkfs.ext4 ${devPath}
+`;
+  else if (fs === 'xfs') out += `sudo mkfs.xfs ${devPath}
+`;
+  else out += `sudo mkfs.btrfs ${devPath}
+`;
+  out += '
+# ── Step 5: Mount ────────────────────────────────────────
+';
+  out += `sudo mkdir -p ${mount}
+`;
+  out += `sudo mount ${devPath} ${mount}
+`;
+  if (fstab) {
+    out += '
+# ── Step 6: Persist in /etc/fstab ───────────────────────
+';
+    out += `# Get UUID:
+blkid ${devPath}
+`;
+    out += `# Add to /etc/fstab (replace UUID below):
+`;
+    out += `echo "UUID=<replace-with-blkid-output>  ${mount}  ${fs}  defaults  0  2" | sudo tee -a /etc/fstab
+`;
+    out += `# Verify:
+sudo mount -a && df -h ${mount}
+`;
+  }
+  out += '
+# ── Verify ───────────────────────────────────────────────
+';
+  out += `pvdisplay
+vgdisplay ${vg}
+lvdisplay ${devPath}
+df -h ${mount}
+`;
+  out += '
+# ── Extend later (if needed) ─────────────────────────────
+';
+  out += `# sudo lvextend -L +20G ${devPath}
+`;
+  out += fs === 'xfs'
+    ? `# sudo xfs_growfs ${mount}
+`
+    : `# sudo resize2fs ${devPath}
+`;
+
+  const el = document.getElementById('lvm-output');
+  if (el) el.textContent = out;
+}
+
+// Signals reference
+function filterSignals() {
+  const q = document.getElementById('sig-search').value.toLowerCase().trim();
+  const matches = q ? SIGNAL_DB.filter(s =>
+    String(s[0]).includes(q) || s[1].toLowerCase().includes(q) ||
+    s[2].toLowerCase().includes(q) || s[3].toLowerCase().includes(q)
+  ) : SIGNAL_DB;
+  renderSignals(matches);
+}
+
+function renderSignals(list) {
+  const el = document.getElementById('sig-list');
+  if (!el) return;
+  el.innerHTML = list.map(s => `
+    <div onclick="copyToClipboard('kill -${s[0]} PID  # ${s[1]}')" style="display:grid;grid-template-columns:40px 80px 1fr 1fr;gap:0;padding:8px 10px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''">
+      <span style="font-family:var(--mono);font-size:12px;color:var(--green);font-weight:700">${s[0]}</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--amber)">${s[1]}</span>
+      <span style="font-size:12px;color:var(--text2)">${s[2]}</span>
+      <span style="font-size:11px;color:var(--text3)">${s[3]}</span>
+    </div>`).join('') || '<div style="padding:20px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--text3)">No signals match.</div>';
+}
+
+// Regex tester
+function testRegex() {
+  const pat = document.getElementById('rx-pattern')?.value || '';
+  const text = document.getElementById('rx-text')?.value || '';
+  const flagI = document.getElementById('rx-flag-i')?.checked;
+  const flagE = document.getElementById('rx-flag-e')?.checked;
+  const flagV = document.getElementById('rx-flag-v')?.checked;
+  const flagN = document.getElementById('rx-flag-n')?.checked;
+
+  const outEl = document.getElementById('rx-output');
+  const cmdEl = document.getElementById('rx-cmd');
+  const statsEl = document.getElementById('rx-stats');
+  if (!outEl || !cmdEl) return;
+
+  // Build grep command
+  let flags = '';
+  if (flagI) flags += 'i';
+  if (flagE) flags += 'E';
+  if (flagV) flags += 'v';
+  if (flagN) flags += 'n';
+  const grepFlags = flags ? ' -' + flags : '';
+  cmdEl.textContent = `grep${grepFlags} '${pat || ''}' file.log`;
+
+  if (!pat) { outEl.innerHTML = '<span style="color:var(--text3)">Enter a pattern above</span>'; statsEl.textContent = ''; return; }
+
+  const lines = text ? text.split('
+') : [];
+  if (!lines.length) { outEl.innerHTML = '<span style="color:var(--text3)">Paste sample text to test</span>'; return; }
+
+  let regexFlags = flagI ? 'gi' : 'g';
+  let re;
+  try { re = new RegExp(pat, regexFlags); }
+  catch(e) { outEl.innerHTML = `<span style="color:var(--red)">Invalid regex: ${e.message}</span>`; return; }
+
+  let matchCount = 0, matchedLines = 0;
+  const rendered = lines.map((line, i) => {
+    const hasMatch = re.test(line);
+    re.lastIndex = 0;
+    const show = flagV ? !hasMatch : hasMatch;
+    if (!show) return null;
+    if (hasMatch) matchedLines++;
+
+    let displayLine = line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    if (!flagV) {
+      displayLine = displayLine.replace(new RegExp(pat, regexFlags), m => {
+        matchCount++;
+        return `<mark style="background:rgba(57,255,110,0.25);color:var(--green);border-radius:2px">${m}</mark>`;
+      });
+    }
+    return `<div style="line-height:1.8">${flagN ? `<span style="color:var(--text3);margin-right:8px;min-width:24px;display:inline-block">${i+1}</span>` : ''}${displayLine}</div>`;
+  }).filter(Boolean);
+
+  outEl.innerHTML = rendered.length ? rendered.join('') : '<span style="color:var(--text3)">No matches found</span>';
+  statsEl.textContent = flagV
+    ? `${rendered.length} lines (non-matching)`
+    : `${matchCount} match${matchCount!==1?'es':''} across ${matchedLines} line${matchedLines!==1?'s':''}`;
+}
+
+// ── SHARED UTILS ───────────────────────────────────────────────────────────────
+function copyText(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const text = el.textContent || el.innerText;
+  copyToClipboard(text);
+}
+
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+  });
+  // Flash feedback
+  const sel = window.getSelection();
+}
+
+
 </script>
 </body>
 </html>
