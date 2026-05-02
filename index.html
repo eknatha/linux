@@ -1404,14 +1404,14 @@ var COTD_DB = [
   {cmd:'journalctl -p err -b', exp:'Show all error-level (and above) log entries from the current boot only.', ex:'# -p 0=emerg 1=alert 2=crit 3=err 4=warning 5=notice'},
   {cmd:'lsof -i :80', exp:'List all processes using port 80 — works across all socket types.', ex:'# nginx  1234 www-data  6u  IPv4  TCP *:http (LISTEN)'},
   {cmd:'strace -p PID -e trace=network', exp:'Trace network system calls of a running process — powerful for debugging.', ex:'# Shows connect(), bind(), send(), recv() calls live'},
-  {cmd:'awk '{print $1}' /var/log/nginx/access.log | sort | uniq -c | sort -rn | head -10', exp:'Find top 10 IP addresses hitting your nginx server.', ex:'# 1523 192.168.1.1\n  432 10.0.0.5'},
+  {cmd:"awk '{print $1}' /var/log/nginx/access.log | sort | uniq -c | sort -rn | head -10", exp:'Find top 10 IP addresses hitting your nginx server.', ex:'# 1523 192.168.1.1\n  432 10.0.0.5'},
   {cmd:'systemctl list-units --state=failed', exp:'List all failed systemd units at a glance.', ex:'# UNIT                    LOAD   ACTIVE SUB    DESCRIPTION'},
   {cmd:'rsync -avz --progress src/ user@host:/dst/', exp:'Sync files with verbose output and progress — preserves permissions.', ex:'# sent 1.23G bytes  received 35 bytes  12.3M bytes/sec'},
   {cmd:'du -sh /* 2>/dev/null | sort -rh | head -15', exp:'Find the largest directories at root level — first step in disk triage.', ex:'# 4.2G /var\n 1.8G /usr\n 512M /opt'},
   {cmd:'ps aux --sort=-%mem | head -10', exp:'Show top 10 processes by memory usage — quick OOM triage.', ex:'# USER PID %CPU %MEM VSZ RSS  COMMAND'},
   {cmd:'cat /proc/loadavg', exp:'Show system load averages for 1, 5, 15 minutes + running/total processes.', ex:'# 0.52 0.48 0.42 2/312 18943'},
   {cmd:'ip -s link show eth0', exp:'Show interface statistics including TX/RX bytes and error counts.', ex:'# RX: bytes=123456789  errors=0  dropped=2'},
-  {cmd:'sed -i.bak 's/old/new/g' file.txt', exp:'In-place replacement with automatic backup (.bak) — never edit without backup.', ex:'# Creates file.txt.bak before modifying'},
+  {cmd:"sed -i.bak 's/old/new/g' file.txt", exp:'In-place replacement with automatic backup (.bak) — never edit without backup.', ex:'# Creates file.txt.bak before modifying'},
   {cmd:'openssl x509 -in cert.pem -noout -dates', exp:'Check SSL certificate expiry dates — run this before renewals.', ex:'# notBefore=Jan  1 00:00:00 2024 GMT\n# notAfter=Dec 31 23:59:59 2024 GMT'},
   {cmd:'dmesg | tail -50 | grep -iE "error|fail|warn|oom"', exp:'Scan recent kernel messages for errors — first stop after a system issue.', ex:'# [12345.678] EXT4-fs error: invalid inode'},
   {cmd:'grep -r "password" /etc/ --include="*.conf" 2>/dev/null', exp:'Scan config files for hardcoded passwords — basic security hygiene.', ex:'# /etc/app/config.conf:password=mysecret123'},
@@ -1428,7 +1428,7 @@ var COTD_DB = [
   {cmd:'timedatectl set-timezone Asia/Kolkata', exp:'Set the system timezone — critical for log correlation across servers.', ex:'# Check: timedatectl status'},
   {cmd:'journalctl --disk-usage && journalctl --vacuum-size=500M', exp:'Check journal disk usage then trim it to 500MB — quick log cleanup.', ex:'# Archived and active journals take up 2.3G'},
   {cmd:'chmod -R u=rwX,g=rX,o= /var/www/html', exp:'Set web directory permissions correctly — X sets execute only on directories.', ex:'# Capital X = execute only if dir or already executable'},
-  {cmd:'ss -o state established '( dport = :ssh or sport = :ssh )'', exp:'Show all established SSH connections — useful for audit and security checks.', ex:'# Netid  State  Recv-Q  Send-Q  Local Address:Port  Peer Address'},
+  {cmd:"ss -o state established '( dport = :ssh or sport = :ssh )'", exp:'Show all established SSH connections — useful for audit and security checks.', ex:'# Netid  State  Recv-Q  Send-Q  Local Address:Port  Peer Address'},
 ];
 (function() {
   var today = new Date();
@@ -1499,23 +1499,14 @@ function snCalc() {
   }).join('');
 
   cmds.textContent =
-    '# Linux commands for this subnet
-' +
-    'ip addr add '+ipStr.trim()+'/'+cidr+' dev eth0
-' +
-    'ip route add '+to4(net32)+'/'+cidr+' dev eth0
-
-' +
-    '# Scan the subnet
-nmap -sn '+to4(net32)+'/'+cidr+'
-
-' +
-    '# iptables — allow traffic from this subnet
-iptables -A INPUT -s '+to4(net32)+'/'+cidr+' -j ACCEPT
-
-' +
-    '# /etc/fstab network mount (NFS)
-# '+to4(net32)+' covers '+hosts.toLocaleString()+' hosts ('+to4(first32)+' — '+to4(last32)+')';
+    '# Linux commands for this subnet\n' +
+    'ip addr add '+ipStr.trim()+'/'+cidr+' dev eth0\n' +
+    'ip route add '+to4(net32)+'/'+cidr+' dev eth0\n\n' +
+    '# Scan the subnet\n' +
+    'nmap -sn '+to4(net32)+'/'+cidr+'\n\n' +
+    '# iptables — allow traffic from this subnet\n' +
+    'iptables -A INPUT -s '+to4(net32)+'/'+cidr+' -j ACCEPT\n\n' +
+    '# '+to4(net32)+' covers '+hosts.toLocaleString()+' hosts ('+to4(first32)+' — '+to4(last32)+')';
 }
 
 function snPreset(cidr) {
@@ -1540,8 +1531,7 @@ function laAnalyze() {
     return;
   }
 
-  var lines = txt.split('
-');
+    var lines = txt.split('\n');
   var counts = {CRIT:0, ERROR:0, WARN:0, INFO:0, DEBUG:0, OTHER:0};
   var ipSet = {};
   var lineFreq = {};
@@ -1609,7 +1599,7 @@ function laAnalyze() {
   if (ipsEl) {
     ipsEl.innerHTML = ipList.length
       ? ipList.map(function(ip){
-          return '<span style="display:inline-block;background:var(--bg4);border:1px solid var(--border2);border-radius:4px;padding:2px 9px;margin:2px;cursor:pointer;color:var(--green);font-size:12px" onclick="clipCopy(''+ip+'')" title="Click to copy">'+ip+' <span style="color:var(--text3)">('+ipSet[ip]+'×)</span></span>';
+          return '<span style="display:inline-block;background:var(--bg4);border:1px solid var(--border2);border-radius:4px;padding:2px 9px;margin:2px;cursor:pointer;color:var(--green);font-size:12px" onclick="clipCopy(this.getAttribute(\x27data-ip\x27))" data-ip="'+ip+'" title="Click to copy">'+ip+' <span style="color:var(--text3)">('+ipSet[ip]+'x)</span></span>';
         }).join('')
       : '<span style="color:var(--text3)">No IP addresses found</span>';
   }
