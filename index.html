@@ -727,10 +727,15 @@ sudo dpkg --configure -a</div><div class="err-sec-lbl">Prevention</div><p>Never 
       <div class="tags"><span class="tag">sar</span><span class="tag">tuned</span><span class="tag">perf</span><span class="tag">RHEL</span></div>
     </div>
   </div>
-  <div style="margin-top:16px;text-align:center">
-    <a href="https://hits.seeyoufarm.com" target="_blank">
-      <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Flinux.eknathalabs.com&count_bg=%2339FF6E&title_bg=%23111111&icon=linux&icon_color=%2339FF6E&title=visitors&edge_flat=true" alt="Visitor Count" style="height:20px;vertical-align:middle;border-radius:2px"/>
-    </a>
+  <div style="margin-top:20px;display:flex;align-items:center;justify-content:center;gap:10px">
+    <div style="display:inline-flex;align-items:center;gap:0;border:1px solid var(--border2);border-radius:4px;overflow:hidden;font-family:var(--mono);font-size:11px">
+      <span style="background:#111;color:var(--green);padding:4px 10px;display:flex;align-items:center;gap:5px">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        visitors
+      </span>
+      <span id="visit-today" style="background:var(--bg2);color:var(--text2);padding:4px 10px;border-left:1px solid var(--border2)">today: —</span>
+      <span id="visit-total" style="background:var(--bg2);color:var(--green);padding:4px 10px;border-left:1px solid var(--border2);font-weight:700">total: —</span>
+    </div>
   </div>
 
   <footer style="border-top:1px solid var(--border);margin-top:32px;padding:24px 1.5rem;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text3)">
@@ -1836,6 +1841,28 @@ function closeTut() {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') { closeTut(); closeMod(); }
 });
+
+// ── VISITOR COUNTER ───────────────────────────────────────────────────────
+(function() {
+  try {
+    var today = new Date().toISOString().slice(0, 10);
+    var data = JSON.parse(localStorage.getItem('eknathalab_visits') || '{}');
+    // Increment total
+    data.total = (data.total || 0) + 1;
+    // Increment today
+    if (data.date === today) {
+      data.today = (data.today || 0) + 1;
+    } else {
+      data.date = today;
+      data.today = 1;
+    }
+    localStorage.setItem('eknathalab_visits', JSON.stringify(data));
+    var todayEl = document.getElementById('visit-today');
+    var totalEl = document.getElementById('visit-total');
+    if (todayEl) todayEl.textContent = 'today: ' + data.today;
+    if (totalEl) totalEl.textContent = 'total: ' + data.total;
+  } catch(e) {}
+})();
 
 </script>
 </body>
